@@ -5,24 +5,72 @@ var db = require("../models");
 var passport = require("../config/passport");
 
 var mysql = require("mysql");
-const { red } = require("color-name");
+const { ConnectionError } = require("sequelize");
 module.exports = function(app) {
 
   app.get("api/getFavs",
-    function(req, res){"SELECT * FROM Items ORDER By Likes DESC Limit 10",function(err, data){if(err) throw err;
+    function(req, res){
+      Connection.query ("SELECT * FROM Item ORDER By Likes DESC Limit 10",function(err, data){if(err) throw err;
        console.log("got top picks");
        res.json(data)
-      }});
+      })
+    });
 
   app.get("api/allItems",
-  function(req, res){"SELECT * FROM items JOIN users ON item.itemownerid = user.id", function(err, data){
+  function(req, res){
+    connection.query("SELECT * FROM Item JOIN User ON Item.itemOwnerId = User.id", function(err, data){
     if(err) throw err, 
     console.log("got them all");
-    res.json(data)}
+    res.json(data)
+  })
+})
+
+  app.get("api/items/:id", function(req, res){
+    userId = req.params.id;
+    conenction.query("SELECT * FROM Item RIGHT JOIN User ON Item.itemOwnerId = User.id LEFT JOIN Bid ON Item.id = Bid.bidItemId WHERE ItemOwnerId = ?", userId,
+    function(err, data){
+      if(err) throw err;
+      console.log("got the item for this guy")
+
+    })
   })
 
-  app.post
-  app.post("api/item") ,
+  app.get("api/itemDetails/:id", function(req,res){
+    itemId = req.params.id;
+    connection.query("SELECT * FROM Item LEFT JOIN Bid on Bid.bidItemId = Item.id LEFT JOIN Message ON Message.itemId = Item.id LEFT JOIN Bid on Bid.bidItemId = Item.id WHERE Item.id=?",
+    itemId,function(err, data){
+      if(err) throw err;
+      res.json(data)
+    })
+  })
+
+  app.post("/api/signUp", function(req, res) {
+    db.User.create({
+      email: req.body.email,
+      password: req.body.password,
+      username: req.body.username
+    })
+      .then(function() {
+        res.redirect(307, "/");
+      })
+      .catch(function(err) {
+        console.log(err)
+        res.status(401).json(err);
+      });
+  });
+
+    app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  res.json(req.user);
+  });
+  
+  // Route for logging user out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+  })
+
+  
+  app.post("api/item",
   function(req, res){
     db.Item.create({
       itemOwnerId : req.body.ItemownerId,
@@ -39,9 +87,10 @@ module.exports = function(app) {
     console.log("postedItem");
     res.json(result)
   })
+})
 
 
-  app.post("api/bids") ,
+  app.post("api/bids",
   function(req, res){
     db.Bid.create({
       BidderId:req.body.BidderId,
@@ -53,18 +102,35 @@ module.exports = function(app) {
     console.log("postedbid");
     res.json(result)
   })
+})
 
-  app.post("api/message") ,
+  app.post("api/message",
   function(req, res){
     db.Message.create({
-      itemID:req.body.itemID,
-      posterID:req.body.posterID,
+      itemID:req.body.itemId,
+      posterID:req.body.posterId,
       message:req.body.message,
     }).then(function(err,result){
     if(err) throw err, 
     console.log("postedmessage");
     res.json(result)
   })
+})
+
+  app.get("/api/user_data", function(req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+     // if the user is succesfully logged in , all of the user information would be given 
+     //as the user object.
+      res.json({
+        email: req.user.email,
+        id: req.user.id,
+        username: req.user.username,
+       });
+    }
+  });
 
   
   // GET route for getting all of the todos

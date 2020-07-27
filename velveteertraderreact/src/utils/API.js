@@ -1,4 +1,3 @@
-// This code is meant to serve as a mock fetch from an API.
 import axios from "axios";
 
 
@@ -7,6 +6,37 @@ export default {
     console.log("gettingfavs")
     return axios.get("/api/getFavs");
 },
+
+getAllItems : function(){
+  console.log("gettingAll")
+  return axios.get("/api/allItems")
+},
+
+getUserItems : function(id){
+  console.log("getthing this one persons items")
+  return axios.get("api/items/"+id)
+},
+
+getItemDetails : function(id){
+  console.log("getting details for this one object")
+  return axios.get ("api/itemDetails/"+id)
+},
+
+signUp : function(body){
+  console.log("signingup");
+  return axios.get ("api/signUp",body)
+},
+
+logIn : function(body){
+  consold.log("logginin");
+  return axios.post ("api/login", body)
+},
+
+logOut : function(){
+  console.log("logout");
+  return axios.get("/logout");
+},
+
 
 
 
