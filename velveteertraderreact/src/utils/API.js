@@ -28,7 +28,7 @@ signUp : function(body){
 },
 
 logIn : function(body){
-  consold.log("logginin");
+  console.log("logginin");
   return axios.post ("api/login", body)
 },
 
@@ -37,44 +37,13 @@ logOut : function(){
   return axios.get("/logout");
 },
 
+getUserData : function(){
+  console.log("getting your data");
+  return axios.get("/api/user_data");
+}
 
 
 
-  moveToPurchase: function(body){
-  console.log("doing the switch");
-  return axios.post("/moveToPurchased",body)
-  },
-
-  logOut: function(){
-    console.log("loggingout at API");
-    return axios.post("/logout")
-  },
-
-getUserID:function(){
-  return axios.get("/api/userme")
-},
-  
-getRandom : function(){
-return axios.get("/api/random");
-
-},
-
-   getUserInfo : function(name){
-     return axios.get("/api/userInfoByName/"+name)
-
-   },
-
-  signup : function(body){
-    return axios.post("/api/signup",body)
-  },
-  login : function(body){
-    return axios.post("/api/login",body)
-  },
-
-   createUserInfo:function(body){
-     return axios.post ("/api/userinformation",body)
-   }
-     
 }
 
 // getAllEmployees: function() {

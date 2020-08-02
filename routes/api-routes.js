@@ -3,6 +3,7 @@
 // Requiring our models
 var db = require("../models");
 var passport = require("../config/passport");
+ 
 
 var mysql = require("mysql");
 const { ConnectionError } = require("sequelize");
@@ -10,7 +11,7 @@ module.exports = function(app) {
 
   app.get("api/getFavs",
     function(req, res){
-      Connection.query ("SELECT * FROM Item ORDER By Likes DESC Limit 10",function(err, data){if(err) throw err;
+      Connection.query ("SELECT * FROM Item ORDER By votes DESC Limit 10",function(err, data){if(err) throw err;
        console.log("got top picks");
        res.json(data)
       })
@@ -78,6 +79,8 @@ module.exports = function(app) {
       itemStory : req.body.itemStory,
       Votes : 0,
       bids:0,
+      highestBid:0,
+      portraitImageUrl:req.body.imageurl1,
       imageUrl1: req.body.imageUrl1,
       imageUrl2: req.body.imageUrl2,
       imageUrl3: req.body.imageUrl3,
@@ -93,7 +96,7 @@ module.exports = function(app) {
   app.post("api/bids",
   function(req, res){
     db.Bid.create({
-      BidderId:req.body.BidderId,
+      bidderId:req.body.BidderId,
       bidItemId:req.body.bidItemId,
       bidAmount:req.body.bidAmount,
       
@@ -200,6 +203,131 @@ module.exports = function(app) {
 
   
 };
+
+// *********************************************************************************
+// api-routes.js - this file offers a set of routes for displaying and saving data to the db
+// *********************************************************************************
+
+// Dependencies
+// =============================================================
+
+// Requiring our models
+var db = require("../models");
+
+// Routes
+// =============================================================
+module.exports = function(app) {
+
+  // GET route for getting all of the posts
+  app.get("/api/posts", function(req, res) {
+    var query = {};
+    if (req.query.author_id) {
+      query.AuthorId = req.query.author_id;
+    }
+    // Here we add an "include" property to our options in our findAll query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Author
+    db.Post.findAll({
+      where: query,
+      include: [db.Author]
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // Get route for retrieving a single post
+  app.get("/api/posts/:id", function(req, res) {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Author
+    db.Post.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Author]
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // POST route for saving a new post
+  app.post("/api/posts", function(req, res) {
+    db.Post.create(req.body).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // DELETE route for deleting posts
+  app.delete("/api/posts/:id", function(req, res) {
+    db.Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+
+  // PUT route for updating posts
+  app.put("/api/posts", function(req, res) {
+    db.Post.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
+};
+
+var db = require("../models");
+
+module.exports = function(app) {
+  app.get("/api/authors", function(req, res) {
+    // Here we add an "include" property to our options in our findAll query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Post
+    db.Author.findAll({
+      include: [db.Post]
+    }).then(function(dbAuthor) {
+      res.json(dbAuthor);
+    });
+  });
+
+  app.get("/api/authors/:id", function(req, res) {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Post
+    db.Author.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Post]
+    }).then(function(dbAuthor) {
+      res.json(dbAuthor);
+    });
+  });
+
+  app.post("/api/authors", function(req, res) {
+    db.Author.create(req.body).then(function(dbAuthor) {
+      res.json(dbAuthor);
+    });
+  });
+
+  app.delete("/api/authors/:id", function(req, res) {
+    db.Author.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbAuthor) {
+      res.json(dbAuthor);
+    });
+  });
+
+};
+
 
 
 // var db = require("../models");
