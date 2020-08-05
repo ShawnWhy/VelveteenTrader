@@ -1,21 +1,19 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { imageBackground, Component, useEffect, useState, useContext } from 'react';
 import Bids from "../bids";
 import Hearts from "../hearts";
 import API from "../../utils/API";
-import apiRoutes from '../../../../routes/api-routes';
-
+import InformationContext from "../../App"
+import Style from "./itemCard.css"
 
 const ItemCard = function(props){
 
-  
+
     return (
-      <div className = "card container">
-        <div className = "itemPortrait">
+      <div style={{backgroundImage: `url(${props.portraitImageUrl})` }} className = "itemCard col-md-3" >
+        
           <div className = "itemName">
             {props.itemName}
-
           </div>
-           
           <div>
              <Bids
              highestBid={props.highestBid}/>
@@ -25,7 +23,7 @@ const ItemCard = function(props){
           
           </div>
           
-        </div>
+        
         <div className = "modal">
           <div className = "modalContent">
             <a href="/cardpage" >go to website</a> 

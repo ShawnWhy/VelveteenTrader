@@ -1,0 +1,33 @@
+.itemCard{
+    
+    border: 1px solid black;
+    padding:3px;
+    border-radius: 5px;
+    float: left;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    margin:1%;
+    height:200px;
+    text-align: center;
+    background-position: center;
+
+    
+    
+
+}
+
+.itemName{
+    background-color: aliceblue;
+    border-radius: 3px;
+}
+
+img{
+    display:block;
+    max-width: 90%;
+    max-height:90%;
+    height:auto;
+    width:auto;
+    margin:auto;
+    border-radius: 10px;
+    display: inline-flex;
+}

@@ -6,11 +6,11 @@ const Itempage = function(props)  {
   
     return(
       <div>
-        ()
+      
         
 
 
-      </div>;
+      </div>
 
 
 

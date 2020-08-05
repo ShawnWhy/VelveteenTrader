@@ -44,9 +44,7 @@ a:visited {
     transform: rotate(360deg);
   }
 }
-.row{
- display: flex;
-}
+
 .invisible{
   visibility: collapse;
   height:0px;
@@ -61,7 +59,3 @@ a:visited {
 
 } 
 
-li{
-  display:inline-block;
-
-}

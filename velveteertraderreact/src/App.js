@@ -237,15 +237,13 @@ const App = function(){
                  (loggedIn == false ? "invisible" : "visible")
               }
             >
-              
-              <Link to="/user">User Portal</Link>
+            <Link to="/user">User Portal</Link>
             </div>
             <div className="margin">
               <Link to="/contact">Contact</Link>
             </div>
           </div>
 
-  <div className="row">
           <Switch>
             <Route exact path="/">
               <HomePage />
@@ -261,7 +259,6 @@ const App = function(){
               <UserPortal name={userProfile.userName} />
             </Route>
           </Switch>
-        </div>
       </Router>
       </InformationContext.Provider> 
     );
