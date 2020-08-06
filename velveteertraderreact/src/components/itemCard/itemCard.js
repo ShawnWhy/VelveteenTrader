@@ -9,14 +9,17 @@ const ItemCard = function(props){
 
 
     return (
-      <div style={{backgroundImage: `url(${props.portraitImageUrl})` }} className = "itemCard col-md-3" >
+      <div style={{backgroundImage: `url(${props.portraitImageUrl})` }} className = "col-md-3 itemCard" >
         
           <div className = "itemName">
             {props.itemName}
           </div>
-          <div>
+          <div className="otherInfo">
              <Bids
-             highestBid={props.highestBid}/>
+             highestBid={props.highestBid}
+             id = {props.id}
+             itemName= {props.itemName}
+             />
                
             <Hearts
             votes={props.votes}/>
@@ -24,8 +27,8 @@ const ItemCard = function(props){
           </div>
           
         
-        <div className = "modal">
-          <div className = "modalContent">
+        <div className = "modal1">
+          <div className = "modalContent1">
             <a href="/cardpage" >go to website</a> 
              </div> 
           

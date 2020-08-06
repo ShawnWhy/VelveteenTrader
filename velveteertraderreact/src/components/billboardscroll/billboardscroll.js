@@ -111,18 +111,34 @@ const [rotationItems, setRotationItems]=useState(
 
   }
 
+  const rowForward= ()=>{
+    var itemlength=favoriteItems.length
+    var temFav=favoriteItems.slice(0,itemlength-1)
+    temFav.unshift(favoriteItems[itemlength-1])
+    SetFavoriteItems(temFav)
+  }
+
+  const rowBackwards =()=>{
+    var itemlength=favoriteItems.length
+    var tempFav = favoriteItems.splice(1,itemlength);
+    console.log(tempFav)
+    tempFav.push(favoriteItems[0])
+    console.log(tempFav)
+    SetFavoriteItems(tempFav)
+}
+
 
 
   
     return (
     
-          <div className="row justify-content-center">
+          <div className="row justify-content-md-center">
           
         {!rotationItems.length ? (
            <h1 className="text-center">no votes yet</h1>
          ) : (
-           <div className= "col-md-12 justify-content-center">
-                         <a class="prev" onClick="">&#10094;</a>
+           <div className= "col-md-10 ">
+             <div ClassName = "row justify-content-md-center">
 
              {rotationItems.map(item => {
                return (
@@ -135,12 +151,16 @@ const [rotationItems, setRotationItems]=useState(
                  />
                );
              })}
-               <div>
-              <a class="next" onClick="">&#10095;</a>
-            </div>
+             
+            
+           </div>
            </div>
            
             )}
+             <a class="prev" onClick={rowBackwards}>&#10094;</a>
+
+               
+<a class="next" onClick={rowForward}>&#10095;</a>
             
             </div>
       

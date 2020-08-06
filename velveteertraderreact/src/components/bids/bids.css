@@ -1,0 +1,20 @@
+.bids{
+    background-color: aliceblue;
+    border-radius: 3px;
+    margin:2px auto;
+    float: left;
+
+}
+
+.bidModal{
+    position:fixed;
+    background-color: aliceblue;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    opacity:100%;
+    transition: 0.6s ease;
+
+
+}
