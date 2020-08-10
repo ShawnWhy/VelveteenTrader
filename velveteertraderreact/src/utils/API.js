@@ -1,4 +1,5 @@
 import axios from "axios";
+import Axios from "axios";
 
 
 export default {
@@ -40,6 +41,11 @@ logOut : function(){
 getUserData : function(){
   console.log("getting your data");
   return axios.get("/api/user_data");
+},
+
+updateLikes : function(body){
+  console.log("updating")
+  return axios.post("/api/updateLikes/")
 }
 
 

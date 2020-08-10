@@ -1,13 +1,23 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
 import API from "../../utils/API"
 import ItemCard from "../itemCard";
-import InformationContext from "../../App"
+import Itempage from "../../pages/itempage"
+import {InformationContext} from "../../App"
 import Style from "./billboardscroll.css"
 
 
+export const ItemContext = React.createContext();
 
 
 const Billboardscroll = function() {
+
+  const [chosenItem, setChosenItem]=useState(
+    {bidModal:"off",
+    ItemPageModal:"off",
+      itemName:"",
+      id:"",
+    itemStory:""}
+  )
 
   const [favoriteItems, SetFavoriteItems] = useState(
     [
@@ -17,7 +27,7 @@ const Billboardscroll = function() {
         itemName: "Gold Pot",
         itemStory:
         "Golg Pot is made of gold  and lives in a place and like to jump",
-        votes: 1,
+        likes: 1,
         highestBid: 300,
         portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
         imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
@@ -31,7 +41,7 @@ const Billboardscroll = function() {
         itemName: "Jumping TeaPot",
         itemStory:
         "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-        votes: 1,
+        likes: 3,
         highestBid: 400,
         portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg" ,
         imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
@@ -45,7 +55,7 @@ const Billboardscroll = function() {
         itemName: "Jumperson",
         itemStory:
         "this one also lives to jump ",
-        votes: 1,
+        likes: 9,
         highestBid: 400,
         portraitImageUrl: "https://i.imgur.com/hpTkbNy.jpg",
         imageUrl1: "https://i.imgur.com/hpTkbNy.jpg",
@@ -55,11 +65,11 @@ const Billboardscroll = function() {
       },
       {
         id:9,
-        itemOwnerId:1,
+        itemOwnerId:8,
         itemName: "crazer",
         itemStory:
         "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-        votes: 1,
+        likes: 1,
         highestBid: 800,
         portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg" ,
         imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
@@ -73,7 +83,7 @@ const Billboardscroll = function() {
         itemName: "doozer",
         itemStory:
         "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-        votes: 1,
+        likes: 1,
         highestBid: 700,
         portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg" ,
         imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
@@ -126,27 +136,52 @@ const [rotationItems, setRotationItems]=useState(
     console.log(tempFav)
     SetFavoriteItems(tempFav)
 }
+ const turnOffBidModal = ()=>{
+    setChosenItem({...chosenItem, bidModal : "off"})
+
+  }
 
 
+const turnOffItemPageModal = ()=>{
+  setChosenItem({...chosenItem, ItemPageModal:"off"})
+}
 
   
     return (
+      <ItemContext.Provider value={{chosenItem, setChosenItem}}>
+
+<div onClick={turnOffBidModal} className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
+        <div className = "bidforum" >
+          <div> the highest bid for {chosenItem.itemName} is {chosenItem.highestBid}</div>
+          <div> how much would you like to bid" <input type="number" placeholder="100"></input> </div>
+        </div>
+        </div>
+
+
+
     
           <div className="row justify-content-md-center">
           
         {!rotationItems.length ? (
            <h1 className="text-center">no votes yet</h1>
          ) : (
-           <div className= "col-md-10 ">
-             <div ClassName = "row justify-content-md-center">
+           <div className= "col-md-12 ">
+             <div className ="row justify-content-md-center">
 
              {rotationItems.map(item => {
                return (
                  <ItemCard
                  portraitImageUrl={item.portraitImageUrl}
                  itemName={item.itemName}  
-                 votes = { item.votes}
+                 likes = { item.likes}
                  highestBid = {item.highestBid} 
+                 itemStory={item.itemStory}
+                 id={item.id}
+                 imageUrl1={item.imageUrl1}
+                 imageUrl2={item.imageUrl2}
+                 imageUrl3={item.imageUrl3}
+                 modelLink={item.modelLink}
+                 SetFavoriteItems={SetFavoriteItems}
                    
                  />
                );
@@ -160,9 +195,15 @@ const [rotationItems, setRotationItems]=useState(
              <a class="prev" onClick={rowBackwards}>&#10094;</a>
 
                
-<a class="next" onClick={rowForward}>&#10095;</a>
+              <a class="next" onClick={rowForward}>&#10095;</a>
             
             </div>
+            <div className={chosenItem.ItemPageModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id} onClick={turnOffItemPageModal}>
+              <Itempage 
+              />
+            </div>
+            </ItemContext.Provider>
+
       
   
   )}

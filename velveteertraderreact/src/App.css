@@ -59,3 +59,33 @@ a:visited {
 
 } 
 
+.signinInPut{
+  margin: 2% auto;
+  border-radius: 3px;
+  float:left;
+  clear:both
+}
+
+.logInModal{
+  
+  height:100%;
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background-color: aliceblue;
+  text-align:center;
+  align-content: center;
+  z-index:4;
+}
+
+.modalContent{
+  margin:auto;
+  position:relative;
+  background-color:white;
+  border:1px solid black;
+  height:40%;
+  width:20%;
+  text-align: center;
+}
+

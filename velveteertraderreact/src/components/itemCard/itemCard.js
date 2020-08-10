@@ -2,38 +2,102 @@ import React, { imageBackground, Component, useEffect, useState, useContext } fr
 import Bids from "../bids";
 import Hearts from "../hearts";
 import API from "../../utils/API";
-import InformationContext from "../../App"
+import {InformationContext} from "../../App"
 import Style from "./itemCard.css"
+import {ItemContext} from "../billboardscroll/billboardscroll"
+
+export const CardContext = React.createContext();
 
 const ItemCard = function(props){
 
+  const [cardInfo, setCardInfo]=useState(   
+    {likes:props.likes,
+    highestBid: props.highestBid,
+    itemStory: props.itemStory,
+    itemOwnerId:props.itemOwnerId,
+    id:props.id,
+    itemName:props.itemName,
+    imageUrl1:props.imageUrl1,
+    imageUrl2: props.imageUrl2,
+    imageUrl3:props.imageUrl3,
+    modelLink:props.modelLink,}
+  )
+
+  const {chosenItem, setChosenItem}= useContext(ItemContext)
+
+  useEffect(()=>{
+    setCardInfo({
+      likes:props.likes,
+      highestBid: props.highestBid,
+      itemStory: props.itemStory,
+      itemOwnerId:props.itemOwnerId,
+      id:props.id,
+      itemName:props.itemName,
+      imageUrl1:props.imageUrl1,
+      imageUrl2: props.imageUrl2,
+      imageUrl3:props.imageUrl3,
+      modelLink:props.modelLink,
+    })},[props]
+
+  )
+
+
+
+  const setChosenItemPage = ()=>{
+    setChosenItem({...chosenItem, 
+      likes:props.likes,
+      highestBid: props.highestBid,
+      itemStory: props.itemStory,
+      itemOwnerId:props.itemOwnerId,
+      id:props.id,
+      itemName:props.itemName,
+      imageUrl1:props.imageUrl1,
+      imageUrl2: props.imageUrl2,
+      imageUrl3:props.imageUrl3,
+      modelLink:props.modelLink,
+      bidModal:"off",
+      ItemPageModal:"on"
+      
+
+    })
+
+    console.log(chosenItem.itemStory)
+    
+  }
+
+
+  
+
 
     return (
+      <CardContext.Provider value = {{cardInfo, setCardInfo}}>
       <div style={{backgroundImage: `url(${props.portraitImageUrl})` }} className = "col-md-3 itemCard" >
         
           <div className = "itemName">
-            {props.itemName}
+            {cardInfo.itemName}
           </div>
           <div className="otherInfo">
              <Bids
-             highestBid={props.highestBid}
-             id = {props.id}
-             itemName= {props.itemName}
+             highestBid={cardInfo.highestBid}
+             id = {cardInfo.id}
+             itemName= {cardInfo.itemName}
              />
                
             <Hearts
-            votes={props.votes}/>
+            likes={cardInfo.likes}/>
           
           </div>
           
         
         <div className = "modal1">
           <div className = "modalContent1">
-            <a href="/cardpage" >go to website</a> 
+            <div onClick={setChosenItemPage} >view ItemDetails
+            </div> 
              </div> 
           
         </div>
          </div>
+         </CardContext.Provider>
   )  
 }
 

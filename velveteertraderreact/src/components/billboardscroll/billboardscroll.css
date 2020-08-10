@@ -31,3 +31,31 @@
   .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.8);
   }
+
+  .bidModalOn{
+    position:fixed;
+    background-color: aliceblue;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    opacity:100%;
+    transition: 0.6s ease;
+    z-index: 3;
+
+
+}
+
+.bidModalOff{
+    position:fixed;
+    background-color: aliceblue;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    opacity:0%;
+    transition: 0.6s ease;
+    visibility:collapse
+
+
+}

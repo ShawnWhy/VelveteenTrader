@@ -260,6 +260,30 @@ const App = function(){
             </Route>
           </Switch>
       </Router>
+              <div className=" row justify-content-center logInModal">
+                <div className="col-md-4 modalContent">
+                  <input className = " offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
+                  <input className = " offset-md-1 col-md-10 signinInPut" type="email" placeholder = "email"></input>
+                  <input className = "offset-md-1 col-md-10 signinInPut" type="password" placeholder = "password"></input>
+                  <div>Login</div>
+                  <div>return Home</div>
+                  <div>X</div>
+
+
+                </div>
+              </div>
+              <div className=" row justify-content-center SignUpModal">
+              <div className="col-md- 4 modalContent">
+              <input  className = "offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
+                  <input className = "offset-md-1 col-md-10 signinInPut"  type="email" placeholder = "email"></input>
+                  <input className = "offset-md-1 col-md-10 signinInPut"  type="password" placeholder = "password"></input>  
+                  <div>Login</div>
+                  <div>return Home</div>
+                  <div>X</div>
+              </div>
+ 
+              </div>
+
       </InformationContext.Provider> 
     );
   }

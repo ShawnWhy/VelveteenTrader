@@ -1,13 +1,11 @@
 import React, { Component, useEffect, useContext, useState } from 'react';
 import Style from "./hearts.css"
 import {ItemContext} from "../billboardscroll/billboardscroll"
-import {CardContext} from ".././itemCard/itemCard"
 import {InformationContext} from "../../App"
 import API from "../../utils/API"
 
-const Hearts =function(props) {
+const Hearts2 =function(props) {
 
-  const {cardInfo, setCardInfo} = useContext(CardContext)
   
   const {userProfile, setUserProfile} = useContext(InformationContext)
   const {chosenItem, setChosenItem} = useContext(ItemContext)
@@ -35,7 +33,6 @@ const Hearts =function(props) {
     newLike+=1;
     // alert(newLike)
     setChosenItem({...chosenItem, likes:newLike})
-    setCardInfo({...cardInfo, likes:newLike})
   }
   
   
@@ -63,4 +60,4 @@ const Hearts =function(props) {
     
 }
 
-export default Hearts;
+export default Hearts2;

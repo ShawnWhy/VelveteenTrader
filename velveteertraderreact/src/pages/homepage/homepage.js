@@ -19,20 +19,13 @@ function Homepage(props) {
          {userProfile.userName}
         </div>
         <div>
-          <input type="text" name="name" placeholder = "item name"></input> 
-          <input type="url" name="url1" placeholder = "imagehr1"></input> 
-          <input type="url" name="url2" placeholder = "imageurl2"></input> 
-          <input type="url" name="url3" placeholder = "imageurl3"></input> 
-          <input type="url" name="verge" placeholder = "vergeurl"></input> 
-
-
-
-
-
-          <textarea  name="story" placeholder  ></textarea> 
-
-          
-        </div>
+          <div></div>
+          <input className = "userinput" type="text" name="name" placeholder = "item name"></input> 
+          <input className = "userinput" type="url" name="url1" placeholder = "imagehr1"></input> 
+          <input className = "userinput" type="url" name="url2" placeholder = "imageurl2"></input> 
+          <input className = "userinput" type="url" name="url3" placeholder = "imageurl3"></input> 
+          <input className = "userinput" type="url" name="verge" placeholder = "vergeurl"></input> 
+          <textarea className = "userinput" name="story" placeholder  ></textarea> </div>
         
         </div>
 

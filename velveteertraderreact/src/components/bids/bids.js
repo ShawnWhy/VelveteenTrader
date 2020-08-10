@@ -1,26 +1,30 @@
-import React, { Component, useContext } from 'react';
-import InformationContext from "../../App"
+import React, { Component, useContext, useState } from 'react';
+import {InformationContext} from "../../App"
+import {ItemContext} from "../billboardscroll/billboardscroll"
 import Style from "./bids.css"
 
  const Bids = function(props) {
 
+ 
+
+  const {chosenItem, setChosenItem}= useContext(ItemContext)
+
+
   const bringupBidModal = ()=>{
+    setChosenItem({...chosenItem, bidModal:"on", itemName:props.itemName, highestBid:props.highestBid, id : props.id })
 
   }
 
 
-    return <div className= "bids" onClick={bringupBidModal}>
-      <div> highest bid : {props.highestBid}</div>
-      <div className = "bidModal" id = {props.id}>
-        <div className = "bidforum">
-          <div> the highest bid for {props.itemName} is {props.highestBid}</div>
-
-
-        </div>
-
-      </div>
+    return( <div className= "bids" onClick={bringupBidModal}>
+              <div className="click">Click to Bid</div>
+              <div className="bidDisplay"> highest bid : {props.highestBid}</div>
       
-    </div>;
+    </div>
+    )
+    
+
+
   }
 
 

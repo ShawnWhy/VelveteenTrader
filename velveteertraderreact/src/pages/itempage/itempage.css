@@ -1,0 +1,21 @@
+.itemStory{
+    background-color:aliceblue;
+    border-radius: 5px;
+    border:1px solid black;
+    position:relative;
+    z-index:-1;
+    float:left;
+
+}
+
+.bidDisplay{
+    
+}
+
+.detailDisplay{
+    position:relative;
+    
+
+    width:40%;  
+    
+}
