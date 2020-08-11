@@ -89,3 +89,14 @@ a:visited {
   text-align: center;
 }
 
+.appear{
+}
+
+.dissappear{
+  visibility:collapse
+}
+
+.xOut{
+  float:right;
+  
+}

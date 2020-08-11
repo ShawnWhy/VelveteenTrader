@@ -10,13 +10,24 @@ const Itempage = function(props)  {
 
   const {chosenItem, setChosenItem}= useContext(ItemContext)
   const [imageRoll, setImageRoll]= useState(
-()    
-
-
-  )
-  useEffect(()=>{
+    []
     
-  })
+  )
+
+  const rowForward = ()=>{
+
+  }
+
+  const rowBackwards = () =>{
+
+  }
+
+
+  
+  useEffect(()=>{
+    var itemImageUrls= [chosenItem.imageUrl1,chosenItem.imageUrl2, chosenItem. imageUrl3 ]
+    setImageRoll(itemImageUrls)
+  },[chosenItem])
 
   
     return(
@@ -25,6 +36,11 @@ const Itempage = function(props)  {
       
       <div>
         <div className = "imagecarosel">
+          <img src={imageRoll[0]}></img>
+          <a className="prevBigPic" onClick={rowBackwards}>&#10094;</a>
+
+               
+<a className="nextBigPic" onClick={rowForward}>&#10095;</a>
 
         </div>
 

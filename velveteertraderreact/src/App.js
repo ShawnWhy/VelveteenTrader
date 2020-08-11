@@ -20,6 +20,14 @@ export const InformationContext = React.createContext();
 
 const App = function(){
 
+  const [returnHomeLogin, setReturnHomeLogin]=useState(
+    "off"
+  )
+
+  const [ returnHomeSignUp, setReturnHomeSignUp]=useState(
+    "off" 
+  )
+
 
   const [loggedIn, setLoggedIn] = useState(
     false
@@ -162,8 +170,15 @@ const App = function(){
         },
   
       ],
-      loggedin:"false"
     }
+  )
+
+  const [loggInModal, setLogInModal] = useState(
+    "off"
+  )
+
+  const [signUpModal, setSignInModal] = useState(
+    "off"
   )
 
   const loadUserInformation = async function(){
@@ -175,17 +190,40 @@ const App = function(){
     })
 
   }
-  const logOn= function(){
+  const logIn= function(){
+    setReturnHomeLogin(
+      "on"
+    )
+    }
 
+  const SignUp=function(){
+    setReturnHomeSignUp(
+      "on"
+    )
   }
 
   const logOut=function(){
+    setLoggedIn("false")
+    
 
   }
 
-  const LoginModalDeploy = function(){}
+  const loginModalDeploy = function(){
+    setLogInModal("on")
+  }
 
- const SignUpModalDeploy = function(){}
+ const signUpModalDeploy = function(){
+    setLogInModal("on")
+  }
+
+  const loginModaloff = function(){
+    setLogInModal("off")
+  }
+
+  const signUpModaloff = function(){
+    setSignInModal("off")
+  }
+ 
 
 
 
@@ -213,17 +251,17 @@ const App = function(){
             
             <div
               className={
-                (loggedIn == false ? "visible" : "invisible")
+                ( loggedIn == false ? "visible" : "invisible")
               }
             >
-              <a onClick={LoginModalDeploy}>Log In</a>
+              <a onClick={loginModalDeploy}>Log In</a>
             </div>
             <div
               className={
                 (loggedIn == false ? "visible" : "invisible")
               }
             >
-              <a onClick={SignUpModalDeploy}>Sign Up</a>
+              <a onClick={signUpModalDeploy}>Sign Up</a>
             </div>
             <div
               className={
@@ -260,26 +298,27 @@ const App = function(){
             </Route>
           </Switch>
       </Router>
-              <div className=" row justify-content-center logInModal">
+              <div className={" row justify-content-center logInModal "+ ( loggInModal === "off" ? "invisible" : "visible")}>
                 <div className="col-md-4 modalContent">
+                <div className={"XOut "+(returnHomeLogin ==="on"? "dissappear": "appear")} onClick={loginModaloff}>X</div>
                   <input className = " offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
                   <input className = " offset-md-1 col-md-10 signinInPut" type="email" placeholder = "email"></input>
                   <input className = "offset-md-1 col-md-10 signinInPut" type="password" placeholder = "password"></input>
-                  <div>Login</div>
-                  <div>return Home</div>
-                  <div>X</div>
+                  <div onClick={logIn} >Login</div>
+                  <div className={"returnHome "+(returnHomeLogin==="on"?"appear":"dissappear")}>logged On <a href="/">Return Home</a></div>
 
 
                 </div>
               </div>
-              <div className=" row justify-content-center SignUpModal">
+              <div className={" row justify-content-center signUpModal "+ ( signUpModal === "off" ? "invisible" : "visible")}>
               <div className="col-md- 4 modalContent">
+              <div onClick={signUpModaloff} className={"XOut "+(returnHomeSignUp ==="on"? "dissappear": "appear")}>X</div>
+
               <input  className = "offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
                   <input className = "offset-md-1 col-md-10 signinInPut"  type="email" placeholder = "email"></input>
                   <input className = "offset-md-1 col-md-10 signinInPut"  type="password" placeholder = "password"></input>  
-                  <div>Login</div>
-                  <div>return Home</div>
-                  <div>X</div>
+                  <div onClick={SignUp}>signup</div>
+                  <div className={"returnHome "+(returnHomeSignUp==="on"?  "appear":"dissappear")}>Signed Up <a href="/">Return Home</a></div>
               </div>
  
               </div>

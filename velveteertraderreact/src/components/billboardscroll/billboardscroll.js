@@ -125,7 +125,7 @@ const [rotationItems, setRotationItems]=useState(
     var itemlength=favoriteItems.length
     var temFav=favoriteItems.slice(0,itemlength-1)
     temFav.unshift(favoriteItems[itemlength-1])
-    SetFavoriteItems(temFav)
+    SetFavoriteItems (temFav)
   }
 
   const rowBackwards =()=>{
@@ -192,13 +192,13 @@ const turnOffItemPageModal = ()=>{
            </div>
            
             )}
-             <a class="prev" onClick={rowBackwards}>&#10094;</a>
+             <a className="prev" onClick={rowBackwards}>&#10094;</a>
 
                
-              <a class="next" onClick={rowForward}>&#10095;</a>
+              <a className="next" onClick={rowForward}>&#10095;</a>
             
             </div>
-            <div className={chosenItem.ItemPageModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id} onClick={turnOffItemPageModal}>
+            <div className={chosenItem.ItemPageModal === "on" ? "itemPageOn" : "itemPageOff" } id = {chosenItem.id} onClick={turnOffItemPageModal}>
               <Itempage 
               />
             </div>
