@@ -58,7 +58,7 @@
     visibility:collapse
 }
 
-.itemModalOn{
+.itemPageOn{
   position:fixed;
   background-color: aliceblue;
   top:0;
@@ -70,7 +70,7 @@
   z-index: 3;
 }
 
-.itemModalOff{
+.itemPageOff{
   position:fixed;
   background-color: aliceblue;
   top:0;

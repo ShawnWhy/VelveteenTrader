@@ -13,18 +13,43 @@ const Itempage = function(props)  {
     []
     
   )
+  const [imageNumber, setImageNumber]=useState(0)
 
   const rowForward = ()=>{
+   var length=imageRoll.length;
+   var number = imageNumber
+   var number = number+1;
+   if (number >length-1){
+     number=0
+   }
+   setImageNumber(number);
+
+
+ 
+
 
   }
 
   const rowBackwards = () =>{
+    var length=imageRoll.length;
+    var number = imageNumber
+    var number = number-1;
+    if (number <0){
+      number= length-1
+    }
+    setImageNumber(number);
 
-  }
+   }
+
+   const closeModal = ()=>
+   {
+     setChosenItem({...chosenItem,ItemPageModal:"off"})
+   }
 
 
   
   useEffect(()=>{
+    console.log("refreshment")
     var itemImageUrls= [chosenItem.imageUrl1,chosenItem.imageUrl2, chosenItem. imageUrl3 ]
     setImageRoll(itemImageUrls)
   },[chosenItem])
@@ -35,9 +60,16 @@ const Itempage = function(props)  {
     
       
       <div>
+        <div ClassName="closeModal" onClick ={closeModal}>x</div>
         <div className = "imagecarosel">
-          <img src={imageRoll[0]}></img>
-          <a className="prevBigPic" onClick={rowBackwards}>&#10094;</a>
+        <a className="prevBigPic" onClick={rowBackwards}>&#10094;</a>
+          {imageRoll.map((image,index)=>{
+            return(
+              <img  name = {index} className={index==imageNumber?"":"invisible"}  src={image}></img>
+
+
+            )
+          })}
 
                
 <a className="nextBigPic" onClick={rowForward}>&#10095;</a>

@@ -19,3 +19,16 @@
     width:40%;  
     
 }
+.nextBigPic{
+    float:right;
+
+}
+
+.prevBigPic{
+    float:left;
+
+}
+
+.invisible{
+    visibility:collapse
+}

@@ -198,7 +198,7 @@ const turnOffItemPageModal = ()=>{
               <a className="next" onClick={rowForward}>&#10095;</a>
             
             </div>
-            <div className={chosenItem.ItemPageModal === "on" ? "itemPageOn" : "itemPageOff" } id = {chosenItem.id} onClick={turnOffItemPageModal}>
+            <div className={chosenItem.ItemPageModal === "on" ? "itemPageOn" : "itemPageOff" } id = {chosenItem.id}>
               <Itempage 
               />
             </div>
