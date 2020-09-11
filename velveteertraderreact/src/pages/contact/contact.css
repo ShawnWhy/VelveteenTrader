@@ -1,0 +1,118 @@
+.background{
+    background-color:lightcyan;
+    position:fixed;
+    height:100%;
+    width:100%;
+    text-align:center;
+}
+
+.Content{
+    width:30%;
+    margin:10% auto;
+    position:relative;
+    top:-10%
+}
+
+.departmentSelect{
+    width:100%;
+    margin-bottom:2%;
+}
+input{
+    width:100%;
+}
+
+textarea{
+    width:100%;
+    
+}
+
+.submitButton{
+    margin-top:2%;
+}
+
+.invisible{
+    visibility:collaps;
+    margin:0%;
+    height:0;
+    width:0;
+    
+
+}
+
+.EmployeeProfile{
+    background-color:whitesmoke;
+    /* border:1px solid black; */
+    display:flex;
+
+}
+
+.employeeInfo{
+    width:60%;
+    text-align:left;
+}
+.imageContainer{
+    width:50%;
+}
+
+.profilePic{
+    margin:2%;
+width:80%;
+height:auto;
+}
+
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (-webkit-min-device-pixel-ratio: 1){
+    .EmployeeProfile{
+        /* background-color:whitesmoke; */
+        display:flex;
+        flex-direction: column;
+        text-align:center;
+    
+    }
+    .Content{
+        width:80%;
+        margin:10% auto;
+        position:relative;
+        top:0%;
+        text-align:center
+    }
+}
+
+
+
+@media only screen and (
+    max-width: 480px){
+    .EmployeeProfile{
+        background-color:whitesmoke;
+        /* border:1px solid black; */
+        text-align:center;
+        display:flex;
+        flex-direction: column;
+    
+    }
+    .Content{
+        width:80%;
+        margin:10% auto;
+        position:relative;
+        
+        text-align:center;
+    }
+
+    .employeeInfo{
+        width:100%;
+        text-align:center;
+
+    }
+    .imageContainer{
+        width:100%;
+        text-align:center;
+    }
+
+    .profilePic{
+        margin:2%;
+    width:50%;
+    height:auto;
+    }
+}

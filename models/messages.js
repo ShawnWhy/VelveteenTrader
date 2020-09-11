@@ -1,4 +1,4 @@
-const { Sequelize } = require(".");
+// const { Sequelize } = require(".");
 
 module.exports = function(sequelize, DataTypes) {
   var Message = sequelize.define("Message", {
@@ -9,20 +9,36 @@ module.exports = function(sequelize, DataTypes) {
     
     },
     itemId: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false, 
-      references: "Item",
-      referencesKey:"id"
+      references:{
+        model:"Items",
+        key:"id"
+      }
+      // references: "Item",
+      // referencesKey:"id"
     }, 
    posterId: {
-       type: sequelize.INTEGER,
+       type: DataTypes.INTEGER,
        allowNull: false,
-       referemce: "User",
-       referencesKey: id
+       references:{
+         model:"Users",
+         key:"id"
+       }
+      //  referemce: "User",
+      //  referencesKey: "id"
    },
     message:{
-      type: DataTypes.text,
+      type: DataTypes.TEXT,
 }
   });
   return Message
 }
+
+// addressId: {
+//   type: DataTypes.INTEGER,
+//   references: {
+//       model: 'addresses',
+//       key: 'id'
+//   }
+// }

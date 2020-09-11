@@ -25,7 +25,7 @@ getItemDetails : function(id){
 
 signUp : function(body){
   console.log("signingup");
-  return axios.get ("api/signUp",body)
+  return axios.post ("api/signUp",body)
 },
 
 logIn : function(body){
@@ -46,8 +46,13 @@ getUserData : function(){
 updateLikes : function(body){
   console.log("updating")
   return axios.post("/api/updateLikes/")
-}
+},
 
+createItem : function(body){
+console.log("creating")
+console.log(body);
+return axios.post("/api/createItem",body);
+}
 
 
 }

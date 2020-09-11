@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext } from "react";
 import { InformationContext } from "../../App";
 import Billboardscroll from "../../components/billboardscroll";
+
 import Style from "./homepage.css"
 
 function Homepage(props) {

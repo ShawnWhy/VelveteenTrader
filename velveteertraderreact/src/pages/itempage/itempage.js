@@ -65,7 +65,7 @@ const Itempage = function(props)  {
         <a className="prevBigPic" onClick={rowBackwards}>&#10094;</a>
           {imageRoll.map((image,index)=>{
             return(
-              <img  name = {index} className={index==imageNumber?"":"invisible"}  src={image}></img>
+              <img  name = {index} className={"BigImage "+ (index==imageNumber?"":"invisible")}  src={image}></img>
 
 
             )

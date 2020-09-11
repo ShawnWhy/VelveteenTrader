@@ -5,8 +5,8 @@ var db = require("../models");
 var passport = require("../config/passport");
  
 
-var mysql = require("mysql");
-const { ConnectionError } = require("sequelize");
+// var mysql = require("mysql");
+// const { ConnectionError } = require("sequelize");
 module.exports = function(app) {
 
   app.get("api/getFavs",
@@ -46,6 +46,7 @@ module.exports = function(app) {
   })
 
   app.post("/api/signUp", function(req, res) {
+    console.log(req.body)
     db.User.create({
       email: req.body.email,
       password: req.body.password,
@@ -71,10 +72,10 @@ module.exports = function(app) {
   })
 
   
-  app.post("api/item",
+  app.post("api/createItem",
   function(req, res){
     db.Item.create({
-      itemOwnerId : req.body.ItemownerId,
+      itemOwnerId : req.body.itemownerId,
       itemName:req.body.itemName,
       itemStory : req.body.itemStory,
       Votes : 0,
@@ -93,7 +94,7 @@ module.exports = function(app) {
 })
 
 
-  app.post("api/bids",
+  app.post("api/createBid",
   function(req, res){
     db.Bid.create({
       bidderId:req.body.BidderId,
@@ -107,7 +108,7 @@ module.exports = function(app) {
   })
 })
 
-  app.post("api/message",
+  app.post("api/createMessage",
   function(req, res){
     db.Message.create({
       itemID:req.body.itemId,
@@ -134,6 +135,8 @@ module.exports = function(app) {
        });
     }
   });
+
+
 
   
   // GET route for getting all of the todos

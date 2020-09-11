@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,16 +9,18 @@ import {
 
 import './App.css';
 import API from "../src/utils/API"
-import HomePage from "../src/pages/homepage";
-import Contact from "../src/pages/contact";
-import Chatroom from "../src/pages/chartroom";
-import UserPortal from "../src/pages/userPortal";
+import HomePage from "./pages/homepage";
+import Contact from "./pages/contact";
+import Chatroom from "./pages/chatroom";
+import UserPortal from "./pages/userPortal";
 // import ItemPage from "../src/pages/itempage";
 
 
 export const InformationContext = React.createContext();
 
 const App = function(){
+
+  const [contactModal , setContactModal]=useState("on");
 
   const [returnHomeLogin, setReturnHomeLogin]=useState(
     "off"
@@ -173,6 +175,13 @@ const App = function(){
     }
   )
 
+  const nameLoginRef = useRef();
+  const passwordLoginRef = useRef();
+  const emailLoginRef = useRef();
+  const nameSignupRef = useRef();
+  const passwordSignupRef = useRef();
+  const emailSignupRef = useRef();
+
   const [loggInModal, setLogInModal] = useState(
     "off"
   )
@@ -190,17 +199,55 @@ const App = function(){
     })
 
   }
-  const logIn= function(){
-    setReturnHomeLogin(
-      "on"
-    )
+  const logIn= function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    var loginInfo ={
+      email:emailLoginRef.current.value,
+      username:nameLoginRef.current.value,
+      password:passwordLoginRef.current.value
+
     }
 
-  const SignUp=function(){
-    setReturnHomeSignUp(
+    API.logIn(loginInfo).then((res)=>{
+    setReturnHomeLogin(
       "on"
-    )
-  }
+    )})
+    }
+
+  const SignUp=function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    // var signUpInfo ={
+    //   email:emailSignupRef.current.value,
+    //   username:nameSignupRef.current.value,
+    //   password:passwordSignupRef.current.value
+
+    var randomItem={
+      itemOwnderId:1,
+      itemName:"shit",
+      itemStory:"this is a piece of shit"
+
+
+    }
+    console.log("randomitem");
+    API.createItem(randomItem).then((res)=>{
+      console.log(res);
+    })
+
+    }
+    // console.log(signUpInfo);
+    // API.signUp(signUpInfo).then((res)=>{
+    //   setReturnHomeSignUp(
+    //     "on"
+    //   )
+
+    // }
+    // )
+
+
+  
+  // }
 
   const logOut=function(){
     setLoggedIn("false")
@@ -209,11 +256,13 @@ const App = function(){
   }
 
   const loginModalDeploy = function(){
+    setSignInModal("off")
     setLogInModal("on")
   }
 
  const signUpModalDeploy = function(){
-    setLogInModal("on")
+    setLogInModal("off")
+    setSignInModal("on")
   }
 
   const loginModaloff = function(){
@@ -223,7 +272,63 @@ const App = function(){
   const signUpModaloff = function(){
     setSignInModal("off")
   }
+  // useEffect(() => {
+  //   async function getId() {
+  //     var data = await API.getUserID();
+  //     console.log(data);
+  //     if (
+  //       data.data.username === null ||
+  //       !data ||
+  //       data.data.username === "nobody"
+  //     ) {
+  //       console.log("loggedon..not");
+  //       setLoggedin("false");
+  //       setUserName("nobody");
+  //     } else {
+  //       console.log(data.data.username);
+  //       // console.log("loggedin");
+  //       setUserName(data.data.username);
+  //       setLoggedin("true");
+  //     }
+  //   }
+  //   getId();
+  // }, [loggedin]);
+
+  // const logOut = function () {
+  //   // API.logOut();
+  //   // console.log("logout");
+  //   //   event.preventDefault();
+  //   //   event.stopPropagation();
+
+  //   async function logingOut() {
+  //     var done = await API.logOut();
+  //     if (done) {
+  //       console.log("loggedout");
+  //       setLoggedin("false");
+  //     }
+  //   }
+
+  //   logingOut();
+  // };
+
+  
+  // var handleSubmit = function (e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   var userlogin = { username: newUser.username, password: newUser.password };
+  //   console.log(userlogin);
+
+  //   API.login(userlogin)
+  //     .then((res) => {
+  //       // localStorage.setItem('token', res.data.token)
+  //       setLoggedin(true);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
  
+
 
 
 
@@ -299,11 +404,11 @@ const App = function(){
           </Switch>
       </Router>
               <div className={" row justify-content-center logInModal "+ ( loggInModal === "off" ? "invisible" : "visible")}>
-                <div className="col-md-4 modalContent">
+                <div className="col-md-  modalContent">
                 <div className={"XOut "+(returnHomeLogin ==="on"? "dissappear": "appear")} onClick={loginModaloff}>X</div>
-                  <input className = " offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
-                  <input className = " offset-md-1 col-md-10 signinInPut" type="email" placeholder = "email"></input>
-                  <input className = "offset-md-1 col-md-10 signinInPut" type="password" placeholder = "password"></input>
+                  <input ref={nameLoginRef} className = " offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
+                  <input ref = {emailLoginRef} className = " offset-md-1 col-md-10 signinInPut" type="email" placeholder = "email"></input>
+                  <input ref = {passwordLoginRef} className = "offset-md-1 col-md-10 signinInPut" type="password" placeholder = "password"></input>
                   <div onClick={logIn} >Login</div>
                   <div className={"returnHome "+(returnHomeLogin==="on"?"appear":"dissappear")}>logged On <a href="/">Return Home</a></div>
 
@@ -311,14 +416,14 @@ const App = function(){
                 </div>
               </div>
               <div className={" row justify-content-center signUpModal "+ ( signUpModal === "off" ? "invisible" : "visible")}>
-              <div className="col-md- 4 modalContent">
+              <div className="col-md-  modalContent">
               <div onClick={signUpModaloff} className={"XOut "+(returnHomeSignUp ==="on"? "dissappear": "appear")}>X</div>
 
-              <input  className = "offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
-                  <input className = "offset-md-1 col-md-10 signinInPut"  type="email" placeholder = "email"></input>
-                  <input className = "offset-md-1 col-md-10 signinInPut"  type="password" placeholder = "password"></input>  
+              <input ref={nameSignupRef} className = "offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
+                  <input ref={emailSignupRef}  className = "offset-md-1 col-md-10 signinInPut"  type="email" placeholder = "email"></input>
+                  <input ref={passwordSignupRef}  className = "offset-md-1 col-md-10 signinInPut"  type="password" placeholder = "password"></input>  
                   <div onClick={SignUp}>signup</div>
-                  <div className={"returnHome "+(returnHomeSignUp==="on"?  "appear":"dissappear")}>Signed Up <a href="/">Return Home</a></div>
+                  <div className={"returnHome "+(returnHomeSignUp==="on"? "appear":"dissappear")}>Signed Up <a href="/">Return Home</a></div>
               </div>
  
               </div>

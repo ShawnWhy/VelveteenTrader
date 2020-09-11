@@ -1,0 +1,45 @@
+{
+  "name": "velveteentrader",
+  "version": "1.0.0",
+  "description": "a social network for people to share their fantasies about their objects and to sell them",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "create-react-component-folder": "^0.3.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "http-proxy-middleware": "^1.0.5",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "react": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "sequelize": "^5.22.3",
+    "socket.io": "^2.3.0",
+    "v5": "^0.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShawnWhy/VelveteenTrader.git"
+  },
+  "keywords": [
+    "social",
+    "media"
+  ],
+  "author": "Shawn Yu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShawnWhy/VelveteenTrader/issues"
+  },
+  "homepage": "https://github.com/ShawnWhy/VelveteenTrader#readme"
+}

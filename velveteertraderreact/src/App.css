@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -43,7 +43,7 @@ a:visited {
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 .invisible{
   visibility: collapse;
@@ -87,6 +87,19 @@ a:visited {
   height:40%;
   width:20%;
   text-align: center;
+}
+
+.signUpModal{
+  
+  height:100%;
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background-color: aliceblue;
+  text-align:center;
+  align-content: center;
+  z-index:4;
 }
 
 .appear{

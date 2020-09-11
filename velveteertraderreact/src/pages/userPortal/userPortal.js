@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState , usecontext, useContext, useRef} from 'react';
 
-class UserPortal extends Component {
-  render() {
-    return <div>UserPortal</div>;
-  }
+const UserPortal= function() {
+
+  return(
+    <div>
+      userportal 
+    </div>
+
+
+  )
 }
 
 export default UserPortal;
