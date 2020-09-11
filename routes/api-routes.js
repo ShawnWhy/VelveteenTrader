@@ -75,13 +75,11 @@ module.exports = function(app) {
   app.post("api/createItem",
   function(req, res){
     db.Item.create({
-      itemOwnerId : req.body.itemownerId,
+      itemOwnerId : req.body.itemOwnerId,
       itemName:req.body.itemName,
       itemStory : req.body.itemStory,
-      Votes : 0,
-      bids:0,
+      votes : 0,
       highestBid:0,
-      portraitImageUrl:req.body.imageurl1,
       imageUrl1: req.body.imageUrl1,
       imageUrl2: req.body.imageUrl2,
       imageUrl3: req.body.imageUrl3,

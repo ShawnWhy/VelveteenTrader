@@ -224,7 +224,7 @@ const App = function(){
     //   password:passwordSignupRef.current.value
 
     var randomItem={
-      itemOwnderId:1,
+      itemOwnerId:1,
       itemName:"shit",
       itemStory:"this is a piece of shit"
 
