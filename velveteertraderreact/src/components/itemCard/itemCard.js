@@ -4,7 +4,7 @@ import Hearts from "../hearts";
 import API from "../../utils/API";
 import {InformationContext} from "../../App"
 import Style from "./itemCard.css"
-import {ItemContext} from "../billboardscroll/billboardscroll"
+import {ItemContext} from "../../App"
 
 export const CardContext = React.createContext();
 
@@ -56,7 +56,8 @@ const ItemCard = function(props){
       imageUrl3:props.imageUrl3,
       modelLink:props.modelLink,
       bidModal:"off",
-      ItemPageModal:"on"
+      ItemPageModal:"on",
+      comments:props.comments
       
 
     })

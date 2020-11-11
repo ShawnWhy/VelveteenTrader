@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useContext, useState } from 'react';
 import Style from "./hearts.css"
-import {ItemContext} from "../billboardscroll/billboardscroll"
+import {ItemContext} from "../../App"
 import {CardContext} from ".././itemCard/itemCard"
 import {InformationContext} from "../../App"
 import API from "../../utils/API"

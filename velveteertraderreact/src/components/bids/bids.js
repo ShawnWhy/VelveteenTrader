@@ -1,6 +1,6 @@
 import React, { Component, useContext, useState } from 'react';
 import {InformationContext} from "../../App"
-import {ItemContext} from "../billboardscroll/billboardscroll"
+import {ItemContext} from "../../App"
 import Style from "./bids.css"
 
  const Bids = function(props) {

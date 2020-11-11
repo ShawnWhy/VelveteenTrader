@@ -15,10 +15,19 @@ import Chatroom from "./pages/chatroom";
 import UserPortal from "./pages/userPortal";
 // import ItemPage from "../src/pages/itempage";
 
+export const ItemContext = React.createContext();
+
 
 export const InformationContext = React.createContext();
 
 const App = function(){
+  const [chosenItem, setChosenItem]=useState(
+    {bidModal:"off",
+    ItemPageModal:"off",
+      itemName:"",
+      id:"",
+    itemStory:""}
+  )
 
   const [contactModal , setContactModal]=useState("on");
 
@@ -38,6 +47,7 @@ const App = function(){
   const [userProfile, setUserProfile] = useState(
     {
       userName : "Shawnster ",
+      id:1,
       items:[
         {
           id:1,
@@ -45,13 +55,18 @@ const App = function(){
           itemName: "Gold Pot",
           itemStory:
           "Golg Pot is made of gold  and lives in a place and like to jump",
-          votes: 1,
+          likes: 1,
           highestBid: 300,
           portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl2: "https://i.imgur.com/n65vbtN.jpeg",
           imageUrl3: "https://i.imgur.com/N6ljJ1T.jpeg",
-          modelLink:""
+          modelLink:"",
+          comments:[
+            {author:"Shawnski",text:"this is amazing"},
+            {author:"Shawnster",text:"hey bro this is cool"},
+            {author:"Shawnssd",text:"hey man cool"}
+            ]
         },
         {
           id:2,
@@ -59,13 +74,21 @@ const App = function(){
           itemName: "Jumping TeaPot",
           itemStory:
           "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-          votes: 1,
+          likes: 1,
           highestBid: 400,
           portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg",
           imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
           imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
           imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-          modelLink:""
+          modelLink:"",
+          comments:[
+            {author:"Shawnski",text:"this is amazing"},
+            {author:"Shawnster",text:"hey bro this is cool"},
+            {author:"Shawnssd",text:"hey man cool"}
+
+
+
+          ]
         },
         {
           id:3,
@@ -73,106 +96,112 @@ const App = function(){
           itemName: "Jumperson",
           itemStory:
           "this one also lives to jump ",
-          votes: 1,
+          likes: 1,
           highestBid: 400,
           portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl2: "https://i.imgur.com/3iix37r.jpeg",
           imageUrl3: "https://i.imgur.com/0INGPZD.jpeg",
-          modelLink:""
+          modelLink:"",
+          comments:[
+            {author:"Shawnski",text:"this is amazing"},
+            {author:"Shawnster",text:"hey bro this is cool"},
+            {author:"Shawnssd",text:"hey man cool"}
+
+
+
+          ]
         },
-      ],
-      votes:[
         {
-          id:1,
+          id:4,
           itemOwnerId:1,
           itemName: "Gold Pot",
           itemStory:
           "Golg Pot is made of gold  and lives in a place and like to jump",
-          votes: 1,
+          likes: 1,
           highestBid: 300,
           portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl2: "https://i.imgur.com/n65vbtN.jpeg",
           imageUrl3: "https://i.imgur.com/N6ljJ1T.jpeg",
-          modelLink:""
+          modelLink:"",
+          comments:[
+            {author:"Shawnski",text:"this is amazing"},
+            {author:"Shawnster",text:"hey bro this is cool"},
+            {author:"Shawnssd",text:"hey man cool"}
+
+
+
+          ]
         },
         {
-          id:2,
+          id:5,
           itemOwnerId:1,
           itemName: "Jumping TeaPot",
           itemStory:
           "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-          votes: 1,
+          likes: 1,
           highestBid: 400,
           portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg",
           imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
           imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
           imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-          modelLink:""
+          modelLink:"",
+          comments:[
+            {author:"Shawnski",text:"this is amazing"},
+            {author:"Shawnster",text:"hey bro this is cool"},
+            {author:"Shawnssd",text:"hey man cool"}
+
+
+
+          ]
         },
         {
-          id:3,
+          id:6,
           itemOwnerId:1,
           itemName: "Jumperson",
           itemStory:
           "this one also lives to jump ",
-          votes: 1,
+          likes: 1,
           highestBid: 400,
           portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
           imageUrl2: "https://i.imgur.com/3iix37r.jpeg",
           imageUrl3: "https://i.imgur.com/0INGPZD.jpeg",
-          modelLink:""
+          modelLink:"",
+          comments:[
+            {author:"Shawnski",text:"this is amazing"},
+            {author:"Shawnster",text:"hey bro this is cool"},
+            {author:"Shawnssd",text:"hey man cool"}
+
+
+
+          ]
         },
+        
+        
+      ],
+      votes:[1,4,5,3
+    
   
       ],
       bids:[
-        {
-          id:1,
-          itemOwnerId:1,
-          itemName: "Gold Pot",
-          itemStory:
-          "Golg Pot is made of gold  and lives in a place and like to jump",
-          votes: 1,
-          highestBid: 300,
-          portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl2: "https://i.imgur.com/n65vbtN.jpeg",
-          imageUrl3: "https://i.imgur.com/N6ljJ1T.jpeg",
-          modelLink:""
-        },
-        {
-          id:2,
-          itemOwnerId:1,
-          itemName: "Jumping TeaPot",
-          itemStory:
-          "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-          votes: 1,
-          highestBid: 400,
-          portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg",
-          imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
-          imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
-          imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-          modelLink:""
-        },
-        {
-          id:3,
-          itemOwnerId:1,
-          itemName: "Jumperson",
-          itemStory:
-          "this one also lives to jump ",
-          votes: 1,
-          highestBid: 400,
-          portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl2: "https://i.imgur.com/3iix37r.jpeg",
-          imageUrl3: "https://i.imgur.com/0INGPZD.jpeg",
-          modelLink:""
+        {item:2, amount:500},
+        {item:3, amount:500},
+        {item:5, amount:500},
+        {item:6, amount:500},
+
+
+
+         
+   
+
+          ],
+      
         },
   
-      ],
-    }
+      
+    
   )
 
   const nameLoginRef = useRef();
@@ -218,32 +247,20 @@ const App = function(){
   const SignUp=function(event){
     event.stopPropagation();
     event.preventDefault();
-    // var signUpInfo ={
-    //   email:emailSignupRef.current.value,
-    //   username:nameSignupRef.current.value,
-    //   password:passwordSignupRef.current.value
-
-    var randomItem={
-      itemOwnerId:1,
-      itemName:"shit",
-      itemStory:"this is a piece of shit"
-
-
-    }
-    console.log("randomitem");
-    API.createItem(randomItem).then((res)=>{
-      console.log(res);
-    })
+    var signUpInfo ={
+      email:emailSignupRef.current.value,
+      username:nameSignupRef.current.value,
+      password:passwordSignupRef.current.value
+}
+    console.log(signUpInfo);
+    API.signUp(signUpInfo).then((res)=>{
+      setReturnHomeSignUp(
+        "on"
+      )
 
     }
-    // console.log(signUpInfo);
-    // API.signUp(signUpInfo).then((res)=>{
-    //   setReturnHomeSignUp(
-    //     "on"
-    //   )
-
-    // }
-    // )
+    )
+  }
 
 
   
@@ -272,6 +289,16 @@ const App = function(){
   const signUpModaloff = function(){
     setSignInModal("off")
   }
+
+  useEffect(()=>{
+    async function getUserInfo(){
+      var username = await API.getUserData()
+      console.log(username);
+
+
+    }
+
+  },[])
   // useEffect(() => {
   //   async function getId() {
   //     var data = await API.getUserID();
@@ -343,6 +370,7 @@ const App = function(){
   
 
    return (
+     <ItemContext.Provider value={{chosenItem, setChosenItem}}>
      <InformationContext.Provider value={{userProfile, setUserProfile}}>
         <Router>
         <div className="row justify-content-center">
@@ -363,21 +391,21 @@ const App = function(){
             </div>
             <div
               className={
-                (loggedIn == false ? "visible" : "invisible")
+                (loggedIn === false ? "visible" : "invisible")
               }
             >
               <a onClick={signUpModalDeploy}>Sign Up</a>
             </div>
             <div
               className={
-                (loggedIn == false ? "invisible" : "visible")
+                (loggedIn === false ? "invisible" : "visible")
               }
             >
               <a onClick={logOut}>Log Out</a>
             </div>
             <div
               className={
-                 (loggedIn == false ? "invisible" : "visible")
+                 (loggedIn === false ? "invisible" : "visible")
               }
             >
             <Link to="/user">User Portal</Link>
@@ -409,7 +437,7 @@ const App = function(){
                   <input ref={nameLoginRef} className = " offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
                   <input ref = {emailLoginRef} className = " offset-md-1 col-md-10 signinInPut" type="email" placeholder = "email"></input>
                   <input ref = {passwordLoginRef} className = "offset-md-1 col-md-10 signinInPut" type="password" placeholder = "password"></input>
-                  <div onClick={logIn} >Login</div>
+                  <div className={"returnHome "+(returnHomeLogin==="on"?"dissappeaer":"appear")} onClick={logIn} >Login</div>
                   <div className={"returnHome "+(returnHomeLogin==="on"?"appear":"dissappear")}>logged On <a href="/">Return Home</a></div>
 
 
@@ -422,13 +450,15 @@ const App = function(){
               <input ref={nameSignupRef} className = "offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
                   <input ref={emailSignupRef}  className = "offset-md-1 col-md-10 signinInPut"  type="email" placeholder = "email"></input>
                   <input ref={passwordSignupRef}  className = "offset-md-1 col-md-10 signinInPut"  type="password" placeholder = "password"></input>  
-                  <div onClick={SignUp}>signup</div>
+                  <div className={"returnHome "+(returnHomeSignUp==="on"? "dissappear":"appear")} onClick={SignUp}>signup</div>
                   <div className={"returnHome "+(returnHomeSignUp==="on"? "appear":"dissappear")}>Signed Up <a href="/">Return Home</a></div>
               </div>
  
               </div>
 
       </InformationContext.Provider> 
+      </ItemContext.Provider>
+      
     );
   }
 

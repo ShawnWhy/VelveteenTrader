@@ -14,7 +14,6 @@ const Chatroom = function(props){
 // transports:["websocket","polling"]
 // });
 
-const [allSentences, setAllsentences]=useState([]);
 const [currentDisplay, setCurrentDisplay]= useState("");
 const {userProfile, setUserProfile}= useContext(InformationContext)
 const [users, setUsers] = useState(
@@ -80,6 +79,21 @@ const [chat, setChat] = useState("on");
 
     return(
       <div>
+        <div className="usersContainer">
+          {!users.length?(
+            <div>users</div>
+          ) : ( 
+            <div>
+            {users.map(({user,id}, index)=>(
+              <div
+              ksy={index}>user</div>
+            ))}</div>
+            )
+          }
+          
+        </div>
+
+
       <div className = "welcomeScreen">
         welcome {userProfile.userName}
 

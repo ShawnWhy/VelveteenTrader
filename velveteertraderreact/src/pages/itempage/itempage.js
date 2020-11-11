@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState , usecontext, useContext} from 'react';
 import Bids from "../../components/bids";
 import Hearts2 from "../../components/hearts2"
-import {ItemContext} from "../../components/billboardscroll/billboardscroll"
+import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
 import Style from "./itempage.css"
 const Itempage = function(props)  {
@@ -23,12 +23,9 @@ const Itempage = function(props)  {
      number=0
    }
    setImageNumber(number);
+}
 
 
- 
-
-
-  }
 
   const rowBackwards = () =>{
     var length=imageRoll.length;
@@ -50,6 +47,7 @@ const Itempage = function(props)  {
   
   useEffect(()=>{
     console.log("refreshment")
+    console.log(chosenItem);
     var itemImageUrls= [chosenItem.imageUrl1,chosenItem.imageUrl2, chosenItem. imageUrl3 ]
     setImageRoll(itemImageUrls)
   },[chosenItem])
@@ -94,17 +92,15 @@ const Itempage = function(props)  {
           {chosenItem.itemStory}
         </p>
 
+ 
+        {!chosenItem.comments?(
+          <h1 className = "nocomments">no comments yet</h1>
+        ):(
+          <div>{chosenItem.comments.map(comment=>{return(
+          <div>{comment.author} : {comment.text}</div>
+        )})}</div>)}
 
-      
-        
-
-
-      </div>
-
-
-
-    ) 
-  
-}
+      </div>)}
+    
 
 export default Itempage;

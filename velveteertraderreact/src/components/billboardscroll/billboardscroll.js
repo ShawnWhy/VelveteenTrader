@@ -2,22 +2,18 @@ import React, { Component, useEffect, useState, useContext } from 'react';
 import API from "../../utils/API"
 import ItemCard from "../itemCard";
 import Itempage from "../../pages/itempage"
-import {InformationContext} from "../../App"
+// import {InformationContext} from "../../App"
 import Style from "./billboardscroll.css"
+import {ItemContext} from "../../App"
 
 
-export const ItemContext = React.createContext();
+
 
 
 const Billboardscroll = function() {
 
-  const [chosenItem, setChosenItem]=useState(
-    {bidModal:"off",
-    ItemPageModal:"off",
-      itemName:"",
-      id:"",
-    itemStory:""}
-  )
+  const {chosenItem, setChosenItem}= useContext(ItemContext)
+
 
   const [favoriteItems, SetFavoriteItems] = useState(
     [
@@ -33,7 +29,12 @@ const Billboardscroll = function() {
         imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
         imageUrl2: "https://i.imgur.com/n65vbtN.jpeg",
         imageUrl3: "https://i.imgur.com/N6ljJ1T.jpeg",
-        modelLink:""
+        modelLink:"",
+        comments:[
+          {author:"Shawnski",text:"this is amazing"},
+          {author:"Shawnster",text:"hey bro this is cool"},
+          {author:"Shawnssd",text:"hey man cool"}
+          ]
       },
       {
         id:2,
@@ -47,7 +48,12 @@ const Billboardscroll = function() {
         imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
         imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
         imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-        modelLink:""
+        modelLink:"",
+        comments:[
+          {author:"Shawnski",text:"this is amazing"},
+          {author:"Shawnster",text:"hey bro this is cool"},
+          {author:"Shawnssd",text:"hey man cool"}
+          ]
       },
       {
         id:3,
@@ -61,7 +67,12 @@ const Billboardscroll = function() {
         imageUrl1: "https://i.imgur.com/hpTkbNy.jpg",
         imageUrl2: "https://i.imgur.com/3iix37r.jpg",
         imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-        modelLink:""
+        modelLink:"",
+        comments:[
+          {author:"Shawnski",text:"this is amazing"},
+          {author:"Shawnster",text:"hey bro this is cool"},
+          {author:"Shawnssd",text:"hey man cool"}
+          ]
       },
       {
         id:9,
@@ -75,7 +86,12 @@ const Billboardscroll = function() {
         imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
         imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
         imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-        modelLink:""
+        modelLink:"",
+        comments:[
+          {author:"Shawnski",text:"this is amazing"},
+          {author:"Shawnster",text:"hey bro this is cool"},
+          {author:"Shawnssd",text:"hey man cool"}
+          ]
       },
       {
         id:10,
@@ -89,7 +105,12 @@ const Billboardscroll = function() {
         imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
         imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
         imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-        modelLink:""
+        modelLink:"",
+        comments:[
+          {author:"Shawnski",text:"this is amazing"},
+          {author:"Shawnster",text:"hey bro this is cool"},
+          {author:"Shawnssd",text:"hey man cool"}
+          ]
       },
 ]
 )
@@ -148,8 +169,7 @@ const turnOffItemPageModal = ()=>{
 
   
     return (
-      <ItemContext.Provider value={{chosenItem, setChosenItem}}>
-
+<div>
 <div onClick={turnOffBidModal} className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
         <div className = "bidforum" >
           <div> the highest bid for {chosenItem.itemName} is {chosenItem.highestBid}</div>
@@ -181,7 +201,7 @@ const turnOffItemPageModal = ()=>{
                  imageUrl2={item.imageUrl2}
                  imageUrl3={item.imageUrl3}
                  modelLink={item.modelLink}
-                 SetFavoriteItems={SetFavoriteItems}
+                 comments={item.comments}
                    
                  />
                );
@@ -202,7 +222,7 @@ const turnOffItemPageModal = ()=>{
               <Itempage 
               />
             </div>
-            </ItemContext.Provider>
+            </div>
 
       
   
