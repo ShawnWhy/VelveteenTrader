@@ -51,6 +51,12 @@ createItem : function(body){
 console.log("creating")
 console.log(body);
 return axios.post("/api/createItem",body);
+},
+
+postComment: function(body){
+  console.log("loggincomment")
+  console.log(body);
+  return axios.post("/api/postcomment",body)
 }
 
 

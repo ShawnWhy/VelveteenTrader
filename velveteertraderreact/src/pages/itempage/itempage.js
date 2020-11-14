@@ -52,18 +52,32 @@ const Itempage = function(props)  {
     setImageRoll(itemImageUrls)
   },[chosenItem])
 
-  
+  const [closeText, setCloseText]=useState("off") 
+  const showCloseText = ()=>{
+    setCloseText("on")}
+  const removeCloseText =()=>{
+    setCloseText("off") 
+  }
+  const [commentSection, setCommentSection]=useState("off")
+  const turnOnComment=()=>{
+    setCommentSection("on")
+  }
+  const turnOffComment=()=>{
+    setCommentSection("off")
+  }
     return(
 
     
       
-      <div>
-        <div ClassName="closeModal" onClick ={closeModal}>x</div>
-        <div className = "imagecarosel">
+      <div className="page">
+      <div className="closeModal" onMouseLeave={removeCloseText} onMouseOver={showCloseText} onClick ={closeModal}><div className={closeText==="on"?"visible":"invisible"}>close</div><div className={closeText==="on"?"invisible":"visible"}>x</div> </div>
+
+        <div className = "imageCarosel">
+
         <a className="prevBigPic" onClick={rowBackwards}>&#10094;</a>
           {imageRoll.map((image,index)=>{
             return(
-              <img  name = {index} className={"BigImage "+ (index==imageNumber?"":"invisible")}  src={image}></img>
+              <img  name = {index} className={"bigImage "+ (index==imageNumber?"":"invisible")}  src={image}></img>
 
 
             )
@@ -91,14 +105,23 @@ const Itempage = function(props)  {
         <p className="itemStory">
           {chosenItem.itemStory}
         </p>
+        <div onClick={turnOnComment} className={commentSection==="on"?"invisible":"button"}>Turn On comments</div>
+        <div onClick={turnOffComment} className={commentSection==="off"?"invisible":"button"}>Turn off comments</div>
 
- 
+        <div className={commentSection==="on"?"commentSection":"invisible"}>
+        
         {!chosenItem.comments?(
           <h1 className = "nocomments">no comments yet</h1>
         ):(
           <div>{chosenItem.comments.map(comment=>{return(
           <div>{comment.author} : {comment.text}</div>
         )})}</div>)}
+        <form className="commentForm">
+          <input className="commentInput" type="text"></input>
+          <input className="commentSubmit" type="submit"></input>
+        </form>
+        </div>
+        
 
       </div>)}
     
