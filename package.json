@@ -4,7 +4,7 @@
   "description": "a social network for people to share their fantasies about their objects and to sell them",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "create-react-component-folder": "^0.3.2",
