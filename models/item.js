@@ -9,27 +9,27 @@ module.exports = function(sequelize, DataTypes) {
     autoIncrement: true,
     
     },
-    itemOwnerId: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references:{
-        model:"Users",
-        key:"id"
-      } 
+    
       
     }, 
-    itemName:{
+    name:{
       type: DataTypes.STRING,
       allowNull: false,
     },
     itemStory:{
       type: DataTypes.TEXT,
   },
-    votes : {
-      type: DataTypes.INTEGER,
-  },
+
     highestBid:{
       type: DataTypes.INTEGER,
+
+  },
+
+  likes:{
+    type:DataTypes.INTEGER,
 
   },
 
@@ -46,6 +46,9 @@ module.exports = function(sequelize, DataTypes) {
   modelLink:{ 
     type: DataTypes.STRING
   },
+  
+
+  
   });
   return Item;
 }

@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
+      isEmail: true
       }
     },
     username: {
@@ -19,6 +19,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     } ,
+    
+
+    
      // dateOfBirth:{type:DataTypes.DATEONLY,
     //         allowNull:true},
 

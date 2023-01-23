@@ -22,15 +22,18 @@ const Hearts2 =function(props) {
   }
 
   const addLike = ()=>{
+  console.log("like")
+  var newLike = parseInt(props.likes);
+  newLike+=1;
     var body={
-      id:chosenItem.id,
-      likes:chosenItem.likes,
-      likedby:userProfile.userName
+      'id':chosenItem.id,
+      'likes':newLike,
+      'userId':userProfile.id
     
     }
-    API.updateLikes(body)
-    var newLike = parseInt(props.likes);
-    newLike+=1;
+    API.updateLikes(body,chosenItem.id)
+    console.log(body);
+  
     // alert(newLike)
     setChosenItem({...chosenItem, likes:newLike})
   }

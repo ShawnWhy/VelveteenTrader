@@ -3,11 +3,13 @@ import Style from "./hearts.css"
 import {ItemContext} from "../../App"
 import {CardContext} from ".././itemCard/itemCard"
 import {InformationContext} from "../../App"
+import { FavItemContext} from '../billboardscroll/billboardscroll';
 import API from "../../utils/API"
 
 const Hearts =function(props) {
+  const {favoriteItems, SetFavoriteItems}= useContext(FavItemContext)
 
-  const {cardInfo, setCardInfo} = useContext(CardContext)
+  const {cardInfo, ChildrenSetCardInfo} = useContext(CardContext)
   
   const {userProfile, setUserProfile} = useContext(InformationContext)
   const {chosenItem, setChosenItem} = useContext(ItemContext)
@@ -15,6 +17,7 @@ const Hearts =function(props) {
     "red"
   )
 
+// console.log(chosenItem)
   const changeToPink=()=>{
     setHeartColor("pink")
    
@@ -24,22 +27,31 @@ const Hearts =function(props) {
   }
 
   const addLike = ()=>{
+    var newLike = parseInt(cardInfo.likes);
+    newLike+=1;
+    console.log("like")
     var body={
-      id:chosenItem.id,
-      likes:chosenItem.likes,
-      likedby:userProfile.userName
+      "id":props.id,
+      "likes":newLike,
+      "userId":userProfile.id
     
     }
-    API.updateLikes(body)
-    var newLike = parseInt(props.likes);
-    newLike+=1;
-    // alert(newLike)
-    setChosenItem({...chosenItem, likes:newLike})
-    setCardInfo({...cardInfo, likes:newLike})
+    console.log(body);
+    API.updateLikes(body, props.id)
+
+    //set favorite items
+    var data = [...favoriteItems]
+    var index = data.findIndex(obj => obj.id === props.id);
+    data = favoriteItems;
+    data[index].likes = newLike
+    SetFavoriteItems(data)
+    props.ChildrenSetCardInfo(newLike)
+    console.log(cardInfo.likes);
   }
   
   
     return(
+    // <CardContext.Consumer>
     
     <div onMouseOver={changeToPink} onMouseLeave={changeToRed} 
     onClick={addLike} className="heart">
@@ -52,13 +64,11 @@ const Hearts =function(props) {
 
     </g>
     </svg>
-  <div className = "likesNumber">{props.likes}</div>
+  <div className = "likesNumber">{cardInfo.likes}</div>
 
-
-
-      
-      
     </div>
+    // </CardContext.Consumer>
+    
     )
     
 }

@@ -42,9 +42,10 @@ getUserData : function(){
   return axios.get("/api/user_data");
 },
 
-updateLikes : function(body){
+updateLikes : function(body, id){
   console.log("updating")
-  return axios.post("/api/updateLikes/")
+  console.log(body)
+  return axios.put("/api/updateLikes/"+id, body)
 },
 
 createItem : function(body){

@@ -4,7 +4,12 @@ import Hearts2 from "../../components/hearts2"
 import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
 import Style from "./itempage.css"
+import API from "../../utils/API"
 const Itempage = function(props)  {
+
+  
+  
+  
 
   const {userProfile, setUserProfile}= useContext(InformationContext)
 
@@ -47,7 +52,7 @@ const Itempage = function(props)  {
   
   useEffect(()=>{
     console.log("refreshment")
-    console.log(chosenItem);
+    // console.log(chosenItem);
     var itemImageUrls= [chosenItem.imageUrl1,chosenItem.imageUrl2, chosenItem. imageUrl3 ]
     setImageRoll(itemImageUrls)
   },[chosenItem])
@@ -92,7 +97,7 @@ const Itempage = function(props)  {
         <div className="bidDisplay">
         <Bids 
         highestBid={chosenItem.highestBid}
-        itemName={chosenItem.itemName}
+        name={chosenItem.name}
         />
         </div>
         <div className="heartDisplay">

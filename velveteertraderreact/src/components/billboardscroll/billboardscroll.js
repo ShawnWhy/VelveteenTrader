@@ -6,6 +6,9 @@ import Itempage from "../../pages/itempage"
 import Style from "./billboardscroll.css"
 import {ItemContext} from "../../App"
 
+export const FavItemContext = React.createContext();
+
+
 
 
 
@@ -19,8 +22,8 @@ const Billboardscroll = function() {
     [
       {
         id:1,
-        itemOwnerId:1,
-        itemName: "Gold Pot",
+        userId:1,
+        name: "Gold Pot",
         itemStory:
         "Golg Pot is made of gold  and lives in a place and like to jump",
         likes: 1,
@@ -38,8 +41,8 @@ const Billboardscroll = function() {
       },
       {
         id:2,
-        itemOwnerId:1,
-        itemName: "Jumping TeaPot",
+        userId:1,
+        name: "Jumping TeaPot",
         itemStory:
         "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
         likes: 3,
@@ -57,8 +60,8 @@ const Billboardscroll = function() {
       },
       {
         id:3,
-        itemOwnerId:1,
-        itemName: "Jumperson",
+        userId:1,
+        name: "Jumperson",
         itemStory:
         "this one also lives to jump ",
         likes: 9,
@@ -76,8 +79,8 @@ const Billboardscroll = function() {
       },
       {
         id:9,
-        itemOwnerId:8,
-        itemName: "crazer",
+        userId:8,
+        name: "crazer",
         itemStory:
         "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
         likes: 1,
@@ -95,8 +98,8 @@ const Billboardscroll = function() {
       },
       {
         id:10,
-        itemOwnerId:1,
-        itemName: "doozer",
+        userId:1,
+        name: "doozer",
         itemStory:
         "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
         likes: 1,
@@ -115,6 +118,13 @@ const Billboardscroll = function() {
 ]
 )
 
+// function setInfoArea(id, key, info) {
+//    var data = [...this.state.data];
+//    var index = data.findIndex(obj => obj.id === id);
+//    data[index].title = title;
+//    this.setState({data});
+// }
+
 const [rotationItems, setRotationItems]=useState(
   []
   
@@ -124,19 +134,29 @@ const [rotationItems, setRotationItems]=useState(
   //  loadFavorites()
    
   // },);
+  useEffect (()=>{
+
+ loadFavorites()
+
+  },'')
 
   useEffect  (()=>{
+    console.log(favoriteItems)
     var tempRot = favoriteItems.slice(0,3)
+    
     setRotationItems(tempRot)
 
 
   },[favoriteItems]);
 
   const loadFavorites = function(){
+    console.log("loadfav ")
     API.getFavorites()
     .then(res=>{
-      SetFavoriteItems(res)
+      console.log(res)
+      SetFavoriteItems(res.data)
 
+      
       
     })
 
@@ -172,7 +192,7 @@ const turnOffItemPageModal = ()=>{
 <div>
 <div onClick={turnOffBidModal} className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
         <div className = "bidforum" >
-          <div> the highest bid for {chosenItem.itemName} is {chosenItem.highestBid}</div>
+          <div> the highest bid for {chosenItem.name} is {chosenItem.highestBid}</div>
           <div> how much would you like to bid" <input type="number" placeholder="100"></input> </div>
         </div>
         </div>
@@ -190,9 +210,11 @@ const turnOffItemPageModal = ()=>{
 
              {rotationItems.map(item => {
                return (
+              <FavItemContext.Provider value={{favoriteItems, SetFavoriteItems}}>
+
                  <ItemCard
-                 portraitImageUrl={item.portraitImageUrl}
-                 itemName={item.itemName}  
+                 portraitImageUrl={item.imageUrl1}
+                 name={item.name}  
                  likes = { item.likes}
                  highestBid = {item.highestBid} 
                  itemStory={item.itemStory}
@@ -204,6 +226,7 @@ const turnOffItemPageModal = ()=>{
                  comments={item.comments}
                    
                  />
+                 </FavItemContext.Provider>
                );
              })}
              

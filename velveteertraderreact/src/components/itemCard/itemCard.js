@@ -16,7 +16,7 @@ const ItemCard = function(props){
     itemStory: props.itemStory,
     itemOwnerId:props.itemOwnerId,
     id:props.id,
-    itemName:props.itemName,
+    name:props.name,
     imageUrl1:props.imageUrl1,
     imageUrl2: props.imageUrl2,
     imageUrl3:props.imageUrl3,
@@ -32,7 +32,7 @@ const ItemCard = function(props){
       itemStory: props.itemStory,
       itemOwnerId:props.itemOwnerId,
       id:props.id,
-      itemName:props.itemName,
+      name:props.name,
       imageUrl1:props.imageUrl1,
       imageUrl2: props.imageUrl2,
       imageUrl3:props.imageUrl3,
@@ -50,7 +50,7 @@ const ItemCard = function(props){
       itemStory: props.itemStory,
       itemOwnerId:props.itemOwnerId,
       id:props.id,
-      itemName:props.itemName,
+      name:props.name,
       imageUrl1:props.imageUrl1,
       imageUrl2: props.imageUrl2,
       imageUrl3:props.imageUrl3,
@@ -66,26 +66,36 @@ const ItemCard = function(props){
     
   }
 
+ function ChildrenSetCardInfo (info){
+  console.log("childrensetcard");
+  console.log(info);
+setCardInfo(()=>({...cardInfo, likes:info
 
+}))
+console.log(cardInfo);
+
+ }
   
 
 
     return (
-      <CardContext.Provider value = {{cardInfo, setCardInfo}}>
+      <CardContext.Provider value = {{cardInfo}}>
       <div style={{backgroundImage: `url(${props.portraitImageUrl})` }} className = "col-md-3 itemCard" >
         
-          <div className = "itemName">
-            {cardInfo.itemName}
+          <div className = "name">
+            {cardInfo.name}
           </div>
           <div className="otherInfo">
              <Bids
              highestBid={cardInfo.highestBid}
              id = {cardInfo.id}
-             itemName= {cardInfo.itemName}
+             name= {cardInfo.name}
              />
                
             <Hearts
-            likes={cardInfo.likes}/>
+            likes={cardInfo.likes}
+            id={cardInfo.id}
+            ChildrenSetCardInfo = {ChildrenSetCardInfo}/>
           
           </div>
           

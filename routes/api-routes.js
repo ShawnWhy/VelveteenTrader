@@ -11,17 +11,20 @@ var connection =require("./connection");
 // const { ConnectionError } = require("sequelize");
 module.exports = function(app) {
 
+  
+
   app.get("/api/getFavs",
     function(req, res){
-      Connection.query ("SELECT * FROM Items ORDER By votes DESC Limit 10",function(err, data){if(err) throw err;
+      
+      connection.query ("SELECT * FROM Items ORDER By likes DESC Limit 10",function(err, data){if(err) throw err;
        console.log("got top picks");
        res.json(data)
       })
     });
 
-  app.get("/api/allItems",
+  app.get("/api/allItems/:userid",
   function(req, res){
-    connection.query("SELECT * FROM Items JOIN Users ON Items.itemOwnerId = Users.id", function(err, data){
+    connection.query("SELECT * FROM Items JOIN Users ON Items.userId = Users.id", function(err, data){
     if(err) throw err, 
     console.log("got them all");
     res.json(data)
@@ -38,7 +41,7 @@ function(req, res){
 
   app.get("/api/items/:id", function(req, res){
     userId = req.params.id;
-    conenction.query("SELECT * FROM Item RIGHT JOIN User ON Item.itemOwnerId = User.id LEFT JOIN Bid ON Item.id = Bid.bidItemId WHERE ItemOwnerId = ?", userId,
+    connection.query("SELECT * FROM Item RIGHT JOIN User ON Item.userId = User.id LEFT JOIN Bid ON Item.id = Bid.biditemId WHERE userId = ?", userId,
     function(err, data){
       if(err) throw err;
       console.log("got the item for this guy")
@@ -48,7 +51,7 @@ function(req, res){
 
   app.get("/api/itemDetails/:id", function(req,res){
     itemId = req.params.id;
-    connection.query("SELECT * FROM Item LEFT JOIN Bid on Bid.bidItemId = Item.id LEFT JOIN Message ON Message.itemId = Item.id LEFT JOIN Bid on Bid.bidItemId = Item.id WHERE Item.id=?",
+    connection.query("SELECT * FROM Item LEFT JOIN Bid on Bid.biditemId = Item.id LEFT JOIN Message ON Message.itemId = Item.id LEFT JOIN Bid on Bid.biditemId = Item.id WHERE Item.id=?n",
     itemId,function(err, data){
       if(err) throw err;
       res.json(data)
@@ -94,7 +97,7 @@ function(req, res){
   app.post("/api/createItem",
   function(req, res){
     db.Item.create({
-      itemOwnerId : req.body.itemOwnerId,
+      userId : req.body.userId,
       itemName:req.body.itemName,
       itemStory : req.body.itemStory,
       votes : 0,
@@ -113,8 +116,8 @@ function(req, res){
   app.post("/api/createBid",
   function(req, res){
     db.Bid.create({
-      bidderId:req.body.BidderId,
-      bidItemId:req.body.bidItemId,
+      userId:req.body.userId,
+      itemId:req.body.itemId,
       bidAmount:req.body.bidAmount,
       
     }).then(function(err,result){
@@ -127,14 +130,41 @@ function(req, res){
   app.post("/api/createMessage",
   function(req, res){
     db.Message.create({
-      itemID:req.body.itemId,
-      posterID:req.body.posterId,
+      itemId:req.body.itemId,
+      userId:req.body.userId,
       message:req.body.message,
     }).then(function(err,result){
     if(err) throw err, 
     console.log("postedmessage");
     res.json(result)
   })
+})
+
+  app.put("/api/updateLikes/:id",
+   
+  function(req, res){
+    console.log(req.body);
+    db.Item.update({
+      
+      likes:req.body.likes,
+      },{
+        where:{
+          id:req.params.id
+        }
+      }).then(function(err,result){
+    if(err) throw err, 
+    console.log("postedmessage");
+    res.json(result)
+  });
+  //     db.Likes.Create({
+  //     itemId:req.body.id,
+  //     likes:req.body.likes,
+  //     }).then(function(err,result){
+  //   if(err) throw err, 
+  //   console.log("postedmessage");
+  //   res.json(result)
+  // });
+
 })
 
   app.get("/api/user_data", function(req, res) {

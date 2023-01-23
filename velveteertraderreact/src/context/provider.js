@@ -4,7 +4,7 @@ import Context from './context';
 
 const Sample = () => (
 
-<Context .Provider value='dark'>
+<Context.Provider value='dark'>
 
 // declare consumer
 

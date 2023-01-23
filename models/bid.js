@@ -3,27 +3,21 @@
 module.exports = function(sequelize, DataTypes) {
   var Bid = sequelize.define("Bid", {
     id:{
-      type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     },
-    bidderId: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        reference:{
-          model:"users",
-          key:"id"
-        }
+  
         // referemce: "User",
         // referencesKey:"id"
     },
-    BidItemId: {
+    itemId: {
       type: DataTypes.INTEGER,
       allowNull: false, 
-      reference:{
-        model:"Items",
-        key:"id"
-      }
+  
       // references: "Item",
       // referencesKey:"id"
     }, 
@@ -31,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     amount:{
       type: DataTypes.FLOAT,
 }
+
   });
   return Bid
 }

@@ -6,14 +6,19 @@
 // =============================================================
 var Axios =require ("axios");
 const passportControl = require('./config/passport');
-
+const compression = require("compression");
 
 var express = require("express");
+var bodyParser = require('body-parser');
 
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 3066;
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
+app.use(compression())
+
+var PORT = process.env.PORT || 3001;
 
 // Requiring our models for syncing
 var db = require("./models");

@@ -24,7 +24,7 @@ const App = function(){
   const [chosenItem, setChosenItem]=useState(
     {bidModal:"off",
     ItemPageModal:"off",
-      itemName:"",
+      name:"",
       id:"",
     itemStory:""}
   )
@@ -52,7 +52,7 @@ const App = function(){
         {
           id:1,
           itemOwnerId:1,
-          itemName: "Gold Pot",
+          name: "Gold Pot",
           itemStory:
           "Golg Pot is made of gold  and lives in a place and like to jump",
           likes: 1,
@@ -71,7 +71,7 @@ const App = function(){
         {
           id:2,
           itemOwnerId:1,
-          itemName: "Jumping TeaPot",
+          name: "Jumping TeaPot",
           itemStory:
           "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
           likes: 1,
@@ -93,7 +93,7 @@ const App = function(){
         {
           id:3,
           itemOwnerId:1,
-          itemName: "Jumperson",
+          name: "Jumperson",
           itemStory:
           "this one also lives to jump ",
           likes: 1,
@@ -115,7 +115,7 @@ const App = function(){
         {
           id:4,
           itemOwnerId:1,
-          itemName: "Gold Pot",
+          name: "Gold Pot",
           itemStory:
           "Golg Pot is made of gold  and lives in a place and like to jump",
           likes: 1,
@@ -137,7 +137,7 @@ const App = function(){
         {
           id:5,
           itemOwnerId:1,
-          itemName: "Jumping TeaPot",
+          name: "Jumping TeaPot",
           itemStory:
           "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
           likes: 1,
@@ -159,7 +159,7 @@ const App = function(){
         {
           id:6,
           itemOwnerId:1,
-          itemName: "Jumperson",
+          name: "Jumperson",
           itemStory:
           "this one also lives to jump ",
           likes: 1,
