@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState, useContext } from 'react';
 import API from "../../utils/API"
 import ItemCard from "../itemCard";
 import Itempage from "../../pages/itempage"
+import { InformationContext } from '../../App';
 // import {InformationContext} from "../../App"
 import Style from "./billboardscroll.css"
 import {ItemContext} from "../../App"
@@ -134,6 +135,22 @@ const [rotationItems, setRotationItems]=useState(
   //  loadFavorites()
    
   // },);
+
+const [newBid, setNewBid]= useState(
+  0
+)
+
+const submitBid = function(itemId){
+
+var body = {
+  userid:InformationContext.id,
+  itemId:itemId,
+  amount:newBid
+}
+
+API.createBid(body)
+
+}
   useEffect (()=>{
 
  loadFavorites()
@@ -190,10 +207,12 @@ const turnOffItemPageModal = ()=>{
   
     return (
 <div>
-<div onClick={turnOffBidModal} className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
+<div className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
         <div className = "bidforum" >
           <div> the highest bid for {chosenItem.name} is {chosenItem.highestBid}</div>
           <div> how much would you like to bid" <input type="number" placeholder="100"></input> </div>
+          <div class="visible" onMOuseOver={turnOffBidModal}>X</div>
+          <div class="visible" onClick={turnOffBidModal}>close</div>
         </div>
         </div>
 

@@ -299,73 +299,7 @@ const App = function(){
     }
 
   },[])
-  // useEffect(() => {
-  //   async function getId() {
-  //     var data = await API.getUserID();
-  //     console.log(data);
-  //     if (
-  //       data.data.username === null ||
-  //       !data ||
-  //       data.data.username === "nobody"
-  //     ) {
-  //       console.log("loggedon..not");
-  //       setLoggedin("false");
-  //       setUserName("nobody");
-  //     } else {
-  //       console.log(data.data.username);
-  //       // console.log("loggedin");
-  //       setUserName(data.data.username);
-  //       setLoggedin("true");
-  //     }
-  //   }
-  //   getId();
-  // }, [loggedin]);
 
-  // const logOut = function () {
-  //   // API.logOut();
-  //   // console.log("logout");
-  //   //   event.preventDefault();
-  //   //   event.stopPropagation();
-
-  //   async function logingOut() {
-  //     var done = await API.logOut();
-  //     if (done) {
-  //       console.log("loggedout");
-  //       setLoggedin("false");
-  //     }
-  //   }
-
-  //   logingOut();
-  // };
-
-  
-  // var handleSubmit = function (e) {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   var userlogin = { username: newUser.username, password: newUser.password };
-  //   console.log(userlogin);
-
-  //   API.login(userlogin)
-  //     .then((res) => {
-  //       // localStorage.setItem('token', res.data.token)
-  //       setLoggedin(true);
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
- 
-
-
-
-
-  // useEffect(() => {
-  //   loadUserInformation()
-  //   .then(res=>{
-  //     setUserProfile(res);
-  //   })
-   
-  // }, []);
 
   
 

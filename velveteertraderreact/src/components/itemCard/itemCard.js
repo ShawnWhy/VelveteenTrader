@@ -41,7 +41,7 @@ const ItemCard = function(props){
 
   )
 
-
+//sets the invisible popup for the item
 
   const setChosenItemPage = ()=>{
     setChosenItem({...chosenItem, 

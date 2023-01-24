@@ -90,22 +90,82 @@ function(req, res){
     )
 
     })
-    
+
+     
+  app.post("/api/createLikes",
+  function(req,res){
+  db.Like.create({
+    itemId:req.body.itemId,
+    userId:req.body.userId
+  }).then(function(err,result){
+    if(err) throw err, 
+    res.json(result)
+
+  })
+})
 
 
+  app.post("/api/postcomment",
+  function(req,res){
+  db.Comment.create({
+    itemId:req.body.itemId,
+    userId:req.body.userId
+  }).then(function(err,result){
+    if(err) throw err, 
+    res.json(result)
+
+  })
+})
+
+  app.post("/api/createMessages",
+  function(req,res){
+  db.Like.create({
+    itemId:req.body.itemId,
+    userId:req.body.userId
+  }).then(function(err,result){
+    if(err) throw err, 
+    res.json(result)
+
+  })
+})
+
+  app.post("/api/createVotes",
+  function(req,res){
+  db.Like.create({
+    itemId:req.body.itemId,
+    userId:req.body.userId
+  }).then(function(err,result){
+    if(err) throw err, 
+    res.json(result)
+
+  })
+})
+
+  app.post("/api/createBid",
+  function(req,res){
+  db.Bid.create({
+    userId:req.body.userId,
+    itemId:req.body.itemId,
+    amount:req.body.amount
+  }).then(function(err,result){
+    if(err) throw err, 
+    res.json(result)
+  })
+
+  })
   
   app.post("/api/createItem",
   function(req, res){
     db.Item.create({
       userId : req.body.userId,
-      itemName:req.body.itemName,
+      name:req.body.name,
       itemStory : req.body.itemStory,
-      votes : 0,
+      likes : 0,
       highestBid:0,
-      imageUrl1: req.body.imageUrl1,
-      imageUrl2: req.body.imageUrl2,
-      imageUrl3: req.body.imageUrl3,
-      modelLink: req.body.modelLink
+      imageUrl1: req.body.url1,
+      imageUrl2: req.body.url2,
+      imageUrl3: req.body.url3,
+      modelLink: req.body.modelUrl
     }).then(function(err,result){
     if(err) throw err, 
     res.json(result)

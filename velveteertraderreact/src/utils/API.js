@@ -47,11 +47,22 @@ updateLikes : function(body, id){
   console.log(body)
   return axios.put("/api/updateLikes/"+id, body)
 },
+createLike : function(body){
+console.log("creating Like")
+console.log(body);
+return axios.post("/api/createLike",body);
+},
+
 
 createItem : function(body){
 console.log("creating")
 console.log(body);
 return axios.post("/api/createItem",body);
+},
+
+createBid: function(body){
+  console.log("creating bid")
+  return axios.post("/api/createBid",body)
 },
 
 postComment: function(body){
