@@ -21,6 +21,10 @@ getItemDetails : function(id){
   console.log("getting details for this one object")
   return axios.get ("api/itemDetails/"+id)
 },
+getComments : function(id){
+console.log("getting all of the comments for this item ")
+return axios.get("api/getComments/"+id)
+},
 
 signUp : function(body){
   console.log("signingup");
@@ -43,10 +47,23 @@ getUserData : function(){
 },
 
 updateLikes : function(body, id){
-  console.log("updating")
+  console.log("updating Likes")
   console.log(body)
   return axios.put("/api/updateLikes/"+id, body)
 },
+
+updateBids : function(body, id){
+  console.log("updating Bid")
+  console.log(body)
+  return axios.put("/api/updateBids/"+id, body)
+},
+
+updateVotes : function(body, id){
+  console.log("updating Vote")
+  console.log(body)
+  return axios.put("/api/updateVotes/"+id, body)
+},
+
 createLike : function(body){
 console.log("creating Like")
 console.log(body);
@@ -65,14 +82,19 @@ createBid: function(body){
   return axios.post("/api/createBid",body)
 },
 
+createVote: function(body){
+  console.log("creating Vote")
+  return axios.post("/api/createVote",body)
+},
+
 postComment: function(body){
   console.log("loggincomment")
   console.log(body);
-  return axios.post("/api/postcomment",body)
+  return axios.post("/api/postComment",body)
+},
 }
 
 
-}
 
 // getAllEmployees: function() {
 //   return axios.get("/api/employees");

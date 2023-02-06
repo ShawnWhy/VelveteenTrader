@@ -19,7 +19,7 @@ const Hearts =function(props) {
 
 // console.log(chosenItem)
   const changeToPink=()=>{
-    setHeartColor("pink")
+    setHeartColor("orange")
    
   }
   const changeToRed=()=>{
@@ -27,6 +27,7 @@ const Hearts =function(props) {
   }
 
   const addLike = ()=>{
+    if(userProfile.points>0){
     var newLike = parseInt(cardInfo.likes);
     newLike+=1;
     console.log("like")
@@ -38,7 +39,10 @@ const Hearts =function(props) {
     }
     console.log(body);
     API.updateLikes(body, props.id)
-
+    API.updateMypoints();
+    var userPoints = API.getUserPoints(cardInfo.itemOwnerId);
+    console.log(userPoints)
+ 
     //set favorite items
     var data = [...favoriteItems]
     var index = data.findIndex(obj => obj.id === props.id);
@@ -48,6 +52,9 @@ const Hearts =function(props) {
     props.ChildrenSetCardInfo(newLike)
     console.log(cardInfo.likes);
   }
+var newPoints = userProfile.points - 1
+setUserProfile()
+}
   
   
     return(

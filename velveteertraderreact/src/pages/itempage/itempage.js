@@ -118,8 +118,8 @@ const Itempage = function(props)  {
         {!chosenItem.comments?(
           <h1 className = "nocomments">no comments yet</h1>
         ):(
-          <div>{chosenItem.comments.map(comment=>{return(
-          <div>{comment.author} : {comment.text}</div>
+          <div className = "comments">{chosenItem.comments.map(comment=>{return(
+          <div className='comment'>{comment.author} : {comment.text}</div>
         )})}</div>)}
         <form className="commentForm">
           <input className="commentInput" type="text"></input>

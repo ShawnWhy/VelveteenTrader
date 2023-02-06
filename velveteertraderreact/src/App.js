@@ -21,6 +21,38 @@ export const ItemContext = React.createContext();
 export const InformationContext = React.createContext();
 
 const App = function(){
+
+// const setBid = function(newBid, oldBid, userid, itemid){
+
+
+// var bidBody= {
+
+
+// }
+  
+// API.createBid(newBid);
+// if(newBid>oldBid){
+
+//   API.updateBids();
+
+// }
+// }
+
+// const makeComment = function(comment, userid, itemid){
+
+// var commentBody= {
+
+
+// }
+  
+// API.createBid(newBid);
+// if(newBid>oldBid){
+
+//   API.updateBids();
+
+// }
+// }
+
   const [chosenItem, setChosenItem]=useState(
     {bidModal:"off",
     ItemPageModal:"off",
@@ -48,6 +80,7 @@ const App = function(){
     {
       userName : "Shawnster ",
       id:1,
+      points:20,
       items:[
         {
           id:1,

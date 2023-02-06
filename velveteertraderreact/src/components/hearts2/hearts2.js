@@ -14,7 +14,7 @@ const Hearts2 =function(props) {
   )
 
   const changeToPink=()=>{
-    setHeartColor("pink")
+    setHeartColor("orange")
    
   }
   const changeToRed=()=>{

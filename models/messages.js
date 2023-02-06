@@ -8,28 +8,29 @@ module.exports = function(sequelize, DataTypes) {
     autoIncrement: true,
     
     },
-    itemId: {
+    receiverId: {
       type: DataTypes.INTEGER,
       allowNull: false, 
-      references:{
-        model:"Items",
-        key:"id"
-      }
+   
       // references: "Item",
       // referencesKey:"id"
     }, 
-   posterId: {
+   senderId: {
        type: DataTypes.INTEGER,
        allowNull: false,
-       references:{
-         model:"Users",
-         key:"id"
-       }
+    
       //  referemce: "User",
       //  referencesKey: "id"
    },
+   time:{
+     type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+
+   },
     message:{
       type: DataTypes.TEXT,
+      
 }
   });
   return Message

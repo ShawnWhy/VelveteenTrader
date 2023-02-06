@@ -1,6 +1,8 @@
-import React, { Component, useEffect, useState, useContext } from 'react';
+import React, { Component, useEffect, useState, useContext,useRef} from 'react';
 import API from "../../utils/API"
 import ItemCard from "../itemCard";
+import MyItemCard from "../myItemCard";
+
 import Itempage from "../../pages/itempage"
 import { InformationContext } from '../../App';
 // import {InformationContext} from "../../App"
@@ -17,6 +19,9 @@ export const FavItemContext = React.createContext();
 const Billboardscroll = function() {
 
   const {chosenItem, setChosenItem}= useContext(ItemContext)
+
+  const {userProfile, setUserProfile}= useContext(InformationContext)
+
 
 
   const [favoriteItems, SetFavoriteItems] = useState(
@@ -125,57 +130,141 @@ const Billboardscroll = function() {
 //    data[index].title = title;
 //    this.setState({data});
 // }
+const newBidRef = useRef();
 
 const [rotationItems, setRotationItems]=useState(
   []
   
 ) 
 
-  // useEffect(() => {
-  //  loadFavorites()
+
+function loadComments(){
+
+var dataFavItems = favoriteItems;
+      
+      console.log("dataFavItems")
+      console.log(dataFavItems)
+      console.log("itemdataas")
+      console.log(favoriteItems)
+      for(let i=0; i<dataFavItems.length; i++){
+
+        dataFavItems[i].comments = []
+
+      }
+      var number = dataFavItems.length
+    for (let i = 0; i<dataFavItems.length; i++){
+      // res.data.forEach(element => {
+        console.log(dataFavItems[i].id)
+    API.getComments(dataFavItems[i].id).then(res=>{
+      if(res.data.length>0){
+      res.data.forEach((object)=>{    
+        console.log(object)
+    let index = favoriteItems.findIndex(obj => obj.id === object.itemId);
+     console.log("index of the array2")
+    console.log(index)
+    if(index>-1){
+      console.log("index of the array")
+    console.log(index)
+    
+    dataFavItems[index].comments.push({author:object.userId,text:object.comment})
+    console.log("dataFavItems " )
+    console.log(object)
+    }
+      })}
+     })
+     
+     number-=1;
+     console.log(number)
+     if(number==0){
+      console.log("got all of the things")
+      console.log(dataFavItems)
+      
+      SetFavoriteItems(dataFavItems)
+     }
+
+      }
+      
+
+}
+
+  useEffect(() => {
+   loadComments()
    
-  // },);
+  },[favoriteItems]);
 
 const [newBid, setNewBid]= useState(
   0
 )
 
-const submitBid = function(itemId){
+const submitBid = function(newBid, oldBid, userid, itemid){
 
-var body = {
-  userid:InformationContext.id,
-  itemId:itemId,
+console.log(chosenItem)
+console.log(userid)
+console.log(itemid)
+
+if(newBid>oldBid){
+
+  var body = {
+  userId:userid,
+  itemId:itemid,
   amount:newBid
 }
+  
+ API.updateBids(body, itemid)
 
-API.createBid(body)
+ API.createBid(body)
+ 
 
 }
+}
+
+//set current objects await
+ var promisedSetState = (newState) => new Promise(resolve => SetFavoriteItems(newState, resolve));
+
+
+
+
+
+
+const setNewBid1 = function(){
+
+  var newbidValue = document.querySelector('.bidInput').value;
+
+  if(newbidValue>0){
+    console.log("set new bid")
+    console.log(newbidValue)
+    console.log(typeof newbidValue)
+      setNewBid(parseInt(newbidValue));
+  }
+}
+
+
   useEffect (()=>{
 
  loadFavorites()
 
   },'')
 
-  useEffect  (()=>{
-    console.log(favoriteItems)
-    var tempRot = favoriteItems.slice(0,3)
+useEffect  (()=>{
+  console.log(favoriteItems)
+  var tempRot = favoriteItems.slice(0,3)
     
-    setRotationItems(tempRot)
+  setRotationItems(tempRot)
 
 
   },[favoriteItems]);
 
   const loadFavorites = function(){
-    console.log("loadfav ")
+    console.log("loadfav")
     API.getFavorites()
     .then(res=>{
       console.log(res)
-      SetFavoriteItems(res.data)
-
+    //  promisedSetState(res.data);
+      SetFavoriteItems(res.data)       // dataFavItems[index].comments=[]
       
       
-    })
+      });
+    
 
   }
 
@@ -210,9 +299,10 @@ const turnOffItemPageModal = ()=>{
 <div className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
         <div className = "bidforum" >
           <div> the highest bid for {chosenItem.name} is {chosenItem.highestBid}</div>
-          <div> how much would you like to bid" <input type="number" placeholder="100"></input> </div>
-          <div class="visible" onMOuseOver={turnOffBidModal}>X</div>
-          <div class="visible" onClick={turnOffBidModal}>close</div>
+          <div> how much would you like to bid" <input className = "bidInput" onChange = {setNewBid1}  type="number" placeholder={chosenItem.highestBid}></input> </div>
+          <div className="visible" onMOuseOver={turnOffBidModal}>X</div>
+          <div className="visible" onClick={turnOffBidModal}>close</div>
+          <div className="submitBid" onClick={()=>{submitBid(newBid, chosenItem.highestBid, userProfile.id, chosenItem.id)}}>submit</div>
         </div>
         </div>
 
@@ -229,8 +319,28 @@ const turnOffItemPageModal = ()=>{
 
              {rotationItems.map(item => {
                return (
+               
               <FavItemContext.Provider value={{favoriteItems, SetFavoriteItems}}>
-
+                   
+                 {item.userId == userProfile.id ? (
+                      <MyItemCard
+                 portraitImageUrl={item.imageUrl1}
+                 name={item.name}  
+                 likes = { item.likes}
+                 highestBid = {item.highestBid} 
+                 itemOwnerId = {item.userID}
+                 itemStory={item.itemStory}
+                 id={item.id}
+                 imageUrl1={item.imageUrl1}
+                 imageUrl2={item.imageUrl2}
+                 imageUrl3={item.imageUrl3}
+                 modelLink={item.modelLink}
+                 comments={item.comments}
+                   
+                 />
+           
+                 ) : (
+                
                  <ItemCard
                  portraitImageUrl={item.imageUrl1}
                  name={item.name}  
@@ -245,10 +355,10 @@ const turnOffItemPageModal = ()=>{
                  comments={item.comments}
                    
                  />
+                 )}
                  </FavItemContext.Provider>
                );
              })}
-             
             
            </div>
            </div>

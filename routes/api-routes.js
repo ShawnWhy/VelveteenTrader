@@ -104,12 +104,12 @@ function(req, res){
   })
 })
 
-
-  app.post("/api/postcomment",
+  app.post("/api/postComment",
   function(req,res){
   db.Comment.create({
     itemId:req.body.itemId,
-    userId:req.body.userId
+    userId:req.body.userId,
+    comment:req.body.comment
   }).then(function(err,result){
     if(err) throw err, 
     res.json(result)
@@ -119,7 +119,7 @@ function(req, res){
 
   app.post("/api/createMessages",
   function(req,res){
-  db.Like.create({
+  db.Message.create({
     itemId:req.body.itemId,
     userId:req.body.userId
   }).then(function(err,result){
@@ -143,6 +143,7 @@ function(req, res){
 
   app.post("/api/createBid",
   function(req,res){
+    console.log(req.body)
   db.Bid.create({
     userId:req.body.userId,
     itemId:req.body.itemId,
@@ -190,17 +191,18 @@ function(req, res){
   app.post("/api/createMessage",
   function(req, res){
     db.Message.create({
-      itemId:req.body.itemId,
-      userId:req.body.userId,
+      senderId:req.body.itemId,
+      receiverId:req.body.userId,
+      time:req.body.time,
       message:req.body.message,
     }).then(function(err,result){
     if(err) throw err, 
-    console.log("postedmessage");
+    console.log("createdmessage");
     res.json(result)
   })
 })
 
-  app.put("/api/updateLikes/:id",
+app.put("/api/updateLikes/:id",
    
   function(req, res){
     console.log(req.body);
@@ -216,16 +218,67 @@ function(req, res){
     console.log("postedmessage");
     res.json(result)
   });
-  //     db.Likes.Create({
-  //     itemId:req.body.id,
-  //     likes:req.body.likes,
-  //     }).then(function(err,result){
-  //   if(err) throw err, 
-  //   console.log("postedmessage");
-  //   res.json(result)
-  // });
-
 })
+
+app.put("/api/updateBids/:id",
+   
+  function(req, res){
+    console.log(req.body);
+    db.Item.update({
+      
+      highestBid:req.body.amount,
+      },{
+        where:{
+          id:req.params.id
+        }
+      }).then(function(err,result){
+    if(err) throw err, 
+    console.log("postedBid");
+    res.json(result)
+  });
+})
+
+
+//delete user
+  app.delete("/api/deleteUser/:id",
+    function(req, res)
+{
+  db.User.destroy({
+    where: {
+        id : req.params.id
+    }
+})
+
+}
+  ).on('success', function(u) {
+    if (u && u.deletedAt) {
+      // successfully deleted the project
+
+      console.log(u);
+    }
+})
+//delete commment
+  app.delete("/api/deleteComment/:id",
+    function(req, res)
+{
+  db.Comment.destroy({
+    where: {
+        id : req.params.id
+    }
+})
+
+}
+  ).on('success', function(u) {
+    if (u && u.deletedAt) {
+      // successfully deleted the project
+
+      console.log(u);
+    }
+})
+//delete 
+
+
+
 
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
@@ -242,9 +295,52 @@ function(req, res){
     }
   });
 
+
+
+  app.get("/api/getComments/:id", function(req, res) {
+    console.log(req.params.id)
+    
+    db.Comment.findAll({
+      where:{
+        itemId: parseInt(req.params.id)
+      }
+
+    }).then(function(result){
+
+    res.json(
+    result
+       );
+    
+  });
+})
+
 }
 
+//   function(req, res){
+//     console.log(req.body);
+//     db.Item.update({
+      
+//       likes:req.body.likes,
+//       },{
+//         where:{
+//           id:req.params.id
+//         }
+//       }).then(function(err,result){
+//     if(err) throw err, 
+//     console.log("postedmessage");
+//     res.json(result)
+//   });
+// })
 
+
+  // app.get("/api/itemDetails/:id", function(req,res){
+  //   itemId = req.params.id;
+  //   connection.query("SELECT * FROM Item LEFT JOIN Bid on Bid.biditemId = Item.id LEFT JOIN Message ON Message.itemId = Item.id LEFT JOIN Bid on Bid.biditemId = Item.id WHERE Item.id=?n",
+  //   itemId,function(err, data){
+  //     if(err) throw err;
+  //     res.json(data)
+  //   })
+  // })
 
   
   
