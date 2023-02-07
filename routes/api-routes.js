@@ -220,6 +220,26 @@ app.put("/api/updateLikes/:id",
   });
 })
 
+app.put("/api/changePoints/:id",
+
+   
+  function(req, res){
+    console.log(req.params);
+    console.log("change points ++++++++")
+    db.User.update({
+      
+      points:req.body.points,
+      },{
+        where:{
+          id:req.params.id
+        }
+      }).then(function(err,result){
+    if(err) throw err, 
+    console.log("changed points");
+    res.json(result)
+  });
+})
+
 app.put("/api/updateBids/:id",
    
   function(req, res){
@@ -295,6 +315,24 @@ app.put("/api/updateBids/:id",
     }
   });
 
+  app.get("/api/getPoints/:id",function(req, res){
+    console.log("getting points++++++++")
+    console.log(req.params.id)
+    db.User.findOne({
+      where:{
+        id : req.params.id
+      }
+    }).then(function(result){
+    console.log(result);
+
+    res.json(
+    result
+       );
+    
+  });
+  }
+  
+  )
 
 
   app.get("/api/getComments/:id", function(req, res) {

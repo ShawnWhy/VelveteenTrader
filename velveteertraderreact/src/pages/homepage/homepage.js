@@ -47,6 +47,7 @@ API.createItem(body);
     return (
     <div class= "row">
         <div className= "col-md-2 sidebar"> 
+        <h2>points : {userProfile.points}</h2>
         <div>
          {userProfile.userName}
         </div>

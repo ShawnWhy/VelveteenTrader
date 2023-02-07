@@ -39,9 +39,7 @@ const Hearts =function(props) {
     }
     console.log(body);
     API.updateLikes(body, props.id)
-    API.updateMypoints();
-    var userPoints = API.getUserPoints(cardInfo.itemOwnerId);
-    console.log(userPoints)
+   
  
     //set favorite items
     var data = [...favoriteItems]
@@ -51,9 +49,24 @@ const Hearts =function(props) {
     SetFavoriteItems(data)
     props.ChildrenSetCardInfo(newLike)
     console.log(cardInfo.likes);
-  }
+  
+//
 var newPoints = userProfile.points - 1
-setUserProfile()
+setUserProfile(()=>({...userProfile, points:newPoints}))
+console.log(newPoints)
+API.changePoints ({points:newPoints}, userProfile.id)
+console.log('cardinfo')
+console.log(cardInfo);
+API.getPoints(cardInfo.itemOwnerId).then(res=>{
+  console.log("got the user points")
+console.log(res.data)
+    //  promisedSetState(res.data);
+if(res.data.points !== null){
+var newOwnerPoints = parseInt(res.data.points) +1
+API.changePoints({points:newOwnerPoints}, cardInfo.itemOwnerId)
+}
+})
+}
 }
   
   

@@ -124,6 +124,24 @@ const Billboardscroll = function() {
 ]
 )
 
+function ChildrenSetCardInfoBid (bid){
+console.log(bid)
+console.log("childrensetcard2");
+
+// SetFavoriteItems(()=>({...cardInfo, highestBid:info
+
+// }))
+
+var objectsArray = favoriteItems;
+
+console.log(objectsArray)
+let index = favoriteItems.findIndex(obj => obj.id === chosenItem.id);
+objectsArray[index].highestBid = bid
+SetFavoriteItems(objectsArray)
+console.log(objectsArray);
+
+ }
+
 // function setInfoArea(id, key, info) {
 //    var data = [...this.state.data];
 //    var index = data.findIndex(obj => obj.id === id);
@@ -213,6 +231,8 @@ if(newBid>oldBid){
  API.updateBids(body, itemid)
 
  API.createBid(body)
+
+ ChildrenSetCardInfoBid(newBid)
  
 
 }
@@ -300,7 +320,7 @@ const turnOffItemPageModal = ()=>{
         <div className = "bidforum" >
           <div> the highest bid for {chosenItem.name} is {chosenItem.highestBid}</div>
           <div> how much would you like to bid" <input className = "bidInput" onChange = {setNewBid1}  type="number" placeholder={chosenItem.highestBid}></input> </div>
-          <div className="visible" onMOuseOver={turnOffBidModal}>X</div>
+          <div className="visible" onMouseOver={turnOffBidModal}>X</div>
           <div className="visible" onClick={turnOffBidModal}>close</div>
           <div className="submitBid" onClick={()=>{submitBid(newBid, chosenItem.highestBid, userProfile.id, chosenItem.id)}}>submit</div>
         </div>
@@ -328,7 +348,7 @@ const turnOffItemPageModal = ()=>{
                  name={item.name}  
                  likes = { item.likes}
                  highestBid = {item.highestBid} 
-                 itemOwnerId = {item.userID}
+                 itemOwnerId = {item.userId}
                  itemStory={item.itemStory}
                  id={item.id}
                  imageUrl1={item.imageUrl1}
@@ -348,6 +368,7 @@ const turnOffItemPageModal = ()=>{
                  highestBid = {item.highestBid} 
                  itemStory={item.itemStory}
                  id={item.id}
+                 itemOwnerId = {item.userId}
                  imageUrl1={item.imageUrl1}
                  imageUrl2={item.imageUrl2}
                  imageUrl3={item.imageUrl3}

@@ -46,6 +46,18 @@ getUserData : function(){
   return axios.get("/api/user_data");
 },
 
+getPoints : function(id){
+  console.log("getting points")
+  return axios.get("/api/getPoints/"+ id)
+
+},
+
+changePoints : function(body, id){
+console.log("updating points")
+console.log(body)
+return axios.put("/api/changePoints/"+id, body)
+
+},
 updateLikes : function(body, id){
   console.log("updating Likes")
   console.log(body)

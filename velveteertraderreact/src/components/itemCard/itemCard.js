@@ -75,6 +75,9 @@ setCardInfo(()=>({...cardInfo, likes:info
 console.log(cardInfo);
 
  }
+
+
+  
   
 
 
@@ -95,7 +98,9 @@ console.log(cardInfo);
             <Hearts
             likes={cardInfo.likes}
             id={cardInfo.id}
-            ChildrenSetCardInfo = {ChildrenSetCardInfo}/>
+            ChildrenSetCardInfo = {ChildrenSetCardInfo}
+            
+            />
           
           </div>
           
