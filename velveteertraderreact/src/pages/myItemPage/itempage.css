@@ -113,7 +113,7 @@
     margin:auto;
 }
 .invisible{
-    visibility:collapse
+    visibility:collapse ! important;
 }
 
 .comment:hover{

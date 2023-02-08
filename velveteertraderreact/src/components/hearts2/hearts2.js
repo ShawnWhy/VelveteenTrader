@@ -3,10 +3,13 @@ import Style from "./hearts.css"
 import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
 import API from "../../utils/API"
+import { FavItemContext} from '../billboardscroll/billboardscroll';
+
 
 const Hearts2 =function(props) {
 
-  
+  const {favoriteItems, SetFavoriteItems}= useContext(FavItemContext)
+
   const {userProfile, setUserProfile} = useContext(InformationContext)
   const {chosenItem, setChosenItem} = useContext(ItemContext)
   const [heartColor, setHeartColor]= useState(
@@ -36,7 +39,36 @@ const Hearts2 =function(props) {
   
     // alert(newLike)
     setChosenItem({...chosenItem, likes:newLike})
-  }
+
+
+    //set favorite items
+    var data = [...favoriteItems]
+    var index = data.findIndex(obj => obj.id === chosenItem.id);
+    data = favoriteItems;
+    data[index].likes = newLike
+    SetFavoriteItems(data)
+    console.log(chosenItem.likes);
+  
+//
+var newPoints = userProfile.points - 1
+setUserProfile(()=>({...userProfile, points:newPoints}))
+console.log(newPoints)
+API.changePoints ({points:newPoints}, userProfile.id)
+console.log('cardinfo')
+console.log(chosenItem);
+API.getPoints(chosenItem.itemOwnerId).then(res=>{
+  console.log("got the user points")
+console.log(res.data)
+    //  promisedSetState(res.data);
+if(res.data.points !== null){
+var newOwnerPoints = parseInt(res.data.points) +1
+API.changePoints({points:newOwnerPoints}, chosenItem.itemOwnerId)
+}
+})
+
+}
+
+  
   
   
     return(

@@ -121,32 +121,22 @@ comment:comment
         <div className="detailDisplay">
         <div className="bidDisplay">
        
-        {chosenItem.itemOwnerId !== userProfile.id ? (<Bids 
-        highestBid={chosenItem.highestBid}
-        name={chosenItem.name}
-        id={chosenItem.id}
-        />) : (
-          <MyBids 
+           <MyBids 
         highestBid={chosenItem.highestBid}
         name={chosenItem.name}
         id={chosenItem.id}
         />
 
 
-        )} 
+        
         </div>
         <div className="heartDisplay">
-        {chosenItem.itemOwnerId !== userProfile.id ? (
-        <Hearts2 
-        likes = {chosenItem.likes}
-         />
-        ):(<MyHearts2 
+        <MyHearts2 
         likes = {chosenItem.likes}
         id={chosenItem.id}
         
          />
-         )
-        }
+        
          </div>
         </div>
 

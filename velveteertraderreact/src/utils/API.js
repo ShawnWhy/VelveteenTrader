@@ -12,9 +12,9 @@ getAllItems : function(){
   return axios.get("/api/allItems")
 },
 
-getUserItems : function(id){
+getMyItems : function(id){
   console.log("getthing this one persons items")
-  return axios.get("api/items/"+id)
+  return axios.get("api/myItems/"+id)
 },
 
 getItemDetails : function(id){

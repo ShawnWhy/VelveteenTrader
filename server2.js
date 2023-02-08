@@ -22,17 +22,9 @@ app.use(compression())
 
 var cors = require('cors');
 app.use(cors());
-    app.use(
-        // Do not use `/ws` as it conflicts with create-react-app's hotrefresh socket.
-        createProxyMiddleware('/websocket', {
-            target: 'http://localhost:3001',
-            ws: true,
-            changeOrigin: true,
-        })
-      );
 
 
-var PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3002;
 const server = require("http").createServer(app);
 
 const corsOptions = {
@@ -48,12 +40,9 @@ const io = require('socket.io')(server,
     credentials: false
   }
   ,  transports: ["websocket", "polling"],
-
-   allowEIO3: true 
+  allowEIO3: true 
 }
 );
-
-
 // Requiring our models for syncing
 var db = require("./models");
 var session = require("express-session");
@@ -64,16 +53,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors())
 
-// Static directory
-// app.use(express.static("public"));
-app.use(
-	session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-  );
-  app.use(passportControl.initialize());
-  app.use(passportControl.session());
-// Routes
+// Syncing our sequelize models and then starting our Express app
 // =============================================================
-require("./routes/api-routes")(app);
+
+
+
 
 const users = {};
 io.on("connection", client => {
@@ -92,11 +76,13 @@ io.on("connection", client => {
   });
 
   client.on("send", message => {
+    console.log("sended")
     console.log(message);
     console.log(client.id)
     console.log(users)
-    console.log(users[client.id])
     var id = client.id;
+      // console.log(users[client.id])
+
     console.log(id)
     io.emit("message", {
       text: message.message,

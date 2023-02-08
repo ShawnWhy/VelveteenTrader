@@ -22,6 +22,14 @@ module.exports = function(sequelize, DataTypes) {
       //  referemce: "User",
       //  referencesKey: "id"
    },
+
+      senderName: {
+       type: DataTypes.STRING,
+       allowNull: false,
+     
+      //  referemce: "User",
+      //  referencesKey: "id"
+   },
    time:{
      type: 'TIMESTAMP',
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),

@@ -39,12 +39,13 @@ function(req, res){
 })
 })
 
-  app.get("/api/items/:id", function(req, res){
+  app.get("/api/myItems/:id", function(req, res){
     userId = req.params.id;
-    connection.query("SELECT * FROM Item RIGHT JOIN User ON Item.userId = User.id LEFT JOIN Bid ON Item.id = Bid.biditemId WHERE userId = ?", userId,
+    connection.query("SELECT * FROM Items WHERE userId = ?", userId,
     function(err, data){
       if(err) throw err;
       console.log("got the item for this guy")
+      res.json(data)
 
     })
   })

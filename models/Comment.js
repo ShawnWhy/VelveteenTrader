@@ -25,6 +25,13 @@ module.exports = function(sequelize, DataTypes) {
       //  referemce: "User",
       //  referencesKey: "id"
    },
+   userName: {
+       type: DataTypes.STRING,
+       allowNull: false,  
+  
+      //  referemce: "User",
+      //  referencesKey: "id"
+   },
 
    votes:{
     type: DataTypes.INTEGER

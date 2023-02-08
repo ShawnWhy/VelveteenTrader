@@ -2,7 +2,6 @@ import React, { Component, useEffect, useState, useContext,useRef} from 'react';
 import API from "../../utils/API"
 import ItemCard from "../itemCard";
 import MyItemCard from "../myItemCard";
-
 import Itempage from "../../pages/itempage"
 import { InformationContext } from '../../App';
 // import {InformationContext} from "../../App"
@@ -140,6 +139,8 @@ objectsArray[index].highestBid = bid
 SetFavoriteItems(objectsArray)
 console.log(objectsArray);
 
+setChosenItem({...chosenItem, highestBid:bid})
+
  }
 
 // function setInfoArea(id, key, info) {
@@ -184,7 +185,7 @@ var dataFavItems = favoriteItems;
       console.log("index of the array")
     console.log(index)
     
-    dataFavItems[index].comments.push({author:object.userId,text:object.comment})
+    dataFavItems[index].comments.push({author:object.userId,text:object.comment, id:object.id})
     console.log("dataFavItems " )
     console.log(object)
     }
@@ -392,8 +393,10 @@ const turnOffItemPageModal = ()=>{
             
             </div>
             <div className={chosenItem.ItemPageModal === "on" ? "itemPageOn" : "itemPageOff" } id = {chosenItem.id}>
+              <FavItemContext.Provider value={{favoriteItems, SetFavoriteItems}}>
               <Itempage 
               />
+              </FavItemContext.Provider>
             </div>
             </div>
 

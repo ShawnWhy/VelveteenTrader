@@ -58,7 +58,8 @@ const App = function(){
     ItemPageModal:"off",
       name:"",
       id:"",
-    itemStory:""}
+    itemStory:"",
+  highestBid:0}
   )
 
   const [contactModal , setContactModal]=useState("on");
@@ -390,10 +391,10 @@ const App = function(){
             <Route path="/contact">
               <Contact />
             </Route>
-            <Route path="/communityPage">
+            {/* <Route path="/communityPageold">
               <Chatroom name={userProfile.userName} />
-            </Route>            
-            <Route>
+            </Route>             */}
+            <Route path="/communityPage">
               <UserPortal name={userProfile.userName} />
             </Route>
           </Switch>

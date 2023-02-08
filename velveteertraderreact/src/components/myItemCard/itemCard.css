@@ -67,3 +67,9 @@ img{
     
 }
 
+@media (min-width: 768px){
+.col-md-3 {
+  flex: 0 0 25%;
+  max-width: min(25%, 300px) ! important;
+}
+}
