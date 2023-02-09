@@ -16,6 +16,55 @@ const UserPortal= function(props) {
 // },[]);
 
 
+function loadComments(){
+
+var dataMyItems = myItems;
+      
+      console.log("dataFavItems")
+      console.log(dataMyItems)
+      console.log("itemdataas")
+      console.log(myItems)
+      for(let i=0; i<myItems.length; i++){
+
+        dataMyItems[i].comments = []
+
+      }
+      var number = dataMyItems.length
+    for (let i = 0; i<dataMyItems.length; i++){
+      // res.data.forEach(element => {
+        console.log(dataMyItems[i].id)
+    API.getComments(dataMyItems[i].id).then(res=>{
+      if(res.data.length>0){
+      res.data.forEach((object)=>{    
+        console.log(object)
+    let index = myItems.findIndex(obj => obj.id === object.itemId);
+     console.log("index of the array2")
+    console.log(index)
+    if(index>-1){
+      console.log("index of the array")
+    console.log(index)
+    
+    dataMyItems[index].comments.push({author:object.userId,text:object.comment, id:object.id})
+    console.log("dataFavItems " )
+    console.log(object)
+    }
+      })}
+     })
+     
+     number-=1;
+     console.log(number)
+     if(number==0){
+      console.log("got all of the things")
+      console.log(dataMyItems)
+      
+      setMyItems(dataMyItems)
+     }
+
+      }
+      
+
+}
+
 
 
 
@@ -29,7 +78,11 @@ const UserPortal= function(props) {
   const {userProfile, setUserProfile}= useContext(InformationContext)
   const {chosenItem, setChosenItem}=useContext(ItemContext)
 
-
+  useEffect(() => {
+   loadComments()
+   
+  },[myItems]);
+  
   const calculateLikes= ()=>{
     var length=0
     var templikes=0;
@@ -74,7 +127,7 @@ const UserPortal= function(props) {
    <div>you have {likes} likes </div>
    <div> you have submitted {itemNumber} items</div>
 
-   {!userProfile.items.length?(
+   {!myItems.length?(
      <div>you have no items</div>
    ):(<div>{myItems.map(item=>{
      return(
@@ -82,7 +135,8 @@ const UserPortal= function(props) {
          portraitImageUrl={item.imageUrl1}
                  name={item.name}  
                  likes = { item.likes}
-                 highestBid = {item.highestBid} 
+                 highestBid = {item.highestBid}
+                 itemOwnerId = {item.userId} 
                  itemStory={item.itemStory}
                  id={item.id}
                  imageUrl1={item.imageUrl1}

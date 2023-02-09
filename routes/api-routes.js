@@ -110,7 +110,9 @@ function(req, res){
   db.Comment.create({
     itemId:req.body.itemId,
     userId:req.body.userId,
-    comment:req.body.comment
+    comment:req.body.comment,
+    userName : req.body.userName,
+    votes:req.body.votes
   }).then(function(err,result){
     if(err) throw err, 
     res.json(result)
@@ -259,6 +261,25 @@ app.put("/api/updateBids/:id",
   });
 })
 
+//updatecomment votes
+
+app.put("/api/updateVotes/:id",
+   
+  function(req, res){
+    console.log(req.body);
+    db.Comment.update({
+      
+      votes:req.body.votes,
+      },{
+        where:{
+          id:req.params.id
+        }
+      }).then(function(err,result){
+    if(err) throw err, 
+    console.log("postedvote");
+    res.json(result)
+  });
+})
 
 //delete user
   app.delete("/api/deleteUser/:id",

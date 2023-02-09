@@ -70,7 +70,7 @@ updateBids : function(body, id){
   return axios.put("/api/updateBids/"+id, body)
 },
 
-updateVotes : function(body, id){
+updateVotes : function(id, body){
   console.log("updating Vote")
   console.log(body)
   return axios.put("/api/updateVotes/"+id, body)

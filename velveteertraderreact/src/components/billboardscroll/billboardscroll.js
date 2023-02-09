@@ -185,7 +185,7 @@ var dataFavItems = favoriteItems;
       console.log("index of the array")
     console.log(index)
     
-    dataFavItems[index].comments.push({author:object.userId,text:object.comment, id:object.id})
+    dataFavItems[index].comments.push({authorName:object.userName,author:object.userId,text:object.comment, id:object.id, votes:object.votes})
     console.log("dataFavItems " )
     console.log(object)
     }

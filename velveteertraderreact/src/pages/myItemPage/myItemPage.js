@@ -3,6 +3,7 @@ import Bids from "../../components/bids";
 import MyBids from "../../components/myBids";
 import Hearts2 from "../../components/hearts2"
 import MyHearts2 from "../../components/myHearts2"
+import Comments from "../../components/comment"
 
 import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
@@ -41,7 +42,8 @@ event.stopPropagation();
 var comment = document.querySelector('.commentInput').value;
 
 var itemData = chosenItem;
-itemData.comments.push({author:userProfile.id,text:comment})
+console.log(itemData)
+itemData.comments.push({author:userProfile.id,text:comment,authorName:userProfile.name,votes:0})
 setChosenItem({...chosenItem, comments:itemData.comments})
 
 
@@ -49,6 +51,8 @@ setChosenItem({...chosenItem, comments:itemData.comments})
 API.postComment({
 itemId:chosenItem.id,
 userId:userProfile.id,
+userName:userProfile.name,
+votes:0,
 comment:comment
 })
 
@@ -152,7 +156,18 @@ comment:comment
           <h1 className = "nocomments">no comments yet</h1>
         ):(
           <div className = "comments">{chosenItem.comments.map(comment=>{return(
-          <div id ={"key "+comment.id} key={comment.id} className='comment'>{comment.author} : {comment.text}</div>
+          <div id ={"key "+comment.id} key={comment.id} className='comment'>
+            {/* {comment.author} : {comment.text} */}
+             <Comments
+            author={comment.author}
+            authorName={comment.authorName}
+
+            comment={comment.text}
+            votes = {comment.votes}
+
+
+            />
+            </div>
         )})}</div>)}
         <form onSubmit ={submitComment} className="commentForm">
           <input className="commentInput" type="text"></input>
