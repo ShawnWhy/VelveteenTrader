@@ -271,11 +271,24 @@ const App = function(){
       password:passwordLoginRef.current.value
 
     }
+    console.log("loggin in ")
+    console.log(loginInfo)
 
     API.logIn(loginInfo).then((res)=>{
     setReturnHomeLogin(
       "on"
-    )})
+    )
+    // {id: 9, email: 'shawnyudesign@gmail.com', username: 'shawnster2', points: 10
+    console.log(res.data)
+    setUserProfile(
+      {
+        userName : res.data.username,
+        id:res.data.id,
+        points:res.data.points
+
+      }
+    )
+  })
     }
 
   const SignUp=function(event){
@@ -291,6 +304,8 @@ const App = function(){
       setReturnHomeSignUp(
         "on"
       )
+
+      console.log(res.data);
 
     }
     )

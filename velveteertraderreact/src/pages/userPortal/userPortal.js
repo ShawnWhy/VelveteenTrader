@@ -44,7 +44,7 @@ var dataMyItems = myItems;
       console.log("index of the array")
     console.log(index)
     
-    dataMyItems[index].comments.push({author:object.userId,text:object.comment, id:object.id})
+    dataMyItems[index].comments.push({authorName:object.userName,votes:object.votes,author:object.userId,text:object.comment, id:object.id})
     console.log("dataFavItems " )
     console.log(object)
     }
@@ -124,6 +124,7 @@ var dataMyItems = myItems;
 
 
    <div> <div> welcome   { userProfile.userName} </div>
+   <div>you have {userProfile.points} points</div>
    <div>you have {likes} likes </div>
    <div> you have submitted {itemNumber} items</div>
 

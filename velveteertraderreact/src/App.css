@@ -113,3 +113,12 @@ a:visited {
   float:right;
   
 }
+
+.name{
+  border-radius:5px;
+  padding:5px;
+  background-color:aliceblue;
+  font-weight:bold;
+  border:1px solid black;
+  width:fit-content;
+}

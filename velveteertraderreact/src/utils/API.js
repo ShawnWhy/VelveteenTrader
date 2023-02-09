@@ -33,6 +33,7 @@ signUp : function(body){
 
 logIn : function(body){
   console.log("logginin");
+  console.log(body)
   return axios.post ("api/login", body)
 },
 

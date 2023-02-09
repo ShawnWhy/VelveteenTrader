@@ -76,6 +76,7 @@ function(req, res){
   });
 
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
+      console.log("authenticating")
   res.json(req.user);
   });
   
@@ -363,7 +364,12 @@ app.put("/api/updateVotes/:id",
     db.Comment.findAll({
       where:{
         itemId: parseInt(req.params.id)
-      }
+      },
+       order: [
+            ['votes', 'DESC'],
+            ['id', 'DESC'],
+        ],
+      
 
     }).then(function(result){
 

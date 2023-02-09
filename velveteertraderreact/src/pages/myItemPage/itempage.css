@@ -118,6 +118,12 @@
 
 .comment:hover{
 
+background-color: rgb(247, 59, 185);
+    
+}
+
+.myComment:hover{
+
     background-color: aqua;
     
 }

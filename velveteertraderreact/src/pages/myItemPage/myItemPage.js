@@ -4,7 +4,7 @@ import MyBids from "../../components/myBids";
 import Hearts2 from "../../components/hearts2"
 import MyHearts2 from "../../components/myHearts2"
 import Comments from "../../components/comment"
-
+import MyComments from "../../components/myComment"
 import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
 import Style from "./itempage.css"
@@ -43,7 +43,7 @@ var comment = document.querySelector('.commentInput').value;
 
 var itemData = chosenItem;
 console.log(itemData)
-itemData.comments.push({author:userProfile.id,text:comment,authorName:userProfile.name,votes:0})
+itemData.comments.push({authorName: userProfile.userName,author:userProfile.id,text:comment,votes:0})
 setChosenItem({...chosenItem, comments:itemData.comments})
 
 
@@ -156,17 +156,32 @@ comment:comment
           <h1 className = "nocomments">no comments yet</h1>
         ):(
           <div className = "comments">{chosenItem.comments.map(comment=>{return(
-          <div id ={"key "+comment.id} key={comment.id} className='comment'>
+          <div id ={"key "+comment.id} key={comment.id}>
             {/* {comment.author} : {comment.text} */}
-             <Comments
+        {comment.author !== userProfile.id ? (
+              <div className='comment'>
+            <Comments
             author={comment.author}
             authorName={comment.authorName}
-
+            id={comment.id}
             comment={comment.text}
             votes = {comment.votes}
-
-
             />
+            </div>
+            ) : (
+              <div className='myComment'>
+            <MyComments
+            author={comment.author}
+            authorName={comment.authorName}
+            id={comment.id}
+            comment={comment.text}
+            votes = {comment.votes}
+            />
+            </div>
+
+
+            )}
+
             </div>
         )})}</div>)}
         <form onSubmit ={submitComment} className="commentForm">
