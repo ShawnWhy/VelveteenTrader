@@ -64,7 +64,8 @@ function(req, res){
     db.User.create({
       email: req.body.email,
       password: req.body.password,
-      username: req.body.username
+      username: req.body.username,
+      points:20
     })
       .then(function(data) {
         res.json(data);
@@ -74,24 +75,19 @@ function(req, res){
         res.status(401).json(err);
       });
   });
-
+ 
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
       console.log("authenticating")
   res.json(req.user);
   });
   
   // Route for logging user out
-  app.get("/logout", function(req, res) {
-    req.logout()
-    .then(function(data){
-      res.json(data);
-    })
-    .catch(function(err){
-      res.json(err);
-    }
-    )
-
-    })
+app.post('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
 
      
   app.post("/api/createLikes",
@@ -331,9 +327,10 @@ app.put("/api/updateVotes/:id",
      // if the user is succesfully logged in , all of the user information would be given 
      //as the user object.
       res.json({
-        email: req.user.email,
+        email: req.user.email,  
         id: req.user.id,
         username: req.user.username,
+        points:req.user.points
        });
     }
   });

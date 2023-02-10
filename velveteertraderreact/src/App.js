@@ -13,6 +13,7 @@ import HomePage from "./pages/homepage";
 import Contact from "./pages/contact";
 import Chatroom from "./pages/chatroom";
 import UserPortal from "./pages/userPortal";
+// import apiRoutes from "../../routes/api-routes";
 // import ItemPage from "../src/pages/itempage";
 
 export const ItemContext = React.createContext();
@@ -22,36 +23,9 @@ export const InformationContext = React.createContext();
 
 const App = function(){
 
-// const setBid = function(newBid, oldBid, userid, itemid){
+ 
 
-
-// var bidBody= {
-
-
-// }
-  
-// API.createBid(newBid);
-// if(newBid>oldBid){
-
-//   API.updateBids();
-
-// }
-// }
-
-// const makeComment = function(comment, userid, itemid){
-
-// var commentBody= {
-
-
-// }
-  
-// API.createBid(newBid);
-// if(newBid>oldBid){
-
-//   API.updateBids();
-
-// }
-// }
+    
 
   const [chosenItem, setChosenItem]=useState(
     {bidModal:"off",
@@ -79,162 +53,10 @@ const App = function(){
   )
   const [userProfile, setUserProfile] = useState(
     {
-      userName : "Shawnster ",
-      id:1,
+      userName : "guest",
+      id:0,
       points:20,
-      items:[
-        {
-          id:1,
-          itemOwnerId:1,
-          name: "Gold Pot",
-          itemStory:
-          "Golg Pot is made of gold  and lives in a place and like to jump",
-          likes: 1,
-          highestBid: 300,
-          portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl2: "https://i.imgur.com/n65vbtN.jpeg",
-          imageUrl3: "https://i.imgur.com/N6ljJ1T.jpeg",
-          modelLink:"",
-          comments:[
-            {author:"Shawnski",text:"this is amazing"},
-            {author:"Shawnster",text:"hey bro this is cool"},
-            {author:"Shawnssd",text:"hey man cool"}
-            ]
-        },
-        {
-          id:2,
-          itemOwnerId:1,
-          name: "Jumping TeaPot",
-          itemStory:
-          "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-          likes: 1,
-          highestBid: 400,
-          portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg",
-          imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
-          imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
-          imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-          modelLink:"",
-          comments:[
-            {author:"Shawnski",text:"this is amazing"},
-            {author:"Shawnster",text:"hey bro this is cool"},
-            {author:"Shawnssd",text:"hey man cool"}
-
-
-
-          ]
-        },
-        {
-          id:3,
-          itemOwnerId:1,
-          name: "Jumperson",
-          itemStory:
-          "this one also lives to jump ",
-          likes: 1,
-          highestBid: 400,
-          portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl2: "https://i.imgur.com/3iix37r.jpeg",
-          imageUrl3: "https://i.imgur.com/0INGPZD.jpeg",
-          modelLink:"",
-          comments:[
-            {author:"Shawnski",text:"this is amazing"},
-            {author:"Shawnster",text:"hey bro this is cool"},
-            {author:"Shawnssd",text:"hey man cool"}
-
-
-
-          ]
-        },
-        {
-          id:4,
-          itemOwnerId:1,
-          name: "Gold Pot",
-          itemStory:
-          "Golg Pot is made of gold  and lives in a place and like to jump",
-          likes: 1,
-          highestBid: 300,
-          portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl2: "https://i.imgur.com/n65vbtN.jpeg",
-          imageUrl3: "https://i.imgur.com/N6ljJ1T.jpeg",
-          modelLink:"",
-          comments:[
-            {author:"Shawnski",text:"this is amazing"},
-            {author:"Shawnster",text:"hey bro this is cool"},
-            {author:"Shawnssd",text:"hey man cool"}
-
-
-
-          ]
-        },
-        {
-          id:5,
-          itemOwnerId:1,
-          name: "Jumping TeaPot",
-          itemStory:
-          "Jumping tea Put loves to go up the stairs, Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ,Jumping tea Put loves to go up the stairs ",
-          likes: 1,
-          highestBid: 400,
-          portraitImageUrl: "https://i.imgur.com/RyyVi7q.jpeg",
-          imageUrl1: "https://i.imgur.com/RyyVi7q.jpeg",
-          imageUrl2: "https://i.imgur.com/8mQuaJT.jpeg",
-          imageUrl3: "https://i.imgur.com/MCmdtIt.jpeg",
-          modelLink:"",
-          comments:[
-            {author:"Shawnski",text:"this is amazing"},
-            {author:"Shawnster",text:"hey bro this is cool"},
-            {author:"Shawnssd",text:"hey man cool"}
-
-
-
-          ]
-        },
-        {
-          id:6,
-          itemOwnerId:1,
-          name: "Jumperson",
-          itemStory:
-          "this one also lives to jump ",
-          likes: 1,
-          highestBid: 400,
-          portraitImageUrl: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl1: "https://i.imgur.com/SI0tPk8.jpg",
-          imageUrl2: "https://i.imgur.com/3iix37r.jpeg",
-          imageUrl3: "https://i.imgur.com/0INGPZD.jpeg",
-          modelLink:"",
-          comments:[
-            {author:"Shawnski",text:"this is amazing"},
-            {author:"Shawnster",text:"hey bro this is cool"},
-            {author:"Shawnssd",text:"hey man cool"}
-
-
-
-          ]
-        },
-        
-        
-      ],
-      votes:[1,4,5,3
-    
-  
-      ],
-      bids:[
-        {item:2, amount:500},
-        {item:3, amount:500},
-        {item:5, amount:500},
-        {item:6, amount:500},
-
-
-
-         
-   
-
-          ],
-      
-        },
-  
-      
+    }
     
   )
 
@@ -254,9 +76,21 @@ const App = function(){
   )
 
   const loadUserInformation = async function(){
-    await API.getUserData()
+    
+    API.getUserData()
     .then(function(res){
-      setUserProfile(res);
+      if(res.data.id){
+        console.log("got user data +++++++++++")
+        console.log(res.data)
+            setLoggedIn("on")
+
+      setUserProfile({
+        userName:res.data.username,
+        points:res.data.points,
+        id:res.data.id,
+
+      });
+      }
        
     
     })
@@ -272,23 +106,16 @@ const App = function(){
 
     }
     console.log("loggin in ")
-    console.log(loginInfo)
+  
 
     API.logIn(loginInfo).then((res)=>{
     setReturnHomeLogin(
       "on"
     )
-    // {id: 9, email: 'shawnyudesign@gmail.com', username: 'shawnster2', points: 10
-    console.log(res.data)
-    setUserProfile(
-      {
-        userName : res.data.username,
-        id:res.data.id,
-        points:res.data.points
 
-      }
-    )
-  })
+  }) .catch((err) => {
+        console.error(err);
+      });
     }
 
   const SignUp=function(event){
@@ -297,7 +124,8 @@ const App = function(){
     var signUpInfo ={
       email:emailSignupRef.current.value,
       username:nameSignupRef.current.value,
-      password:passwordSignupRef.current.value
+      password:passwordSignupRef.current.value,
+      
 }
     console.log(signUpInfo);
     API.signUp(signUpInfo).then((res)=>{
@@ -309,17 +137,22 @@ const App = function(){
 
     }
     )
+    .catch((err) => {
+        console.error(err);
+      });
   }
 
 
   
   // }
 
-  const logOut=function(){
-    setLoggedIn("false")
-    
-
-  }
+  const logOut=async function(){
+    API.logOut().then(
+      (res)=>{
+      console.log("logged out")
+      console.log(res)
+    window.location.reload();})
+    }
 
   const loginModalDeploy = function(){
     setSignInModal("off")
@@ -340,14 +173,12 @@ const App = function(){
   }
 
   useEffect(()=>{
-    async function getUserInfo(){
-      var username = await API.getUserData()
-      console.log(username);
+
+loadUserInformation()
 
 
-    }
-
-  },[])
+  
+  },'')
 
 
   

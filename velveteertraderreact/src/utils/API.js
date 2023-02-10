@@ -39,7 +39,7 @@ logIn : function(body){
 
 logOut : function(){
   console.log("logout");
-  return axios.get("/logout");
+  return axios.post("/logout");
 },
 
 getUserData : function(){

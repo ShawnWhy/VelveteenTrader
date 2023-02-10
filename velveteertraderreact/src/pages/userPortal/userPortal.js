@@ -109,7 +109,7 @@ var dataMyItems = myItems;
   })
 
 
-  },'')
+  },[userProfile])
 
   useEffect(()=>{
     calculateLikes();

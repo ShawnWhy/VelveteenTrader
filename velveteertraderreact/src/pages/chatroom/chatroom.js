@@ -6,9 +6,9 @@ import openSocket from 'socket.io-client';
 
 const Chatroom = function(props){
 
-  const socket = openSocket("http://localhost:3002", {
+  const socket = io("http://localhost:3002", {
    withCredentials: false,
-  // autoConnect:false,
+  autoConnect:false,
   transports: ["websocket", "polling"]
 });
 
@@ -25,11 +25,18 @@ const [users, setUsers] = useState([]);
 const [message, setMessage] = useState("");
 const [messages, setMessages] = useState([]);
 console.log(userProfile.userName)
+//  window.onbeforeunload = function(e) {
+//   socket.disconnect();
+// };
 
   useEffect(() => {
+  socket.close()
+  socket.disconnect()
+  socket.connect();
 
   socket.on("connect", function () {
   console.log("clientsideworks")
+  socket.open();
   socket.emit("username", userProfile.userName);
     })
     //set all the users in the chatroom 
@@ -42,9 +49,9 @@ console.log(userProfile.userName)
       console.log(message);
       //push the message into the messages array
       setMessages((messages) => [...messages, message]);
-      // console.log(chatwindowRef.current.scrollTop);
+      console.log(chatwindowRef.current.scrollTop);
       chatwindowRef.current.scrollTop = chatwindowRef.current.scrollHeight;
-      // console.log(chatwindowRef.current.scrollHeight);
+      console.log(chatwindowRef.current.scrollHeight);
       // console.log(chatwindowRef.current.scrollTop)
     });
     // as other players connect to the server, the player's name is pushed into the list of players
@@ -54,12 +61,15 @@ console.log(userProfile.userName)
     });
 
      socket.on("disconnected", id => {
+      console.log(id)
       setUsers((users) => {
         return users.filter((user) => user.id!==id);
       });
+
+
     });
 
-  }, '');
+  }, [userProfile]);
 
   const handleMessageOut = (event) => {
     console.log(message)
@@ -68,6 +78,7 @@ console.log(userProfile.userName)
       message: message,
       username: userProfile.userName,
     };
+    socket.open();
     socket.emit("send", newMessage);
     setMessage("");
   };
