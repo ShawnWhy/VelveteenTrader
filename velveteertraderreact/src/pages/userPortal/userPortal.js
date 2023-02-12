@@ -150,10 +150,9 @@ var dataMyItems = myItems;
      )
    })}</div>)}
 <div className='chatRoom'>
-<Chatroom>
+<Chatroom/>
 
 
-</Chatroom>
 </div>
 
 <div className={chosenItem.ItemPageModal === "on" ? "itemPageOn" : "itemPageOff" } id = {chosenItem.id}>

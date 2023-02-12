@@ -60,19 +60,18 @@ app.use(cors())
 
 
 const users = {};
+
 io.on("connection", client => {
-  client.on("username", username => {
-    console.log(username)
+  client.on("username", username => { 
+
     const user = {
-      name: username,
-      id: client.id
-    };
-    users[client.id] = user;
-    console.log(user);
-    console.log(users);
-    console.log(client.id)
-    io.emit("connected", user);
-    io.emit("users", Object.values(users));
+    name: username,
+    id: client.id
+
+    }; 
+     users[client.id] = user;
+     io.emit("users", Object.values(users));
+  
   });
 
   client.on("send", message => {
@@ -88,15 +87,29 @@ io.on("connection", client => {
       text: message.message,
       date: new Date().toISOString(),
       user: message.username
-    });
+    },users);
   });
 
-  client.on("disconnect", () => {
-    const username = users[client.id];
+client.on("disconnect", () => {
+
+delete users[client.id];
+ io.emit("disconnected", client.id);
+    
+   
+  });
+
+client.on("manualDisconnect", ()=>{
+    console.log("manual dis!!@@@")
+    
+    client.disconnect()
+    // client.removeAllListeners()
+
     delete users[client.id];
     io.emit("disconnected", client.id);
-  });
+})
+
 });
+
 
 
 db.sequelize.sync().then(function() {
