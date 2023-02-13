@@ -194,8 +194,8 @@ console.log("chat is off")
             </div>
             </div>
             ):(<div> turn on chat </div>)}
-            <div className = "chatOnButton" onClick={function(){setChat("on")}}>start Chatting</div>
-            <div className = "chatOnButton" onClick={function(e){toggleChat(e)}}>start Chatting</div>
+            <div className = "chatOnButton" onClick={function(){setChat("on")}}>start chatting</div>
+            <div className = "chatOnButton" onClick={function(e){toggleChat(e)}}>open chatting</div>
 
       </div>
     )
