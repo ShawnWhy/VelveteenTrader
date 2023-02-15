@@ -6,7 +6,10 @@ export default {
     console.log("gettingfavs")
     return axios.get("/api/getFavs");
 },
-
+ getTopComments: function(){
+    console.log("gettingTopComments")
+    return axios.get("/api/getTopComments");
+},
 getAllItems : function(){
   console.log("gettingAll")
   return axios.get("/api/allItems")

@@ -7,6 +7,8 @@ import { InformationContext } from '../../App';
 // import {InformationContext} from "../../App"
 import Style from "./billboardscroll.css"
 import {ItemContext} from "../../App"
+import Comments from "../../components/comment";
+import MyComments from "../../components/myComment"
 
 export const FavItemContext = React.createContext();
 
@@ -16,6 +18,8 @@ export const FavItemContext = React.createContext();
 
 
 const Billboardscroll = function() {
+
+  const [topComments, setTopComments]= useState([])
 
   const {chosenItem, setChosenItem}= useContext(ItemContext)
 
@@ -160,11 +164,10 @@ const [rotationItems, setRotationItems]=useState(
 function loadComments(){
 
 var dataFavItems = favoriteItems;
-      
-      console.log("dataFavItems")
-      console.log(dataFavItems)
-      console.log("itemdataas")
-      console.log(favoriteItems)
+      // console.log("dataFavItems")
+      // console.log(dataFavItems)
+      // console.log("itemdataas")
+      // console.log(favoriteItems)
       for(let i=0; i<dataFavItems.length; i++){
 
         dataFavItems[i].comments = []
@@ -173,38 +176,31 @@ var dataFavItems = favoriteItems;
       var number = dataFavItems.length
     for (let i = 0; i<dataFavItems.length; i++){
       // res.data.forEach(element => {
-        console.log(dataFavItems[i].id)
+        // console.log(dataFavItems[i].id)
     API.getComments(dataFavItems[i].id).then(res=>{
       if(res.data.length>0){
       res.data.forEach((object)=>{    
-        console.log(object)
+        // console.log(object)
     let index = favoriteItems.findIndex(obj => obj.id === object.itemId);
-     console.log("index of the array2")
-    console.log(index)
+    //  console.log("index of the array2")
+    // console.log(index)
     if(index>-1){
-      console.log("index of the array")
-    console.log(index)
-    
+    //   console.log("index of the array")
+    // console.log(index)
     dataFavItems[index].comments.push({authorName:object.userName,author:object.userId,text:object.comment, id:object.id, votes:object.votes})
-    console.log("dataFavItems " )
-    console.log(object)
+    // console.log("dataFavItems " )
+    // console.log(object)
     }
       })}
      })
-     
      number-=1;
-     console.log(number)
      if(number==0){
       console.log("got all of the things")
-      console.log(dataFavItems)
-      
+      // console.log(dataFavItems)
       SetFavoriteItems(dataFavItems)
      }
-
-      }
-      
-
-}
+    }
+   }
 
   useEffect(() => {
    loadComments()
@@ -216,10 +212,9 @@ const [newBid, setNewBid]= useState(
 )
 
 const submitBid = function(newBid, oldBid, userid, itemid){
-
-console.log(chosenItem)
-console.log(userid)
-console.log(itemid)
+// console.log(chosenItem)
+// console.log(userid)
+// console.log(itemid)
 
 if(newBid>oldBid){
 
@@ -228,7 +223,7 @@ if(newBid>oldBid){
   itemId:itemid,
   amount:newBid
 }
-  
+
  API.updateBids(body, itemid)
 
  API.createBid(body)
@@ -238,31 +233,23 @@ if(newBid>oldBid){
 
 }
 }
-
 //set current objects await
- var promisedSetState = (newState) => new Promise(resolve => SetFavoriteItems(newState, resolve));
-
-
-
-
-
-
+//  var promisedSetState = (newState) => new Promise(resolve => SetFavoriteItems(newState, resolve));
 const setNewBid1 = function(){
 
   var newbidValue = document.querySelector('.bidInput').value;
 
   if(newbidValue>0){
-    console.log("set new bid")
-    console.log(newbidValue)
-    console.log(typeof newbidValue)
+    // console.log("set new bid")
+    // console.log(newbidValue)
+    // console.log(typeof newbidValue)
       setNewBid(parseInt(newbidValue));
   }
 }
-
-
-  useEffect (()=>{
+useEffect (()=>{
 
  loadFavorites()
+ loadTopComments()
 
   },'')
 
@@ -276,17 +263,23 @@ useEffect  (()=>{
   },[favoriteItems]);
 
   const loadFavorites = function(){
-    console.log("loadfav")
+    // console.log("loadfav")
     API.getFavorites()
     .then(res=>{
-      console.log(res)
+      // console.log(res)
     //  promisedSetState(res.data);
       SetFavoriteItems(res.data)       // dataFavItems[index].comments=[]
-      
-      
-      });
-    
+});
 
+  }
+
+  const loadTopComments = function(){
+    API.getTopComments()
+    .then(res=>{
+      setTopComments(res.data)
+    })
+
+    
   }
 
   const rowForward= ()=>{
@@ -299,9 +292,9 @@ useEffect  (()=>{
   const rowBackwards =()=>{
     var itemlength=favoriteItems.length
     var tempFav = favoriteItems.splice(1,itemlength);
-    console.log(tempFav)
+    // console.log(tempFav)
     tempFav.push(favoriteItems[0])
-    console.log(tempFav)
+    // console.log(tempFav)
     SetFavoriteItems(tempFav)
 }
  const turnOffBidModal = ()=>{
@@ -391,6 +384,44 @@ const turnOffItemPageModal = ()=>{
                
               <a className="next" onClick={rowForward}>&#10095;</a>
             
+            </div>
+         <div>
+     
+      {!topComments?(
+          <h1 className = "nocomments">no comments yet</h1>
+        ):(
+          <div className = "comments">{topComments.map(comment=>{return(
+          <div id ={"key "+comment.id} key={comment.id}>
+            {/* {comment.author} : {comment.text} */}
+        {comment.userId!== userProfile.id ? (
+              <div className='comment'>
+           
+            <Comments
+            author={comment.userId}
+            authorName={comment.userName}
+            id={comment.id}
+            comment={comment.comment}
+            votes = {comment.votes}
+            />
+            </div>
+            ) : (
+              <div className='myComment'>
+            <MyComments
+              author={comment.userId}
+            authorName={comment.userName}
+            id={comment.id}
+            comment={comment.comment}
+            votes = {comment.votes}
+            />
+            </div>
+
+
+            )}
+
+            </div>
+        )})}</div>)}
+
+
             </div>
             <div className={chosenItem.ItemPageModal === "on" ? "itemPageOn" : "itemPageOff" } id = {chosenItem.id}>
               <FavItemContext.Provider value={{favoriteItems, SetFavoriteItems}}>

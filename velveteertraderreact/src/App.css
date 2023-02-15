@@ -46,7 +46,7 @@ a:visited {
 } */
 
 .invisible{
-  visibility: collapse;
+  visibility: collapse ! important;
   height:0px;
   width:0px;
   margin:0px;
@@ -67,7 +67,8 @@ a:visited {
 }
 
 .logInModal{
-  
+    margin:0 ! important;
+
   height:100%;
   width:100%;
   position:fixed;
@@ -90,7 +91,7 @@ a:visited {
 }
 
 .signUpModal{
-  
+  margin:0 ! important;
   height:100%;
   width:100%;
   position:fixed;
@@ -122,3 +123,82 @@ a:visited {
   border:1px solid black;
   width:fit-content;
 }
+
+.title_link{
+  margin: 5px;
+float: left;
+height: 100%;
+min-width: 200px;
+padding: 20px;
+text-align: center;
+font-size: 20px;
+font-weight: bold;
+}
+
+.title_linkLogo{
+  /* display:flex; */
+  animation:titleFall1 .2s both;
+  animation-delay: .1s;
+
+
+}
+.title_linkLogo div{
+  text-align:left;
+  width:100%;
+  float:left;
+}
+.title_link1{
+  animation:titleFall2 .2s both;
+  animation-delay: .2s;
+  
+}
+.title_link2{
+    animation:titleFall2 .2s both;
+  animation-delay: .3s;
+  
+}.title_link3{
+    animation:titleFall2 .2s both;
+  animation-delay: .4s;
+  
+}.title_link4{
+    animation:titleFall2 .2s both;
+  animation-delay: .5s;
+  
+}
+
+@keyframes titleFall2 {
+  0%{transform:translate(0px, -200px)}
+  100%{transform:translate(0px, 0px)}
+  
+}
+
+@keyframes titleFall1 {
+  0%{transform:translate(-200px)rotate(75deg)}
+  100%{transform:translate(0px)rotate(0deg)}
+  
+}
+
+@media screen and (min-width: 980px){
+  .myItemDisplay{
+    height:250px;
+    overflow:scroll;
+    border-top:solid black 2px;
+    border-bottom:solid black 2px
+}
+  
+}
+
+
+.welcomeHome{
+
+
+}
+.welcomeHome div{
+
+}
+
+/* .itemCard{
+animation: titleFall1 .2s both;
+animation-deplay:.5s;
+
+} */

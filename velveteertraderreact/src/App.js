@@ -23,6 +23,29 @@ export const InformationContext = React.createContext();
 
 const App = function(){
 
+ const newTitleColors = [
+    'orange','rgb(244, 170, 42)',
+    'rgb(255, 10, 247)','rgb(204, 255, 51)','rgb(242, 115, 208)',
+    'rgb(255, 51, 0)'
+  ]
+  const setTitles = ()=>{
+    var titles = document.getElementsByClassName('title_link')
+    console.log(titles)
+    let newTitleColors2 = newTitleColors
+    for(let i=0;i<titles.length;i++){
+    setTimeout(() => {
+    let randomNumber = Math.floor(Math.random()*newTitleColors2.length)
+    var titleColor = newTitleColors2[randomNumber];
+    newTitleColors2.splice(newTitleColors2[randomNumber],1)
+    if(titles[i]){
+    titles[i].setAttribute('style','background-color:'+titleColor)
+    }
+        
+      }, i*100);
+    }
+
+
+  }
  
 
     
@@ -176,7 +199,7 @@ const App = function(){
 
 loadUserInformation()
 
-
+setTitles()
   
   },'')
 
@@ -188,43 +211,40 @@ loadUserInformation()
      <InformationContext.Provider value={{userProfile, setUserProfile}}>
         <Router>
         <div className="row justify-content-center">
-          
-            <div className = "margin">
+            <div className = "margin title_linkLogo title_link">
+            <div>The Velveteen</div>
+            <div>Exchange</div>
+            </div>
+            <div className = "margin title_link1 title_link">
               <Link to="/">Home Page</Link>
             </div>
-            <div className = "margin">
+            <div className = "margin title_link2 title_link">
               <Link to="/CommunityPage">Community Page</Link>
             </div>
             
             <div
               className={
-                ( loggedIn == false ? "visible" : "invisible")
+                ( loggedIn == false ? "visible title_link3 title_link" : "invisible")
               }
             >
               <a onClick={loginModalDeploy}>Log In</a>
             </div>
             <div
               className={
-                (loggedIn === false ? "visible" : "invisible")
+                (loggedIn === false ? "visible title_link4 title_link" : "invisible")
               }
             >
               <a onClick={signUpModalDeploy}>Sign Up</a>
             </div>
             <div
               className={
-                (loggedIn === false ? "invisible" : "visible")
+                (loggedIn === false ? "invisible " : "visible title_link3 title_link")
               }
             >
               <a onClick={logOut}>Log Out</a>
             </div>
-            <div
-              className={
-                 (loggedIn === false ? "invisible" : "visible")
-              }
-            >
-            <Link to="/user">User Portal</Link>
-            </div>
-            <div className="margin">
+
+            <div className="margin title_link4 title_link">
               <Link to="/contact">Contact</Link>
             </div>
           </div>

@@ -123,14 +123,14 @@ var dataMyItems = myItems;
     <ItemContext.Provider value = {{chosenItem, setChosenItem}}>
 
 
-   <div> <div> welcome   { userProfile.userName} </div>
+   <div className='welcomeHome'> <div> welcome   { userProfile.userName} </div>
    <div>you have {userProfile.points} points</div>
    <div>you have {likes} likes </div>
    <div> you have submitted {itemNumber} items</div>
 
    {!myItems.length?(
      <div>you have no items</div>
-   ):(<div>{myItems.map(item=>{
+   ):(<div className='myItemDisplay'>{myItems.map(item=>{
      return(
        <MyItemCard
          portraitImageUrl={item.imageUrl1}

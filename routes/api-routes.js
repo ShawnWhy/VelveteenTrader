@@ -16,12 +16,20 @@ module.exports = function(app) {
   app.get("/api/getFavs",
     function(req, res){
       
-      connection.query ("SELECT * FROM Items ORDER By likes DESC Limit 10",function(err, data){if(err) throw err;
+      connection.query ("SELECT * FROM items ORDER By likes DESC Limit 10",function(err, data){if(err) throw err;
        console.log("got top picks");
        res.json(data)
       })
     });
 
+  app.get("/api/getTopComments",
+    function(req, res){
+      
+      connection.query ("SELECT * FROM comments ORDER By votes DESC Limit 20",function(err, data){if(err) throw err;
+       console.log("got top comments");
+       res.json(data)
+      })
+    });
   app.get("/api/allItems/:userid",
   function(req, res){
     connection.query("SELECT * FROM Items JOIN Users ON Items.userId = Users.id", function(err, data){
