@@ -171,6 +171,8 @@ comment:comment
             {comment.author !== userProfile.id ? (
               <div className='comment'>
             <Comments
+            page="item"
+            itemId={comment.itemId}
             author={comment.author}
             authorName={comment.authorName}
             id={comment.id}
@@ -181,6 +183,8 @@ comment:comment
             ) : (
               <div className='myComment'>
             <MyComments
+            page="item"
+            itemId={comment.itemId}
             author={comment.author}
             authorName={comment.authorName}
             id={comment.id}

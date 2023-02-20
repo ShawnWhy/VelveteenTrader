@@ -9,20 +9,11 @@ const MyComments =function(props) {
   const {userProfile, setUserProfile} = useContext(InformationContext)
   const {chosenItem, setChosenItem} = useContext(ItemContext)
 
-  const HandleVoteClick = (e)=>{
-    if(props.page=="main"){
 
-    }
-    else{
-      console.log("nothing")
-    }
-
-
-  }
 
     return(
     // <CardContext.Consumer>
-    <div className="commentInfo" onClick = { (e)=>{HandleVoteClick(e)}}>
+    <div className="commentInfo">
       <div className="commentInfoName">{props.authorName}</div><div>:</div>
       <div className= "commentInfoComment">{props.comment}</div>
     <div >

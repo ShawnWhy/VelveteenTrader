@@ -12,6 +12,9 @@ import MyComments from "../../components/myComment"
 
 export const FavItemContext = React.createContext();
 
+export const TopCommentsContext = React.createContext();
+
+
 
 
 
@@ -19,13 +22,14 @@ export const FavItemContext = React.createContext();
 
 const Billboardscroll = function() {
 
-  const [topComments, setTopComments]= useState([])
+
 
   const {chosenItem, setChosenItem}= useContext(ItemContext)
 
   const {userProfile, setUserProfile}= useContext(InformationContext)
 
 
+  const [topComments, setTopComments]= useState([])
 
   const [favoriteItems, SetFavoriteItems] = useState(
     [
@@ -187,7 +191,7 @@ var dataFavItems = favoriteItems;
     if(index>-1){
     //   console.log("index of the array")
     // console.log(index)
-    dataFavItems[index].comments.push({authorName:object.userName,author:object.userId,text:object.comment, id:object.id, votes:object.votes})
+    dataFavItems[index].comments.push({authorName:object.userName,author:object.userId,text:object.comment, id:object.id, votes:object.votes, itemId:object.itemId})
     // console.log("dataFavItems " )
     // console.log(object)
     }
@@ -309,6 +313,8 @@ const turnOffItemPageModal = ()=>{
 
   
     return (
+<TopCommentsContext.Provider value={{topComments, setTopComments}}>
+
 <div>
 <div className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
         <div className = "bidforum" >
@@ -333,8 +339,10 @@ const turnOffItemPageModal = ()=>{
 
              {rotationItems.map(item => {
                return (
-               
+
               <FavItemContext.Provider value={{favoriteItems, SetFavoriteItems}}>
+
+
                    
                  {item.userId == userProfile.id ? (
                       <MyItemCard
@@ -371,7 +379,9 @@ const turnOffItemPageModal = ()=>{
                    
                  />
                  )}
+
                  </FavItemContext.Provider>
+
                );
              })}
             
@@ -397,22 +407,26 @@ const turnOffItemPageModal = ()=>{
               <div className='comment'>
            
             <Comments
+            page = "main"
             author={comment.userId}
             authorName={comment.userName}
             id={comment.id}
             comment={comment.comment}
             votes = {comment.votes}
+            itemId = {comment.itemId}
             />
             </div>
             ) : (
               <div className='myComment'>
             <MyComments
-              author={comment.userId}
+            page = "main"
+            author={comment.userId}
             authorName={comment.userName}
             id={comment.id}
             comment={comment.comment}
             votes = {comment.votes}
-            />
+          itemId = {comment.itemId}
+           />
             </div>
 
 
@@ -428,11 +442,13 @@ const turnOffItemPageModal = ()=>{
               <Itempage 
               />
               </FavItemContext.Provider>
+
             </div>
             </div>
 
-      
-  
+              
+            </TopCommentsContext.Provider>
+
   )}
     
   export default Billboardscroll;

@@ -59,10 +59,14 @@ function(req, res){
   })
 
   app.get("/api/itemDetails/:id", function(req,res){
+    console.log("getting item etails")
+    console.log(req.params.id)
     itemId = req.params.id;
-    connection.query("SELECT * FROM Item LEFT JOIN Bid on Bid.biditemId = Item.id LEFT JOIN Message ON Message.itemId = Item.id LEFT JOIN Bid on Bid.biditemId = Item.id WHERE Item.id=?n",
+    connection.query("SELECT * FROM Items WHERE id = ?",
     itemId,function(err, data){
       if(err) throw err;
+    console.log(data)
+    console.log("got item data")
       res.json(data)
     })
   })
