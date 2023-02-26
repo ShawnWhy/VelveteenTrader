@@ -127,3 +127,20 @@ background-color: rgb(247, 59, 185);
     background-color: aqua;
     
 }
+
+@media screen and (max-width: 700px) {
+
+.imageCarosel{
+width:100% ! important;
+
+}
+.itemStory, .commentSection, .detailDisplay,.turnOnComment, .turnOffComment{
+    width:80%;
+}
+
+.closeItemPage2, .closeItemPage{
+    z-index:12;  
+}
+
+
+}

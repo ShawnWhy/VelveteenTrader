@@ -22,12 +22,48 @@ export const ItemContext = React.createContext();
 export const InformationContext = React.createContext();
 
 const App = function(){
-
- const newTitleColors = [
+  
+ var newTitleColors = [
     'orange','rgb(244, 170, 42)',
     'rgb(255, 10, 247)','rgb(204, 255, 51)','rgb(242, 115, 208)',
     'rgb(255, 51, 0)'
   ]
+
+  const [warnMessageLogin, setWarnMessageLogin] = useState({
+    status:"off",
+    message:""
+  })
+  const [warnMessageSignUp, setWarnMessageSignup] = useState({
+    status:"off",
+    message:""
+  })
+
+
+
+  
+
+ const titleOnMouseOver = (e)=>{
+  e.stopPropagation()
+  e.preventDefault()
+   if (e.target.tagName.toLowerCase() == "a"){
+   
+    let newTitleColors2 = [
+    'orange','rgb(244, 170, 42)',
+    'rgb(255, 10, 247)','rgb(204, 255, 51)','rgb(242, 115, 208)',
+    'rgb(255, 51, 0)'
+  ]
+    console.log(newTitleColors2)
+    let randomNumber = Math.floor(Math.random()*newTitleColors2.length)
+    var titleColor = newTitleColors2[randomNumber];
+    console.log(randomNumber)
+    console.log(newTitleColors2)
+    e.target.parentElement.setAttribute('style','background-color:'+titleColor + ";border-radius:12px")
+
+ }
+}
+
+
+
   const setTitles = ()=>{
     var titles = document.getElementsByClassName('title_link')
     console.log(titles)
@@ -38,7 +74,7 @@ const App = function(){
     var titleColor = newTitleColors2[randomNumber];
     newTitleColors2.splice(newTitleColors2[randomNumber],1)
     if(titles[i]){
-    titles[i].setAttribute('style','background-color:'+titleColor)
+    titles[i].setAttribute('style','background-color:'+titleColor + ";border-radius:12px")
     }
         
       }, i*100);
@@ -135,9 +171,12 @@ const App = function(){
     setReturnHomeLogin(
       "on"
     )
+    console.log(res);
+    setWarnMessageLogin({...warnMessageLogin, message:"you are logged in !"})
 
   }) .catch((err) => {
         console.error(err);
+        setWarnMessageLogin({...warnMessageLogin, message:err.message})
       });
     }
 
@@ -155,13 +194,15 @@ const App = function(){
       setReturnHomeSignUp(
         "on"
       )
+      setWarnMessageSignup({...warnMessageSignUp, message:"you have succesfully signed up!"})
 
-      console.log(res.data);
+      // console.log(res.data);
 
     }
     )
     .catch((err) => {
         console.error(err);
+        setWarnMessageSignup({...warnMessageSignUp, message:err.message})
       });
   }
 
@@ -169,7 +210,9 @@ const App = function(){
   
   // }
 
-  const logOut=async function(){
+  const logOut=async function(e){
+        e.stopPropagation()
+    e.preventDefault()
     API.logOut().then(
       (res)=>{
       console.log("logged out")
@@ -177,12 +220,16 @@ const App = function(){
     window.location.reload();})
     }
 
-  const loginModalDeploy = function(){
+  const loginModalDeploy = function(e){
+    e.stopPropagation()
+    e.preventDefault()
     setSignInModal("off")
     setLogInModal("on")
   }
 
- const signUpModalDeploy = function(){
+ const signUpModalDeploy = function(e){
+    e.stopPropagation()
+    e.preventDefault()
     setLogInModal("off")
     setSignInModal("on")
   }
@@ -200,11 +247,23 @@ const App = function(){
 loadUserInformation()
 
 setTitles()
+
+var titleLinks = document.querySelectorAll(".title_link a");
+  console.log(titleLinks)
+  if(titleLinks.length>0){
+    console.log("34")
+    titleLinks.forEach(element => {
+      console.log("36")
+      element.addEventListener("mouseover",(e)=>{
+        titleOnMouseOver(e)
+      })
+      
+    });
+  }
   
   },'')
 
-
-  
+ 
 
    return (
      <ItemContext.Provider value={{chosenItem, setChosenItem}}>
@@ -227,21 +286,21 @@ setTitles()
                 ( loggedIn == false ? "visible title_link3 title_link" : "invisible")
               }
             >
-              <a onClick={loginModalDeploy}>Log In</a>
+              <a onClick={(e)=>{loginModalDeploy(e)}} href="">Log In</a>
             </div>
             <div
               className={
                 (loggedIn === false ? "visible title_link4 title_link" : "invisible")
               }
             >
-              <a onClick={signUpModalDeploy}>Sign Up</a>
+              <a onClick={(e)=>{signUpModalDeploy(e)}} href="">Sign Up</a>
             </div>
             <div
               className={
                 (loggedIn === false ? "invisible " : "visible title_link3 title_link")
               }
             >
-              <a onClick={logOut}>Log Out</a>
+              <a onClick={(e)=>{logOut(e)}} href="">Log Out</a>
             </div>
 
             <div className="margin title_link4 title_link">
@@ -267,11 +326,15 @@ setTitles()
       </Router>
               <div className={" row justify-content-center logInModal "+ ( loggInModal === "off" ? "invisible" : "visible")}>
                 <div className="col-md-  modalContent">
+                  <div className="warnMessage">{warnMessageLogin.message}</div>
                 <div className={"XOut "+(returnHomeLogin ==="on"? "dissappear": "appear")} onClick={loginModaloff}>X</div>
                   <input ref={nameLoginRef} className = " offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
                   <input ref = {emailLoginRef} className = " offset-md-1 col-md-10 signinInPut" type="email" placeholder = "email"></input>
                   <input ref = {passwordLoginRef} className = "offset-md-1 col-md-10 signinInPut" type="password" placeholder = "password"></input>
-                  <div className={"returnHome "+(returnHomeLogin==="on"?"dissappeaer":"appear")} onClick={logIn} >Login</div>
+                  <div></div>
+                  <div className={"returnHome "+(returnHomeLogin==="on"?"dissappeaer":"appear")}>____________________</div>
+                  <div className={"returnHome loginButton "+(returnHomeLogin==="on"?"dissappeaer":"appear")} onClick={logIn} >Login</div>
+
                   <div className={"returnHome "+(returnHomeLogin==="on"?"appear":"dissappear")}>logged On <a href="/">Return Home</a></div>
 
 
@@ -279,12 +342,16 @@ setTitles()
               </div>
               <div className={" row justify-content-center signUpModal "+ ( signUpModal === "off" ? "invisible" : "visible")}>
               <div className="col-md-  modalContent">
+              <div className="warnMessage">{warnMessageSignUp.message}</div>
               <div onClick={signUpModaloff} className={"XOut "+(returnHomeSignUp ==="on"? "dissappear": "appear")}>X</div>
 
               <input ref={nameSignupRef} className = "offset-md-1 col-md-10 signinInPut" type="text" placeholder = "User Name"></input>
                   <input ref={emailSignupRef}  className = "offset-md-1 col-md-10 signinInPut"  type="email" placeholder = "email"></input>
                   <input ref={passwordSignupRef}  className = "offset-md-1 col-md-10 signinInPut"  type="password" placeholder = "password"></input>  
-                  <div className={"returnHome "+(returnHomeSignUp==="on"? "dissappear":"appear")} onClick={SignUp}>signup</div>
+                  <div className={"returnHome "+(returnHomeLogin==="on"?"dissappeaer":"appear")}>____________________</div>
+
+                  <div className={"returnHome signUpButton "+(returnHomeSignUp==="on"? "dissappear":"appear")} onClick={SignUp}>signup</div>
+
                   <div className={"returnHome "+(returnHomeSignUp==="on"? "appear":"dissappear")}>Signed Up <a href="/">Return Home</a></div>
               </div>
  

@@ -62,7 +62,7 @@ function(req, res){
     console.log("getting item etails")
     console.log(req.params.id)
     itemId = req.params.id;
-    connection.query("SELECT * FROM Items WHERE id = ?",
+    connection.query("SELECT * FROM Items WHERE id = ?", 
     itemId,function(err, data){
       if(err) throw err;
     console.log(data)

@@ -9,6 +9,7 @@ import API from "../../utils/API"
 const Comments =function(props) {
   const {userProfile, setUserProfile} = useContext(InformationContext)
   const {chosenItem, setChosenItem} = useContext(ItemContext)
+  
   const {topComments, setTopComments}= useContext(TopCommentsContext)
 
 
@@ -102,7 +103,9 @@ const Comments =function(props) {
           if(userProfile.id!=0){
           API.changePoints ({points:newPoints}, userProfile.id)
           }
-          API.getPoints(props.itemId).then(res=>{
+          console.log(props.author)
+          if(props.author!==0){
+          API.getPoints(props.author).then(res=>{
           console.log("got the user points")
           console.log(res.data)
           //  promisedSetState(res.data);
@@ -113,17 +116,18 @@ const Comments =function(props) {
         })
       }
       }
+      }
   
     return(
     // <CardContext.Consumer>
+    <div class = "commentContainer">
     <div className = "commentInfo" onClick = { (e)=>{HandleVoteClick(e) }} >
       <div className = "commentInfoName" >{props.authorName}</div><div>:</div>
       <div className = "commentInfoComment">{props.comment}</div>
-    <div >
+    
       </div>
-  <div className = "commentVotes" onClick = { (e)=>{voteForComment(e)}} >{props.votes}</div>
-
-    </div>
+  <div className = "commentVotes othersComment" onClick = { (e)=>{voteForComment(e)}} >votes : {props.votes}</div>
+</div>
    
     )
     

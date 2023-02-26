@@ -104,7 +104,7 @@ comment:comment
     
       
       <div className="page">
-      <div className="closeModal" onMouseLeave={removeCloseText} onMouseOver={showCloseText} onClick ={closeModal}><div className={closeText==="on"?"visible":"invisible"}>close</div><div className={closeText==="on"?"invisible":"visible"}>x</div> </div>
+      <div className="closeModal" onMouseLeave={removeCloseText} onMouseOver={showCloseText} onClick ={closeModal}><div className={closeText==="on"?"visible closeItemPage2":"invisible"}>close</div><div className={closeText==="on"?"invisible":"visible closeItemPage"}>x</div> </div>
 
         <div className = "imageCarosel">
 
@@ -157,8 +157,8 @@ comment:comment
         <p className="itemStory">
           {chosenItem.itemStory}
         </p>
-        <div onClick={turnOnComment} className={commentSection==="on"?"invisible":"button"}>Turn On comments</div>
-        <div onClick={turnOffComment} className={commentSection==="off"?"invisible":"button"}>Turn off comments</div>
+        <div onClick={turnOnComment} className={commentSection==="on"?"invisible":"button turnOnComment"}>Turn On comments</div>
+        <div onClick={turnOffComment} className={commentSection==="off"?"invisible":"button turnOffComment"}>Turn off comments</div>
 
         <div className={commentSection==="on"?"commentSection":"invisible"}>
         

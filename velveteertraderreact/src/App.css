@@ -44,9 +44,29 @@ a:visited {
     transform: rotate(360deg);
   }
 } */
+a {
+  color:rgb(255, 255, 255) ! important;
+  text-decoration: none ;
+}
+
+a:link {
+  color:rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+a:visited {
+  color:rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+a:hover {
+  color:rgb(255, 255, 255) ! important;
+  text-decoration: none ! important;
+}
 
 .invisible{
   visibility: collapse ! important;
+  display:none;
   height:0px;
   width:0px;
   margin:0px;
@@ -88,6 +108,7 @@ a:visited {
   height:40%;
   width:20%;
   text-align: center;
+  border-radius:20px;
 }
 
 .signUpModal{
@@ -103,7 +124,11 @@ a:visited {
   z-index:4;
 }
 
-.appear{
+.appear a{
+  color:rgb(52, 0, 209) ! important
+}
+.appear a:hover{
+  color:rgb(239, 77, 2) ! important
 }
 
 .dissappear{
@@ -196,6 +221,88 @@ font-weight: bold;
 .welcomeHome div{
 
 }
+
+.commentContainer div {
+  padding: 5px;
+}
+.commentContainer {
+  border-bottom: 1px black solid;
+}
+.commentInfo {
+  display: flex;
+}
+.othersComment:hover{
+  background-color: orange;
+
+
+
+}
+.comments{
+    height: 400px;
+    overflow: scroll;
+    border: 1px black solid;
+    border-radius: 12px;
+}
+
+.commentSection .comments{
+border-radius: 12px;
+border:unset;
+height:200px;
+
+}
+
+
+.prev, .next{
+color:black ! important;
+top:100px ! important;
+}
+
+@media screen and (max-width: 480px) {
+
+.prev, .next{
+position:fixed ! important;
+color:black ! important;
+top:50% ! important;
+z-index:10 ! important;
+
+}
+
+.title_linkLogo{
+width:90% ! important;
+
+}
+
+.imageCarosel{
+width:100% ! important;
+
+}
+
+}
+
+.warnMessage{
+
+  margin-top:20px;
+  margin-bottom:10px;
+
+}
+
+.loginButton:hover, .signUpButton:hover, .prevBigPic:hover, .nextBigPic:hover{
+
+  background-color: black;
+  color:white;
+
+
+}
+
+.prevBigPic, .nextBigPic{
+  color:black ! important;
+  padding:5px;
+  
+
+}
+
+
+
 
 /* .itemCard{
 animation: titleFall1 .2s both;

@@ -7,6 +7,12 @@ import Style from "./homepage.css"
 
 function Homepage(props) {
 
+    const [warnMessageItem, setWarnMessageItem]= useState({
+    status:"off",
+    message:""
+  })
+
+
   const {userProfile, setUserProfile}= useContext(InformationContext)
 
     const handleInputChange = function (event) {
@@ -28,7 +34,11 @@ const createItem = (event)=>{
   event.preventDefault();
   event.stopPropagation();
   console.log("createitem")
-  console.log(userProfile);
+  // console.log(userProfile);
+  if(newItem.name.length>0&&newItem.url1.length>0&&
+    newItem.url2.length>0&&newItem.url3.length>0&&
+    newItem.story.length>20
+    ){
   var body= {
     name:newItem.name,
     url1:newItem.url1,
@@ -40,7 +50,18 @@ const createItem = (event)=>{
   }
 
   console.log(body);
-API.createItem(body);
+API.createItem(body).then((res=>{
+  setWarnMessageItem({...warnMessageItem, message:"success!"});
+})).catch((err)=>{
+  setWarnMessageItem({...warnMessageItem, message:err.message})
+});
+    }
+    else{
+
+        setWarnMessageItem({...warnMessageItem, message:"please fill in the image urls and make sure that the item story is more than 20 characters long"});
+
+
+    }
 
 }
 
@@ -53,7 +74,7 @@ API.createItem(body);
         </div>
         <form onSubmit={createItem}>
         <div>
-          
+          <div className = "warnMessage">{warnMessageItem.message}</div>
           <input className = "userinput" type="text" name="name" placeholder = "item name" onChange={handleInputChange}></input> 
           <input className = "userinput" type="url" name="url1" placeholder = "imageurl1" onChange={handleInputChange}></input> 
           <input className = "userinput" type="url" name="url2" placeholder = "imageurl2" onChange={handleInputChange}></input> 

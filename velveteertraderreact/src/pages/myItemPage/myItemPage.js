@@ -43,7 +43,7 @@ var comment = document.querySelector('.commentInput').value;
 
 var itemData = chosenItem;
 console.log(itemData)
-itemData.comments.push({authorName: userProfile.userName,author:userProfile.id,text:comment,votes:0})
+itemData.comments.push({userName: userProfile.userName,userId:userProfile.id,text:comment,votes:0,itemId:comment.itemId})
 setChosenItem({...chosenItem, comments:itemData.comments})
 
 
@@ -104,7 +104,7 @@ comment:comment
     
       
       <div className="page">
-      <div className="closeModal" onMouseLeave={removeCloseText} onMouseOver={showCloseText} onClick ={closeModal}><div className={closeText==="on"?"visible":"invisible"}>close</div><div className={closeText==="on"?"invisible":"visible"}>x</div> </div>
+      <div className="closeModal" onMouseLeave={removeCloseText} onMouseOver={showCloseText} onClick ={closeModal}><div className={closeText==="on"?"visible closeItemPage2":"invisible"}>close</div><div className={closeText==="on"?"invisible":"visible closeItemPage"}>x</div> </div>
 
         <div className = "imageCarosel">
 
@@ -158,26 +158,28 @@ comment:comment
           <div className = "comments">{chosenItem.comments.map(comment=>{return(
           <div id ={"key "+comment.id} key={comment.id}>
             {/* {comment.author} : {comment.text} */}
-        {comment.author !== userProfile.id ? (
+        {comment.userId !== userProfile.id ? (
               <div className='comment'>
-            <Comments
+                          <Comments
             page="item" 
-            author={comment.author}
-            authorName={comment.authorName}
+            author={comment.userId}
+            authorName={comment.userName}
             id={comment.id}
             comment={comment.text}
             votes = {comment.votes}
+            itemId = {comment.itemId}
             />
             </div>
             ) : (
               <div className='myComment'>
             <MyComments
             page="item"
-            author={comment.author}
-            authorName={comment.authorName}
+            author={comment.userId}
+            authorName={comment.userName}
             id={comment.id}
             comment={comment.text}
             votes = {comment.votes}
+             itemId = {comment.itemId}
             />
             </div>
 

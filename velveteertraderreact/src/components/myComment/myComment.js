@@ -22,12 +22,13 @@ const MyComments =function(props) {
 
     return(
     // <CardContext.Consumer>
+    <div class = "commentContainer">
+
     <div className="commentInfo" onClick = { (e)=>{HandleVoteClick(e)}}>
       <div className="commentInfoName">{props.authorName}</div><div>:</div>
       <div className= "commentInfoComment">{props.comment}</div>
-    <div >
       </div>
-  <div className = "commentVotes">{props.votes}</div>
+  <div className = "commentVotes">votes : {props.votes}</div>
 
     </div>
     // </CardContext.Consumer>

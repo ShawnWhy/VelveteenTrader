@@ -5,11 +5,14 @@ import MyItempage from "../myItemPage"
 import Chatroom from "../chatroom"
 import { InformationContext } from "../../App"
 import {ItemContext}from "../../App"
+import { TopCommentsContext } from '../../components/billboardscroll/billboardscroll';
 import Style from "./userPortal.css"
 
 
 
 const UserPortal= function(props) {
+const [topComments, setTopComments]= useState([])
+
 // useEffect(() => {
 //    loadAllMyItems()
    
@@ -44,7 +47,7 @@ var dataMyItems = myItems;
       console.log("index of the array")
     console.log(index)
     
-    dataMyItems[index].comments.push({authorName:object.userName,votes:object.votes,author:object.userId,text:object.comment, id:object.id})
+    dataMyItems[index].comments.push({userName:object.userName,votes:object.votes,userId:object.userId,text:object.comment, id:object.id, itemId:object.itemId})
     console.log("dataFavItems " )
     console.log(object)
     }
@@ -120,6 +123,7 @@ var dataMyItems = myItems;
 
 
   return(
+    <TopCommentsContext.Provider value={{topComments, setTopComments}}>
     <ItemContext.Provider value = {{chosenItem, setChosenItem}}>
 
 
@@ -149,6 +153,7 @@ var dataMyItems = myItems;
        
      )
    })}</div>)}
+   
 <div className='chatRoom'>
 <Chatroom/>
 
@@ -162,6 +167,7 @@ var dataMyItems = myItems;
 
 </div>
 </ItemContext.Provider>
+</TopCommentsContext.Provider>
 
   )
 }
