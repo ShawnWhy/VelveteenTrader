@@ -93,7 +93,11 @@ const Hearts =function(props) {
     
     }
     console.log(body);
-    API.updateLikes(body, props.id)
+    API.updateLikes(body, props.id).then(res=>{
+      console.log(res)
+    }).catch((err)=>{
+          console.log(err);
+        })
    
  
     //set favorite items
@@ -109,7 +113,9 @@ const Hearts =function(props) {
 var newPoints = userProfile.points - 1
 setUserProfile(()=>({...userProfile, points:newPoints}))
 console.log(newPoints)
+if(userProfile.id!==0){
 API.changePoints ({points:newPoints}, userProfile.id)
+}
 console.log('cardinfo')
 console.log(cardInfo);
 API.getPoints(cardInfo.itemOwnerId).then(res=>{
@@ -120,6 +126,8 @@ if(res.data.points !== null){
 var newOwnerPoints = parseInt(res.data.points) +1
 API.changePoints({points:newOwnerPoints}, cardInfo.itemOwnerId)
 }
+}).catch((err)=>{
+console.log(err);
 })
 }
 }
