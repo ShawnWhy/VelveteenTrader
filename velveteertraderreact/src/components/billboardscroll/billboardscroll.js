@@ -320,8 +320,8 @@ const turnOffItemPageModal = ()=>{
         <div className = "bidforum" >
           <div> the highest bid for {chosenItem.name} is {chosenItem.highestBid}</div>
           <div> how much would you like to bid" <input className = "bidInput" onChange = {setNewBid1}  type="number" placeholder={chosenItem.highestBid}></input> </div>
-          <div className="visible" onMouseOver={turnOffBidModal}>X</div>
-          <div className="visible" onClick={turnOffBidModal}>close</div>
+          {/* <div className="visible" onMouseOver={turnOffBidModal}>X</div> */}
+          <div className="visible closeBid" onClick={turnOffBidModal}>X</div>
           <div className="submitBid" onClick={()=>{submitBid(newBid, chosenItem.highestBid, userProfile.id, chosenItem.id)}}>submit</div>
         </div>
         </div>

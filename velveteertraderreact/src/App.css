@@ -212,7 +212,11 @@ font-weight: bold;
 }
   
 }
-
+.sidebar{
+  border-radius:12px;
+  z-index:15;
+  left:20px;
+}
 
 .welcomeHome{
 
@@ -252,13 +256,81 @@ height:200px;
 }
 
 
+
 .prev, .next{
 color:black ! important;
 top:100px ! important;
 }
+@media screen and (max-width: 1292px) {
+  .title_link{
+  text-align: center;
+  min-width: unset ! important;
+   
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .title_linkLogo div:nth-child(3){
+  text-align: center;
+   width:100%;
+   display:none;
+  }
+
+  .next{
+    right:20px ! important;
+  }
+
+  .comments{
+    width:95%;
+  }
+}
+@media screen and (max-width: 770px) {
+
+  
+.sidebar{
+  z-index:1;
+  left:20px;
+}
+
+.title_link{
+width:90% ! important;
+height:40px ! important;
+padding:unset ! important;
+
+}
+.title_linkLogo{
+height:100% ! important;
+width:90% ! important;
+padding-top:20px ! important;
+padding-bottom:20px ! important;
+text-align: center ! important;
+}
+
+.title_linkLogo div:first-child{
+  text-align: right;
+  width:50%;
+  display:none;
+}
+
+.title_linkLogo div:nth-child(2){
+  text-align: left;
+   width:50%;
+   padding-left:10px;
+     display:none
+
+}
+.title_linkLogo div:nth-child(3){
+  text-align: center;
+   width:100%;
+  }
+}
+
 
 @media screen and (max-width: 480px) {
 
+.itemPageOn{
+  z-index:12 ! important;
+}
 .prev, .next{
 position:fixed ! important;
 color:black ! important;
@@ -271,6 +343,8 @@ z-index:10 ! important;
 width:90% ! important;
 
 }
+
+
 
 .imageCarosel{
 width:100% ! important;
@@ -299,13 +373,72 @@ width:100% ! important;
   padding:5px;
   
 
+  
 }
 
+.bidModalOn{
+  z-index:100 ! important;
+}
 
-
-
+.myItemDisplay{
+ width: 90%;
+left: 5%;
+position: relative;
+border: 1px black solid;
+border-radius:12px
+}
 /* .itemCard{
 animation: titleFall1 .2s both;
 animation-deplay:.5s;
 
 } */
+div::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+div {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.commentSection .comments{
+width:100%
+
+}
+
+.bidforum
+{width: 50%;
+    padding: 15px;
+    left: 25%;
+    position: absolute;
+    top: 30%;
+    border: solid black 1px;
+    border-radius: 12px;
+  }
+
+  .submitBid{
+    background-color:unset ! important;
+    text-align: center ! important;
+    /* position: absolute; */
+    width: calc(100% - 30px) ! important;
+
+
+  }
+
+  .submitBid:hover{
+    background-color:black ! important;
+    color:white;
+  }
+
+  .closeBid{
+    top: 0px;
+    position: absolute;
+    right: 10px;
+
+  }
+
+  .closeBid:hover{
+    background-color: black ! important;
+    color:white;
+  }

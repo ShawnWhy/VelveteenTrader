@@ -273,6 +273,7 @@ var titleLinks = document.querySelectorAll(".title_link a");
             <div className = "margin title_linkLogo title_link">
             <div>The Velveteen</div>
             <div>Exchange</div>
+            <div>The Velveteen Exchange</div>
             </div>
             <div className = "margin title_link1 title_link">
               <Link to="/">Home Page</Link>

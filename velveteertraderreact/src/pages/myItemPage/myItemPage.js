@@ -147,8 +147,8 @@ comment:comment
         <p className="itemStory">
           {chosenItem.itemStory}
         </p>
-        <div onClick={turnOnComment} className={commentSection==="on"?"invisible":"button"}>Turn On comments</div>
-        <div onClick={turnOffComment} className={commentSection==="off"?"invisible":"button"}>Turn off comments</div>
+        <div className="commentInput"  onClick={turnOnComment} className={commentSection==="on"?"invisible":"button"}>Turn On comments</div>
+        <div className="commentSubmit" onClick={turnOffComment} className={commentSection==="off"?"invisible":"button"}>Turn off comments</div>
 
         <div className={commentSection==="on"?"commentSection":"invisible"}>
         
