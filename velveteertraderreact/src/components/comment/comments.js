@@ -35,7 +35,9 @@ const Comments =function(props) {
    
   }
 
-})
+}).catch(err=>{
+        console.log(err)
+      })
 
     API.getItemDetails(props.itemId).then((res)=>{ 
       console.log(res) 
@@ -59,7 +61,9 @@ const Comments =function(props) {
 
     console.log(chosenItem)
 
-  })
+  }).catch(err=>{
+        console.log(err)
+      })
 
    
   }

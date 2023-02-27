@@ -279,9 +279,13 @@ top:100px ! important;
   .next{
     right:20px ! important;
   }
+    .prev{
+    left:20px ! important;
+  }
 
   .comments{
     width:95%;
+    margin:auto;
   }
 }
 @media screen and (max-width: 770px) {
