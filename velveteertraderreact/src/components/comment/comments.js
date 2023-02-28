@@ -104,7 +104,9 @@ const Comments =function(props) {
           var newPoints = userProfile.points - 1
           setUserProfile(()=>({...userProfile, points:newPoints}))
           console.log(newPoints)
-          if(userProfile.id!=0){
+          console.log(userProfile.id)
+          if(userProfile.id!==0){
+            console.log("userprofile is not 0")
           API.changePoints ({points:newPoints}, userProfile.id)
           .then(res=>{
             console.log(res)
@@ -119,9 +121,12 @@ const Comments =function(props) {
           console.log(res.data)
           //  promisedSetState(res.data);
           if(res.data){
+              console.log("res.data")
+
           if(res.data.points !== null){
+            console.log("res.data.points")
           var newOwnerPoints = parseInt(res.data.points) +1
-          API.changePoints({points:newOwnerPoints}, props.itemId)
+          API.changePoints({points:newOwnerPoints}, props.author)
           }
         }
         }).catch((err)=>{

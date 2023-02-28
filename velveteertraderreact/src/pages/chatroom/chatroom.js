@@ -44,8 +44,6 @@ const calculateUSerDisplay = ()=>{
   });
   
 }
-const [chatWindow, setChatWindow]= useState("off")
-const [currentDisplay, setCurrentDisplay]= useState("");
 const {userProfile, setUserProfile}= useContext(InformationContext)
 const chatwindowRef = useRef();
 const [chat, setChat] = useState("off");
@@ -69,10 +67,24 @@ calculateUSerDisplay()
 },[users])
 
 
-  useEffect(() => {
+  // useEffect(() => {
+
+const [InitialChatButton, setInitialChatButton] = useState("on")
+
+    
+
+  // }, [chat]);
+
+  const turnOnChat1 = ()=>{
+    setInitialChatButton("off")
+    setChat("on")
+    turnOnChat2()
+
+  }
 
 
-  if(chat=="on"){
+  const turnOnChat2  = ()=>{
+
   console.log("chat is on")
 
   socket.connect();
@@ -114,17 +126,8 @@ calculateUSerDisplay()
 
 
     });
+  
   }
-  else{
-
-console.log("chat is off")
-
- 
-
-  }
-    
-
-  }, [chat]);
 
   const toggleChat = function(e){
     e.preventDefault()
@@ -157,7 +160,7 @@ console.log("chat is off")
 
       </div>
       {chat == "on"? (
-        <div>
+        <div className='chatSection'>
       <div className=" chatWindow">
       {!messages.length ? (
                 <h1 className="chat-title">Speak</h1>
@@ -193,10 +196,10 @@ console.log("chat is off")
               </ul>
             </div>
             </div>
-            ):(<div> turn on chat </div>)}
-            <div className = "chatOnButton" onClick={function(){setChat("on")}}>start chatting</div>
-            <div className = "chatOnButton" onClick={function(e){toggleChat(e)}}>open chatting</div>
-
+            ):(
+            <div className ={"chatOnButton "+(InitialChatButton==="on"?"":"invisible")} onClick={function(){turnOnChat1()}} > turn on chat </div>)}
+            <div className ={ "chatOnButton " + (chat=="off"&&InitialChatButton=="off"?"visible":"invisible")} onClick={function(e){toggleChat(e)}}>turn on chat</div>
+            <div className = {"chatOnButton " + (chat=="off"?"invisible":"visible")}onClick={function(e){toggleChat(e)}}>turn off chat</div>
       </div>
     )
 }

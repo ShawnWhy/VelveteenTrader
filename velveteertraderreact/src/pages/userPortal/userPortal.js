@@ -126,14 +126,14 @@ var dataMyItems = myItems;
     <TopCommentsContext.Provider value={{topComments, setTopComments}}>
     <ItemContext.Provider value = {{chosenItem, setChosenItem}}>
 
-
-   <div className='welcomeHome'> <div> welcome   { userProfile.userName} </div>
-   <div>you have {userProfile.points} points</div>
-   <div>you have {likes} likes </div>
-   <div> you have submitted {itemNumber} items</div>
-
+    <div className='userPortal_info'>
+   <div className='welcomeHome'>  welcome   { userProfile.userName} </div>
+   <div className='userPortal_points'>you have {userProfile.points} points</div>
+   <div className="userPortal_likes">you have {likes} likes </div>
+   <div className='userPortal_itemcount'> you have submitted {itemNumber} items</div>
+    </div>
    {!myItems.length?(
-     <div>you have no items</div>
+     <div className = "noItemMessage">you have no items</div>
    ):(<div className='myItemDisplay'>{myItems.map(item=>{
      return(
        <MyItemCard
@@ -165,7 +165,7 @@ var dataMyItems = myItems;
               />
             </div>
 
-</div>
+
 </ItemContext.Provider>
 </TopCommentsContext.Provider>
 

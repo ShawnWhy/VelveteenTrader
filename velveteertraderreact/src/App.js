@@ -135,14 +135,14 @@ const App = function(){
   )
 
   const loadUserInformation = async function(){
-    
+    let userId;
     API.getUserData()
     .then(function(res){
       if(res.data.id){
         console.log("got user data +++++++++++")
         console.log(res.data)
             setLoggedIn("on")
-
+      userId = res.data.id
       setUserProfile({
         userName:res.data.username,
         points:res.data.points,
@@ -152,6 +152,12 @@ const App = function(){
       }
        
     
+    }).then(()=>{
+      API.getPoints(userId).then(
+        res=>{
+          setUserProfile({...userProfile, points:res.data.points})
+        }
+      )
     })
 
   }

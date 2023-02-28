@@ -236,6 +236,7 @@ app.put("/api/changePoints/:id",
 
    
   function(req, res){
+    console.log(req.body)
     console.log(req.params);
     console.log("change points ++++++++")
     db.User.update({

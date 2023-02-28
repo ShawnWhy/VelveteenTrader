@@ -59,6 +59,7 @@ getPoints : function(id){
 changePoints : function(body, id){
 console.log("updating points")
 console.log(body)
+console.log(id)
 return axios.put("/api/changePoints/"+id, body)
 
 },
