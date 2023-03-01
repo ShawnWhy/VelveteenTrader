@@ -143,20 +143,20 @@ const App = function(){
         console.log(res.data)
             setLoggedIn("on")
       userId = res.data.id
-      setUserProfile({
-        userName:res.data.username,
-        points:res.data.points,
-        id:res.data.id,
-
-      });
-      }
+       }
        
     
-    }).then(()=>{
+    })
+    .then(()=>{
+      console.log(userId)
       API.getPoints(userId).then(
         res=>{
-          setUserProfile({...userProfile, points:res.data.points})
+          if(res.data !==null){
+            console.log(res)
+          setUserProfile({id:res.data.id, points:res.data.points, userName:res.data.username})
+          
         }
+      }
       )
     })
 

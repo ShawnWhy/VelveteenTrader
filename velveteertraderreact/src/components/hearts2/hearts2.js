@@ -70,9 +70,12 @@ const Hearts2 =function(props) {
     setHeartColor("red")
   }
 
+  var heartThrottle = "off"
+
   const addLike = (e)=>{
   console.log("like")
-  if(userProfile.points>0){
+  if(userProfile.points>0&&heartThrottle=="off"){
+    heartThrottle="on";
 
   explodeHeart(e)
   var newLike = parseInt(props.likes);
@@ -114,6 +117,10 @@ var newOwnerPoints = parseInt(res.data.points) +1
 API.changePoints({points:newOwnerPoints}, chosenItem.itemOwnerId)
 }
 })
+setTimeout(() => {
+  heartThrottle="off"
+}, 500);
+
   }
 }
 

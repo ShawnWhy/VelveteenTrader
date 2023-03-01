@@ -342,7 +342,7 @@ const turnOffItemPageModal = ()=>{
 
               <FavItemContext.Provider value={{favoriteItems, SetFavoriteItems}}>
 
-
+                <div></div>
                    
                  {item.userId == userProfile.id ? (
                       <MyItemCard
@@ -405,7 +405,8 @@ const turnOffItemPageModal = ()=>{
             {/* {comment.author} : {comment.text} */}
         {comment.userId!== userProfile.id ? (
               <div className='comment'>
-           
+           {userProfile.id}
+           {"comment user id " + comment.userId}
             <Comments
             page = "main"
             author={comment.userId}
@@ -418,6 +419,8 @@ const turnOffItemPageModal = ()=>{
             </div>
             ) : (
               <div className='myComment'>
+                    {userProfile.id}
+           {"comment user id " + comment.userId}
             <MyComments
             page = "main"
             author={comment.userId}

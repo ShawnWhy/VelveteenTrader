@@ -11,15 +11,14 @@ const Comments =function(props) {
   const {chosenItem, setChosenItem} = useContext(ItemContext)
   
   const {topComments, setTopComments}= useContext(TopCommentsContext)
-
+  const [commentThrottle, setCommentThrottle] = useState("off")
 
   const HandleVoteClick = ()=>{
     if(props.page =="main"){
+      
       setChosenItemPage()
+    
     }
-
-
-
   }
 
     const setChosenItemPage = ()=>{
@@ -72,7 +71,8 @@ const Comments =function(props) {
   const voteForComment=(e)=>{
     e.preventDefault()
     e.stopPropagation()
-        if(userProfile.points>0){
+        if(userProfile.points>0 && commentThrottle==="off"){
+          setCommentThrottle("on")
           
           var newVote = parseInt(props.votes)
           newVote++
@@ -133,7 +133,12 @@ const Comments =function(props) {
           console.log(err);
         })
       }
+         setTimeout(() => {
+        setCommentThrottle("off")
+      }, 1500);
       }
+   
+
       }
   
     return(
