@@ -185,7 +185,7 @@ const [InitialChatButton, setInitialChatButton] = useState("on")
               value={message}
               onChange={(event) => setMessage(event.currentTarget.value)}
             />
-            <button className="chatBtn" onClick={handleMessageOut}>submit</button>
+            <button className="chatBtn" onClick={(e)=>{handleMessageOut(e)}}>submit</button>
 
             <div className="col-md-4 remove">
               <h3>Users</h3>

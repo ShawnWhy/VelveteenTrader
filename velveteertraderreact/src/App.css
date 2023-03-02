@@ -213,7 +213,14 @@ font-weight: bold;
     border-top:solid black 2px;
     border-bottom:solid black 2px
 }
+
   
+}
+
+@media screen and (max-width: 979px) and (min-width: 768px){
+  .myItemDisplay{
+    min-height:500px;
+  }
 }
 .sidebar{
   border-radius:12px;

@@ -50,7 +50,16 @@ const createItem = (event)=>{
   }
 
   console.log(body);
+
 API.createItem(body).then((res=>{
+  setNewItem({
+    name:"",
+    url1:"",
+    url2:"",
+    url3:"",
+    modelUrl:"",
+    story:""
+})
   setWarnMessageItem({...warnMessageItem, message:"success!"});
 })).catch((err)=>{
   setWarnMessageItem({...warnMessageItem, message:err.message})
@@ -72,15 +81,15 @@ API.createItem(body).then((res=>{
         <div>
          {userProfile.userName}
         </div>
-        <form onSubmit={createItem}>
+        <form onSubmit={(e)=>{createItem(e)}}>
         <div>
           <div className = "warnMessage">{warnMessageItem.message}</div>
-          <input className = "userinput" type="text" name="name" placeholder = "item name" onChange={handleInputChange}></input> 
-          <input className = "userinput" type="url" name="url1" placeholder = "imageurl1" onChange={handleInputChange}></input> 
-          <input className = "userinput" type="url" name="url2" placeholder = "imageurl2" onChange={handleInputChange}></input> 
-          <input className = "userinput" type="url" name="url3" placeholder = "imageurl3" onChange={handleInputChange}></input> 
+          <input className = "userinput" type="text" name="name" value = {newItem.name} placeholder = "item name" onChange={handleInputChange}></input> 
+          <input className = "userinput" type="url" name="url1" value = {newItem.url1} placeholder = "imageurl1" onChange={handleInputChange}></input> 
+          <input className = "userinput" type="url" name="url2" value = {newItem.url2} placeholder = "imageurl2" onChange={handleInputChange}></input> 
+          <input className = "userinput" type="url" name="url3" value = {newItem.url3} placeholder = "imageurl3" onChange={handleInputChange}></input> 
           <input className = "userinput" type="url" name="modelUrl" placeholder = "modelUrl" onChange={handleInputChange}></input> 
-          <textarea className = "userinput" name="story" onChange={handleInputChange}  ></textarea>
+          <textarea className = "userinput" name="story" value = {newItem.story} onChange={handleInputChange}  ></textarea>
           <input className="userinput" type="submit"></input>
            </div>
           

@@ -59,9 +59,11 @@ const Contact = function(props){
 
 
 return(
-
-  <div className="background">
-    <div className ="Content">
+  
+  <div className="contactBackground">
+    
+    <div className ="contactContent">
+    <h2>Function Under Construction</h2>
     <p>name</p>
     < input type= "text" placeholder="name" ref={nameRef}>
     </input>

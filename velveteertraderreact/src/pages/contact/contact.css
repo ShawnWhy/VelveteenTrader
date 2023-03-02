@@ -1,16 +1,20 @@
-.background{
-    background-color:lightcyan;
+.contentBackground{
+    background-color:rgb(255, 255, 255);
     position:fixed;
     height:100%;
     width:100%;
     text-align:center;
 }
 
-.Content{
+.contactContent{
     width:30%;
     margin:10% auto;
     position:relative;
-    top:-10%
+    top:-10%;
+    border:1px black solid;
+    border-radius:12px;
+    padding:20px;
+
 }
 
 .departmentSelect{

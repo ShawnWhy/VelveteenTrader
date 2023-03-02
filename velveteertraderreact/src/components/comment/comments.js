@@ -133,9 +133,9 @@ const Comments =function(props) {
           console.log(err);
         })
       }
-         setTimeout(() => {
+        setTimeout(() => {
         setCommentThrottle("off")
-      }, 1500);
+      }, 2000);
       }
    
 

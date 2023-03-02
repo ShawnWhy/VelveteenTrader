@@ -25,7 +25,7 @@ module.exports = function(app) {
   app.get("/api/getTopComments",
     function(req, res){
       
-      connection.query ("SELECT * FROM comments ORDER By votes DESC Limit 20",function(err, data){if(err) throw err;
+      connection.query ("SELECT * FROM comments ORDER By votes DESC, id ASC Limit 20",function(err, data){if(err) throw err;
        console.log("got top comments");
        res.json(data)
       })
@@ -377,7 +377,7 @@ app.put("/api/updateVotes/:id",
       },
        order: [
             ['votes', 'DESC'],
-            ['id', 'DESC'],
+            ['id', 'ASC'],
         ],
       
 

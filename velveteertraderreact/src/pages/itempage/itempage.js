@@ -41,6 +41,7 @@ event.preventDefault();
 event.stopPropagation();
 
 var comment = document.querySelector('.commentInput').value;
+if(comment.length>0){
 
 var itemData = chosenItem;
 itemData.comments.push({author:userProfile.id,text:comment,authorName:userProfile.userName,votes:0})
@@ -54,9 +55,11 @@ userId:userProfile.id,
 userName:userProfile.userName,
 votes:0,
 comment:comment
+}).then(res=>{
+  document.querySelector('.commentInput').value= ''
 })
 
-
+}
 
 } 
 
@@ -198,7 +201,7 @@ comment:comment
 
             </div>
         )})}</div>)}
-        <form onSubmit ={submitComment} className="commentForm">
+        <form onSubmit ={(e)=>{submitComment(e)}} className="commentForm">
           <input className="commentInput" type="text"></input>
           <input className="commentSubmit" type="submit"></input>
         </form>
