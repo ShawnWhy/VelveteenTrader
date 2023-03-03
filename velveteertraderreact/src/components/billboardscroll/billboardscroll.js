@@ -23,7 +23,6 @@ export const TopCommentsContext = React.createContext();
 const Billboardscroll = function() {
 
 
-
   const {chosenItem, setChosenItem}= useContext(ItemContext)
 
   const {userProfile, setUserProfile}= useContext(InformationContext)
@@ -405,8 +404,8 @@ const turnOffItemPageModal = ()=>{
             {/* {comment.author} : {comment.text} */}
         {comment.userId!== userProfile.id ? (
               <div className='comment'>
-           {userProfile.id}
-           {"comment user id " + comment.userId}
+           {/* {userProfile.id}
+           {"comment user id " + comment.userId} */}
             <Comments
             page = "main"
             author={comment.userId}
@@ -419,8 +418,8 @@ const turnOffItemPageModal = ()=>{
             </div>
             ) : (
               <div className='myComment'>
-                    {userProfile.id}
-           {"comment user id " + comment.userId}
+                    {/* {userProfile.id}
+           {"comment user id " + comment.userId} */}
             <MyComments
             page = "main"
             author={comment.userId}

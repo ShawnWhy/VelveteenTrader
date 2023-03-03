@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link,
   Redirect,
@@ -13,15 +13,20 @@ import HomePage from "./pages/homepage";
 import Contact from "./pages/contact";
 import Chatroom from "./pages/chatroom";
 import UserPortal from "./pages/userPortal";
+import UserPage from "./pages/userPage";
 // import apiRoutes from "../../routes/api-routes";
 // import ItemPage from "../src/pages/itempage";
 
 export const ItemContext = React.createContext();
+export const pageUSerContext = React.createContext();
+
 
 
 export const InformationContext = React.createContext();
 
 const App = function(){
+
+const [pageUser, setPageUser]=useState(0)
   
  var newTitleColors = [
     'orange','rgb(244, 170, 42)',
@@ -248,26 +253,26 @@ const App = function(){
     setSignInModal("off")
   }
 
-  useEffect(()=>{
+    useEffect(()=>{
 
-loadUserInformation()
+  loadUserInformation()
 
-setTitles()
+  setTitles()
 
-var titleLinks = document.querySelectorAll(".title_link a");
-  console.log(titleLinks)
-  if(titleLinks.length>0){
-    console.log("34")
-    titleLinks.forEach(element => {
-      console.log("36")
-      element.addEventListener("mouseover",(e)=>{
-        titleOnMouseOver(e)
-      })
-      
-    });
-  }
-  
-  },'')
+  var titleLinks = document.querySelectorAll(".title_link a");
+    console.log(titleLinks)
+    if(titleLinks.length>0){
+      console.log("34")
+      titleLinks.forEach(element => {
+        console.log("36")
+        element.addEventListener("mouseover",(e)=>{
+          titleOnMouseOver(e)
+        })
+        
+      });
+    }
+    
+    },'')
 
  
 
@@ -315,21 +320,23 @@ var titleLinks = document.querySelectorAll(".title_link a");
             </div>
           </div>
 
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
+          <Routes>
+            <Route exact path="/"
+              element={<HomePage/>}>
             </Route>
-           
-            <Route path="/contact">
-              <Contact />
+           <Route path = "/userPage/:id" element = {<UserPage />}>
+             
+           </Route>
+            <Route path="/contact" element = {<Contact />}>
+              
             </Route>
             {/* <Route path="/communityPageold">
               <Chatroom name={userProfile.userName} />
             </Route>             */}
-            <Route path="/communityPage">
-              <UserPortal name={userProfile.userName} />
+            <Route path="/communityPage" element = {<UserPortal name={userProfile.userName} />}>
+              
             </Route>
-          </Switch>
+          </Routes>
       </Router>
               <div className={" row justify-content-center logInModal "+ ( loggInModal === "off" ? "invisible" : "visible")}>
                 <div className="col-md-  modalContent">

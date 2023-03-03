@@ -5,11 +5,20 @@ import {CardContext} from "../itemCard/itemCard"
 import {InformationContext} from "../../App"
 import {TopCommentsContext} from '../billboardscroll/billboardscroll';
 import API from "../../utils/API"
+import UserPage from "../../pages/userPage/userPage"
+import { pageUSerContext } from '../../App';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+
 
 const Comments =function(props) {
   const {userProfile, setUserProfile} = useContext(InformationContext)
   const {chosenItem, setChosenItem} = useContext(ItemContext)
-  
   const {topComments, setTopComments}= useContext(TopCommentsContext)
   const [commentThrottle, setCommentThrottle] = useState("off")
 
@@ -142,15 +151,20 @@ const Comments =function(props) {
       }
   
     return(
-    // <CardContext.Consumer>
+ 
+
+    
     <div class = "commentContainer">
     <div className = "commentInfo" onClick = { (e)=>{HandleVoteClick(e) }} >
-      <div className = "commentInfoName" >{props.authorName}</div><div>:</div>
+      {props.author}
+      <div className = "commentInfoName"  ><Link to = {{pathname: '/userPage/'+props.author}} >{props.authorName}</Link></div><div>:</div>
       <div className = "commentInfoComment">{props.comment}</div>
     
       </div>
   <div className = "commentVotes othersComment" onClick = { (e)=>{voteForComment(e)}} >votes : {props.votes}</div>
 </div>
+
+
    
     )
     
