@@ -291,6 +291,7 @@ const [pageUser, setPageUser]=useState(0)
             </div>
             <div className = "margin title_link2 title_link">
               <Link to="/CommunityPage">Community Page</Link>
+
             </div>
             
             <div
@@ -325,7 +326,6 @@ const [pageUser, setPageUser]=useState(0)
               element={<HomePage/>}>
             </Route>
            <Route path = "/userPage/:id" element = {<UserPage />}>
-             
            </Route>
             <Route path="/contact" element = {<Contact />}>
               

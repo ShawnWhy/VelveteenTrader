@@ -3,11 +3,10 @@ import Style from "./hearts.css"
 import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
 import API from "../../utils/API"
-import { FavItemContext} from '../billboardscroll/billboardscroll';
-
-const Hearts2 =function(props) {
+import { userItemsContext } from '../../pages/userPage/userPage';
+const Hearts2UserPage =function(props) {
   
-  const {favoriteItems, SetFavoriteItems}= useContext(FavItemContext)
+  const {userItems, setUserItems}= useContext(userItemsContext)
   const {userProfile, setUserProfile} = useContext(InformationContext)
 
   const {chosenItem, setChosenItem} = useContext(ItemContext)
@@ -93,11 +92,11 @@ const Hearts2 =function(props) {
 
 
     //set favorite items
-    var data = [...favoriteItems]
+    var data = [...userItems]
     var index = data.findIndex(obj => obj.id === chosenItem.id);
-    data = favoriteItems;
+    data = userItems;
     data[index].likes = newLike
-    SetFavoriteItems(data)
+    setUserItems(data)
     console.log(chosenItem.likes);
   
 //
@@ -150,4 +149,4 @@ setTimeout(() => {
     
 }
 
-export default Hearts2;
+export default Hearts2UserPage;

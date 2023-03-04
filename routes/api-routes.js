@@ -30,29 +30,35 @@ module.exports = function(app) {
        res.json(data)
       })
     });
-  app.get("/api/allItems/:userid",
-  function(req, res){
-    connection.query("SELECT * FROM Items JOIN Users ON Items.userId = Users.id", function(err, data){
-    if(err) throw err, 
-    console.log("got them all");
-    res.json(data)
-  })
-})
+
+// app.get("/api/allItems/:userid",
+//   function(req, res){
+//     connection.query("SELECT * FROM Items JOIN Users ON Items.userId = Users.id", function(err, data){
+//     if(err) throw err, 
+//     console.log("got them all");
+//     res.json(data)
+//   })
+// })
 
 app.get("/api/alltheItems",
 function(req, res){
+  console.log("all teh utems!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
   connection.query("SELECT * FROM items", function(err, data){
   if(err) throw err, 
+  
   res.json(data)
 })
 })
 
-  app.get("/api/myItems/:id", function(req, res){
+app.get("/api/myItems/:id", function(req, res){
     userId = req.params.id;
+    console.log("getting MY ITEMS!!!!!!!!!!!!!!")
+    console.log(userId)
+    console.log("user id used to myitems++++++++++++++++++++++++")
     connection.query("SELECT * FROM Items WHERE userId = ?", userId,
     function(err, data){
       if(err) throw err;
-      console.log("got the item for this guy")
+      console.log("got the item for this guy++++++++++++++++++++++")
       res.json(data)
 
     })
@@ -382,6 +388,42 @@ app.put("/api/updateVotes/:id",
       
 
     }).then(function(result){
+
+    res.json(
+    result
+       );
+    
+  });
+}),
+
+app.get("/api/otherUserData/:id", function(req,res ){
+  console.log("FINDING OTHER PEOPLES DATA!!!!!!!")
+userId = req.params.id
+db.User.findOne({
+   where:{
+        id:userId
+      },
+
+}).then(function(result){
+
+    res.json(
+    result
+       );
+    
+  });
+}),
+
+
+
+app.get("/api/otherUserItems/:id", function(req,res ){
+  console.log("FINDING OTHER PEOPLES Items")
+userId = req.params.id
+db.Item.findAll({
+   where:{
+        userId:userId
+      },
+
+}).then(function(result){
 
     res.json(
     result

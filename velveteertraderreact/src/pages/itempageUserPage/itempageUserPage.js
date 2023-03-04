@@ -3,18 +3,19 @@ import Bids from "../../components/bids";
 import MyBids from "../../components/myBids";
 import Hearts2 from "../../components/hearts2"
 import MyHearts2 from "../../components/myHearts2"
-import Comments from "../../components/comment"
-import MyComments from "../../components/myComment"
+import MyComments from '../../components/myComment/myComment';
+import CommentsUserPage from '../../components/commentUserPage/commentsUserPage';
 import Hearts2UserPage from '../../components/hearts2userPAge/hearts2UserPage';
-
 import {ItemContext} from "../../App"
 import {InformationContext} from "../../App"
+import {userItemsContext } from '../userPage/userPage';
 import Style from "./itempage.css"
 import API from "../../utils/API"
-const Itempage = function(props)  {
+const ItempageUserPage = function(props)  {
 
   
   
+  const {userItems, setUserItems}= useContext(userItemsContext)
   const {userProfile, setUserProfile}= useContext(InformationContext)
   const {chosenItem, setChosenItem}= useContext(ItemContext)
   const [imageRoll, setImageRoll]= useState(
@@ -142,11 +143,17 @@ comment:comment
         </div>
         <div className="heartDisplay">
         {chosenItem.itemOwnerId !== userProfile.id ? (
-        
+        props.page !=="user"?(
          <Hearts2 
         page = {props.page}
         likes = {chosenItem.likes}
          />
+        ):(
+        <Hearts2UserPage 
+        page = {props.page}
+        likes = {chosenItem.likes}
+         />
+        )
      
         ):(<MyHearts2 
         likes = {chosenItem.likes}
@@ -175,7 +182,7 @@ comment:comment
             {comment.author !== userProfile.id ? (
             
             <div className='comment'>
-            <Comments
+            <CommentsUserPage
             page="item"
             itemId={comment.itemId}
             author={comment.author}
@@ -213,4 +220,4 @@ comment:comment
       </div>)}
     
 
-export default Itempage;
+export default ItempageUserPage;

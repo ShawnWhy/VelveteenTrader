@@ -1,10 +1,12 @@
 import React, { imageBackground, Component, useEffect, useState, useContext } from 'react';
 import Bids from "../bids";
 import Hearts from "../hearts";
+import heartsUserPage from '../heartsUserPage/heartsUserPage';
 import API from "../../utils/API";
 import {InformationContext} from "../../App"
 import Style from "./itemCard.css"
 import {ItemContext} from "../../App"
+import HeartsUserPage from '../heartsUserPage/heartsUserPage';
 
 export const CardContext = React.createContext();
 
@@ -94,13 +96,21 @@ console.log(cardInfo);
              id = {cardInfo.id}
              name= {cardInfo.name}
              />
-               
-            <Hearts
+            {props.page !=="user"? (<Hearts
+            likes={cardInfo.likes}
+            id={cardInfo.id}
+            ChildrenSetCardInfo = {ChildrenSetCardInfo}
+            
+            />):(
+            <HeartsUserPage
             likes={cardInfo.likes}
             id={cardInfo.id}
             ChildrenSetCardInfo = {ChildrenSetCardInfo}
             
             />
+
+            )}
+          
           
           </div>
           

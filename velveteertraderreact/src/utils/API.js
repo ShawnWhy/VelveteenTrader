@@ -12,11 +12,13 @@ export default {
 },
 getAllItems : function(){
   console.log("gettingAll")
-  return axios.get("/api/allItems")
+  return axios.get("/api/alltheItems")
 },
 
 getMyItems : function(id){
   console.log("getthing this one persons items")
+  console.log(id)
+  // id = id.toString()
   return axios.get("api/myItems/"+id)
 },
 
@@ -49,6 +51,17 @@ getUserData : function(){
   console.log("getting your data");
   return axios.get("/api/user_data");
 },
+
+getOtherUser : function(id){
+console.log("getting other user's data")
+return axios.get("/api/otherUserData/"+ id);
+},
+
+getOtherUserItems : function(id){
+console.log("getting other user's data")
+return axios.get("/api/otherUserItems/"+ id);
+},
+
 
 getPoints : function(id){
   console.log("getting points")

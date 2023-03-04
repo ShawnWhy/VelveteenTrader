@@ -81,8 +81,11 @@ var dataMyItems = myItems;
   const {userProfile, setUserProfile}= useContext(InformationContext)
   const {chosenItem, setChosenItem}=useContext(ItemContext)
 
+  //when the myItems variable changes, all of the variables relating to it will also change
   useEffect(() => {
    loadComments()
+    calculateLikes();
+    calculateItems();
    
   },[myItems]);
   
@@ -101,25 +104,20 @@ var dataMyItems = myItems;
 
   
   
-
+//count the number of the user's items to show in screen
   const calculateItems =()=>{
-    setItemNumber(myItems.length)}
-  useEffect(()=>{
+    setItemNumber(myItems.length)
+  }
 
+// at the start, get all of the items that belongs to the me. 
+//when that happens the comments and will also be gotten
+  useEffect(()=>{
   API.getMyItems(userProfile.id).then((result)=>{
     console.log(result)
     setMyItems(result.data)
   })
-
-
   },[userProfile])
 
-  useEffect(()=>{
-    calculateLikes();
-    calculateItems();
-
-  },[myItems])
- 
 
 
   return(

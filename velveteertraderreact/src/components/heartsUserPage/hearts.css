@@ -1,0 +1,86 @@
+.heart{
+    float:right;
+    height:50px;
+    width:50px;
+    /* overflow: hidden; */
+    text-align: center;
+}
+
+
+svg{
+    position:absolute;
+    transform: scale(2);
+    top:0;
+    z-index:0
+}
+
+.likesNumber{
+    color:aliceblue;
+    font-weight: bold;
+    position:relative;
+    top:0;
+    left:10px;
+    z-index:1
+    
+    
+}
+.moreHeart{
+    position:absolute;
+    top:100%;
+}
+.moreHeart1{
+    
+    animation:raiseHeart1 .4s both;
+}
+
+@keyframes raiseHeart1 {
+    0%{transform:rotate(0deg)translate(0px,0px)}
+    100%{transform:rotate(48deg)translate(0px,-100px)scale(.35)}
+    
+}
+
+.moreHeart2{
+    
+    animation:raiseHeart2 .4s both;
+}
+
+@keyframes raiseHeart2 {
+    0%{transform:rotate(0deg)translate(0px,0px)}
+    100%{transform:rotate(-15deg)translate(0px,-100px)scale(1.5)}
+    
+}
+
+.moreHeart3{
+   
+    animation:raiseHeart3 .4s both;
+}
+
+@keyframes raiseHeart3 {
+    0%{transform:rotate(0deg)translate(0px,0px)}
+    100%{transform:rotate(15deg)translate(0px,-100px)scale(.75)}
+    
+}
+
+.moreHeart4{
+    
+    animation:raiseHeart4 .4s both;
+}
+
+@keyframes raiseHeart4 {
+    0%{transform:rotate(0deg)translate(0px,0px)}
+    100%{transform:rotate(7deg)translate(0px,-100px)scale(1.75)}
+    
+}
+
+.moreHeart0{
+    
+    animation:raiseHeart0 .4s both;
+}
+
+@keyframes raiseHeart0 {
+    0%{transform:rotate(0deg) translate(0px,0px);
+    opacity: 1;}
+    100%{transform:rotate(-30deg) translate(0px,-100px) scale(1.5);
+    opacity: .3}
+    
+}

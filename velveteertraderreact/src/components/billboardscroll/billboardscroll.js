@@ -134,10 +134,6 @@ function ChildrenSetCardInfoBid (bid){
 console.log(bid)
 console.log("childrensetcard2");
 
-// SetFavoriteItems(()=>({...cardInfo, highestBid:info
-
-// }))
-
 var objectsArray = favoriteItems;
 
 console.log(objectsArray)
@@ -150,27 +146,16 @@ setChosenItem({...chosenItem, highestBid:bid})
 
  }
 
-// function setInfoArea(id, key, info) {
-//    var data = [...this.state.data];
-//    var index = data.findIndex(obj => obj.id === id);
-//    data[index].title = title;
-//    this.setState({data});
-// }
-const newBidRef = useRef();
-
 const [rotationItems, setRotationItems]=useState(
   []
   
 ) 
 
-
+//load the comments for the selected items
 function loadComments(){
 
 var dataFavItems = favoriteItems;
-      // console.log("dataFavItems")
-      // console.log(dataFavItems)
-      // console.log("itemdataas")
-      // console.log(favoriteItems)
+
       for(let i=0; i<dataFavItems.length; i++){
 
         dataFavItems[i].comments = []
@@ -178,74 +163,58 @@ var dataFavItems = favoriteItems;
       }
       var number = dataFavItems.length
     for (let i = 0; i<dataFavItems.length; i++){
-      // res.data.forEach(element => {
-        // console.log(dataFavItems[i].id)
-    API.getComments(dataFavItems[i].id).then(res=>{
+      API.getComments(dataFavItems[i].id).then(res=>{
       if(res.data.length>0){
       res.data.forEach((object)=>{    
-        // console.log(object)
-    let index = favoriteItems.findIndex(obj => obj.id === object.itemId);
-    //  console.log("index of the array2")
-    // console.log(index)
-    if(index>-1){
-    //   console.log("index of the array")
-    // console.log(index)
+      let index = favoriteItems.findIndex(obj => obj.id === object.itemId);
+      if(index>-1){
     dataFavItems[index].comments.push({authorName:object.userName,author:object.userId,text:object.comment, id:object.id, votes:object.votes, itemId:object.itemId})
-    // console.log("dataFavItems " )
-    // console.log(object)
-    }
+       }
       })}
      })
      number-=1;
      if(number==0){
       console.log("got all of the things")
-      // console.log(dataFavItems)
-      SetFavoriteItems(dataFavItems)
+        SetFavoriteItems(dataFavItems)
      }
     }
    }
 
   useEffect(() => {
    loadComments()
-   
-  },[favoriteItems]);
+   },[favoriteItems]);
 
 const [newBid, setNewBid]= useState(
   0
 )
 
+//submitting bid from the bid modal
 const submitBid = function(newBid, oldBid, userid, itemid){
-// console.log(chosenItem)
-// console.log(userid)
-// console.log(itemid)
-
 if(newBid>oldBid){
-
   var body = {
   userId:userid,
   itemId:itemid,
   amount:newBid
 }
-
- API.updateBids(body, itemid)
-
- API.createBid(body)
+ API.updateBids(body, itemid).then(res=>{
+  console.log(res)
+ API.createBid(body).then(res=>{
+ console.log(res)
+ })
+ }).catch(err=>{
+  console.log(err)
+ })
 
  ChildrenSetCardInfoBid(newBid)
- 
-
-}
+ }
 }
 //set current objects await
-//  var promisedSetState = (newState) => new Promise(resolve => SetFavoriteItems(newState, resolve));
 const setNewBid1 = function(){
 
   var newbidValue = document.querySelector('.bidInput').value;
 
   if(newbidValue>0){
-    // console.log("set new bid")
-    // console.log(newbidValue)
-    // console.log(typeof newbidValue)
+
       setNewBid(parseInt(newbidValue));
   }
 }
@@ -272,6 +241,8 @@ useEffect  (()=>{
       // console.log(res)
     //  promisedSetState(res.data);
       SetFavoriteItems(res.data)       // dataFavItems[index].comments=[]
+}).catch(err=>{
+  console.log(err)
 });
 
   }
