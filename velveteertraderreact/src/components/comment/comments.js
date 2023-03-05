@@ -155,10 +155,10 @@ const Comments =function(props) {
 
     
     <div class = "commentContainer">
-    <div className = "commentInfo" onClick = { (e)=>{HandleVoteClick(e) }} >
+    <div className = "commentInfo">
       {props.author}
       <div className = "commentInfoName"  ><Link to = {{pathname: '/userPage/'+props.author}} >{props.authorName}</Link></div><div>:</div>
-      <div className = "commentInfoComment">{props.comment}</div>
+      <div className = "commentInfoComment" onClick = { (e)=>{HandleVoteClick(e) }}>{props.comment}</div>
     
       </div>
   <div className = "commentVotes othersComment" onClick = { (e)=>{voteForComment(e)}} >votes : {props.votes}</div>

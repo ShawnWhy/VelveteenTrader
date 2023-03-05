@@ -12,6 +12,29 @@ var connection =require("./connection");
 module.exports = function(app) {
 
   
+ app.get("/api/getcommentsotheruser/:id", function(req, res) {
+
+    console.log("getting all of the comments!!!!!!!!!!! for Other people");
+    console.log(req.params.id)
+    
+    db.Comment.findAll({
+      where:{
+        itemId: parseInt(req.params.id)
+      },
+       order: [
+            ['votes', 'DESC'],
+            ['id', 'ASC'],
+        ],
+      
+
+    }).then(function(result){
+
+    res.json(
+    result
+       );
+    
+  });
+}),
 
   app.get("/api/getFavs",
     function(req, res){
@@ -375,6 +398,8 @@ app.put("/api/updateVotes/:id",
 
 
   app.get("/api/getComments/:id", function(req, res) {
+
+    console.log("getting all of the comments!!!!!!!!!!!");
     console.log(req.params.id)
     
     db.Comment.findAll({
@@ -396,6 +421,25 @@ app.put("/api/updateVotes/:id",
   });
 }),
 
+//  app.get("/api/getCommentsOtherUser/:id", function(req, res) {
+
+//     console.log("getting all of the comments!!!!!!!!!!! for Other people");
+//     console.log(req.params.id)
+    
+//     connection.query("SELECT * FROM Comments WHERE itemId = ?", req.params.id,
+//     function(err, data){
+//       if(err) throw err;
+//       console.log("got the comments for this item")
+//       res.json(data)
+
+//     }).then(function(result){
+
+//     res.json(
+//     result
+//        );
+    
+//   });
+// }),
 app.get("/api/otherUserData/:id", function(req,res ){
   console.log("FINDING OTHER PEOPLES DATA!!!!!!!")
 userId = req.params.id

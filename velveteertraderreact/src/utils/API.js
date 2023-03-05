@@ -19,27 +19,33 @@ getMyItems : function(id){
   console.log("getthing this one persons items")
   console.log(id)
   // id = id.toString()
-  return axios.get("api/myItems/"+id)
+  return axios.get("/api/myItems/"+id)
 },
 
 getItemDetails : function(id){
   console.log("getting details for this one object")
-  return axios.get ("api/itemDetails/"+id)
+  return axios.get ("/api/itemDetails/"+id)
 },
 getComments : function(id){
 console.log("getting all of the comments for this item ")
-return axios.get("api/getComments/"+id)
+return axios.get("/api/getComments/"+id)
+},
+
+getCommentsOtherUser : function(id){
+console.log(id)
+console.log("getting all of the comments for other User ")
+return axios.get("/api/getcommentsotheruser/"+id)
 },
 
 signUp : function(body){
   console.log("signingup");
-  return axios.post ("api/signUp",body)
+  return axios.post ("/api/signUp",body)
 },
 
 logIn : function(body){
   console.log("logginin");
   console.log(body)
-  return axios.post ("api/login", body)
+  return axios.post ("/api/login", body)
 },
 
 logOut : function(){

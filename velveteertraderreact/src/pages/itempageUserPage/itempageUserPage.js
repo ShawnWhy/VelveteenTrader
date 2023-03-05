@@ -42,13 +42,13 @@ var comment = document.querySelector('.commentInput').value;
 if(comment.length>0){
 
 var itemData = chosenItem;
-itemData.comments.push({author:userProfile.id,text:comment,authorName:userProfile.userName,votes:0})
+itemData.comments.push({userId:userProfile.id,text:comment,userName:userProfile.userName,votes:0})
 setChosenItem({...chosenItem, comments:itemData.comments})
 
 
 
 API.postComment({
-itemId:chosenItem.id,
+itemId:chosenItem.id, 
 userId:userProfile.id,
 userName:userProfile.userName,
 votes:0,
@@ -179,14 +179,14 @@ comment:comment
           <div className = "comments">{chosenItem.comments.map(comment=>{return(
           <div id ={"key "+comment.id} key={comment.id} >
             {/* {comment.author} : {comment.text} */}
-            {comment.author !== userProfile.id ? (
+            {comment.userId !== userProfile.id ? (
             
             <div className='comment'>
             <CommentsUserPage
             page="item"
             itemId={comment.itemId}
-            author={comment.author}
-            authorName={comment.authorName}
+            author={comment.userId}
+            authorName={comment.userName}
             id={comment.id}
             comment={comment.text}
             votes = {comment.votes}
@@ -197,8 +197,8 @@ comment:comment
             <MyComments
             page="item"
             itemId={comment.itemId}
-            author={comment.author}
-            authorName={comment.authorName}
+            author={comment.userId}
+            authorName={comment.userName}
             id={comment.id}
             comment={comment.text}
             votes = {comment.votes}

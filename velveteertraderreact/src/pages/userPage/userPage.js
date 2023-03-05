@@ -14,7 +14,7 @@ export const userItemsContext = React.createContext()
 const UserPage= function(props) {
 
   let {id}  = useParams();
-
+  const [userItemsDownloaded, setUserItemDownloaded]= useState([])
   const [otherUser, setOtherUser]= useState({})
   const [likes, setLikes]=useState(0)
   const [itemNumber, setItemNumber]=useState(0)
@@ -30,13 +30,13 @@ const UserPage= function(props) {
 //and then push those into the userItem variable as an array 
 
 function loadComments(){
-  var dataUserItems = userItems;
+  var dataUserItems = userItemsDownloaded;
       
       console.log("dataFavItems")
       console.log(dataUserItems)
       console.log("itemdataas")
       console.log(userItems)
-      for(let i=0; i<userItems.length; i++){
+      for(let i=0; i<userItemsDownloaded.length; i++){
 
         dataUserItems[i].comments = []
 
@@ -44,12 +44,14 @@ function loadComments(){
       var number = dataUserItems.length
     for (let i = 0; i<dataUserItems.length; i++){
       // res.data.forEach(element => {
-        console.log(dataUserItems[i].id)
-    API.getComments(dataUserItems[i].id).then(res=>{
+    console.log(dataUserItems[i].id)
+    API.getCommentsOtherUser(dataUserItems[i].id).then(res=>{
       if(res.data.length>0){
+        console.log("commentsgotten")
+        console.log(res)
       res.data.forEach((object)=>{    
-        console.log(object)
-    let index = userItems.findIndex(obj => obj.id === object.itemId);
+   
+    let index = userItemsDownloaded.findIndex(obj => obj.id === object.itemId);
      console.log("index of the array2")
     console.log(index)
     if(index>-1){
@@ -57,10 +59,12 @@ function loadComments(){
     console.log(index)
     
     dataUserItems[index].comments.push({userName:object.userName,votes:object.votes,userId:object.userId,text:object.comment, id:object.id, itemId:object.itemId})
-    console.log("dataFavItems " )
-    console.log(object)
+    // console.log("dataFavItems " )
+    // console.log(userItems)
     }
       })}
+     }).catch(err=>{
+      console.log(err);
      })
      
      number-=1;
@@ -76,61 +80,48 @@ function loadComments(){
       
 
 }
-
   
-
-// console.log(props.location);
-
-
-// useEffect(() => {
-// loadComments()
-   
-//   },[userItems]);
-  
-  useEffect(()=>{
+useEffect(()=>{
     console.log("useeffect getMyItems")
     console.log(id) 
     API.getOtherUserItems(id).then((result)=>{
     console.log(result)
-    setUserItems(result.data)
+    setUserItemDownloaded(result.data)
 }).catch(err=>{console.log(err)})
-setChosenItem({...chosenItem, ItemPageModal:"off"})
-},[id])
 
-// useEffect(()=>{
-//   console.log("get ALL ITEMS!!!!!!!!!!")
-// API.getAllItems().then(res=>{
-// console.log(res)
-// })
-// },'')
+setChosenItem({...chosenItem, ItemPageModal:"off"})
+console.log("userPage chosenItem")
+console.log(chosenItem)
+},[id])
 
 //calculate the number of likes the user has received based on all of the gotten Items
 
 const calculateLikes= ()=>{
     var length=0
     var templikes=0;
-    for(var i=0; i<userItems.length;i++){
-      templikes+=userItems[i].likes;
+    for(var i=0; i<userItemsDownloaded.length;i++){
+      templikes+=userItemsDownloaded[i].likes;
       length++;
     }
-    if(length=userItems.length){
+    if(length=userItemsDownloaded.length){
       setLikes(templikes)
     }
   
   }
 
     useEffect(()=>{
+    loadComments();
     calculateLikes();
     calculateItems();
 
-  },[userItems])
+  },[userItemsDownloaded])
  
 const [newBid, setNewBid]= useState(
   0
 )
   //count the number of the user's items to show in screen
   const calculateItems =()=>{
-    setItemNumber(userItems.length)
+    setItemNumber(userItemsDownloaded.length)
   }
 
 //set the appearance of the bid number in the chosen item page
@@ -209,7 +200,7 @@ const turnOffItemPageModal = ()=>{
         </div>
    {!userItems.length?(
      <div className = "noItemMessage">they have no items</div>
-   ):(<div className='myItemDisplay'>{userItems.map(item=>{
+   ):(<div className='myItemDisplay userItemDisplay'>{userItems.map(item=>{
      return(
        <ItemCard
          portraitImageUrl={item.imageUrl1}
