@@ -45,23 +45,17 @@ var itemData = chosenItem;
 console.log(itemData)
 itemData.comments.push({userName: userProfile.userName,userId:userProfile.id,text:comment,votes:0,itemId:comment.itemId})
 setChosenItem({...chosenItem, comments:itemData.comments})
-
-
-
 API.postComment({
 itemId:chosenItem.id,
 userId:userProfile.id,
-userName:userProfile.name,
+userName:userProfile.userName,
 votes:0,
 comment:comment
 }).then(res=>{
-  console.log(res)
+  document.querySelector('.commentInput').value= ''
 }).catch((err)=>{
-          console.log(err);
-        })
-
-
-
+console.log(err);
+})
 } 
 
 

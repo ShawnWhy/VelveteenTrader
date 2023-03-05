@@ -144,7 +144,9 @@ app.post('/logout', function(req, res, next) {
 })
 
   app.post("/api/postComment",
+
   function(req,res){
+  console.log("posted comment!!1")
   db.Comment.create({
     itemId:req.body.itemId,
     userId:req.body.userId,

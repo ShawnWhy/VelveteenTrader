@@ -68,6 +68,11 @@ console.log("getting other user's data")
 return axios.get("/api/otherUserItems/"+ id);
 },
 
+getOtherUserData: function(id){
+  console.log("getting other user's data")
+  return axios.get("/api/otherUserData/"+id)
+},
+
 
 getPoints : function(id){
   console.log("getting points")

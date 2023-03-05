@@ -13,6 +13,7 @@ export const userItemsContext = React.createContext()
 
 const UserPage= function(props) {
 
+
   let {id}  = useParams();
   const [userItemsDownloaded, setUserItemDownloaded]= useState([])
   const [otherUser, setOtherUser]= useState({})
@@ -82,6 +83,15 @@ function loadComments(){
 }
   
 useEffect(()=>{
+
+    API.getOtherUserData(id).then(result=>{
+      console.log("getting this person's data")
+     console.log(result.data);
+     setOtherUser(result.data);
+     
+    }).catch(err=>{
+      console.log(err);
+    })
     console.log("useeffect getMyItems")
     console.log(id) 
     API.getOtherUserItems(id).then((result)=>{
@@ -110,6 +120,7 @@ const calculateLikes= ()=>{
   }
 
     useEffect(()=>{
+      console.log(otherUser)
     loadComments();
     calculateLikes();
     calculateItems();
@@ -183,10 +194,10 @@ const turnOffItemPageModal = ()=>{
    
 
     <div className='userPortal_info'>
-   <div className='welcomeHome'>  this is {id} { userProfile.userName}'s page</div>
-   <div className='userPortal_points'>they have {userProfile.points} points</div>
+   <div className='welcomeHome'>  this is {otherUser.username}'s page</div>
+   <div className='userPortal_points'>they have {otherUser.points} points</div>
    <div className="userPortal_likes">and {likes} likes </div>
-   <div className='userPortal_itemcount'> { userProfile.userName} has submitted {itemNumber} items</div>
+   <div className='userPortal_itemcount'> { otherUser.username} has submitted {itemNumber} items</div>
     </div>
 
        <div className = {chosenItem.bidModal === "on" ? "bidModalOn" : "bidModalOff" } id = {chosenItem.id}>
